@@ -1,0 +1,21 @@
+# Python
+
+products.db
+notes.txt
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Conda / envs
+.conda/
+venv/
+env/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
