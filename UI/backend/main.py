@@ -25,7 +25,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, EmailStr
 
-DB_PATH = Path(__file__).parent.parent / "data" / "products.db"
+DB_PATH = Path(__file__).parent.parent.parent / "data" / "products.db"
 FRONTEND_PATH = Path(__file__).parent.parent / "frontend"
 
 app = FastAPI(title="SmartCart API")
