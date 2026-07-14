@@ -11,6 +11,7 @@ Run on the H100 (delete the old products.db first):
 
 import sqlite3
 import re
+import random
 from pathlib import Path
 
 DB_PATH = Path(__file__).parent / "products.db"
@@ -99,6 +100,33 @@ CATEGORIES = [
     "Beverages", "Dairy", "Bakery", "Snacks", "Grains & Staples", "Fruits & Vegetables"
 ]
 
+# ===== Simple review text per product (no separate person/reviewer needed) =====
+FIVE_STAR = [
+    "Absolutely love this {product}! The quality is outstanding and it's become a staple in our kitchen.",
+    "This {product} exceeded expectations. Fresh, high quality, and great value for the price.",
+    "Best {product} available. Great taste and consistent quality every time.",
+]
+FOUR_STAR = [
+    "Really good {product}, solid quality for the price. Would recommend to anyone looking for a reliable option.",
+    "Pretty happy with this {product}. Good freshness and packaging overall.",
+    "Good quality {product}. Does exactly what it says, minor room for improvement.",
+]
+THREE_STAR = [
+    "Decent {product}, does the job but nothing extraordinary. Average quality for the price point.",
+    "It's an okay {product}. Quality is acceptable for everyday use.",
+]
+RATING_POOLS = {5: FIVE_STAR, 4: FOUR_STAR, 3: THREE_STAR}
+
+
+def generate_rating_and_review(name: str, seed_index: int):
+    """Deterministic but varied: same product always gets the same rating/review
+    on a fresh build, while still varying meaningfully across products."""
+    rng = random.Random(seed_index)  # deterministic per product, not fully random
+    rating = rng.choices([3, 4, 5], weights=[15, 40, 45])[0]
+    template = rng.choice(RATING_POOLS[rating])
+    review_text = template.format(product=name)
+    return float(rating), review_text
+
 
 def main():
     conn = sqlite3.connect(DB_PATH)
@@ -111,20 +139,21 @@ def main():
 
     category_lookup = dict(conn.execute("SELECT name, category_id FROM category;").fetchall())
 
-    # Insert products, already linked to the right category_id
+    # Insert products, already linked to the right category_id, with rating + review set directly
     rows = []
-    for name, desc, price, stock, category_name in PRODUCTS:
+    for i, (name, desc, price, stock, category_name) in enumerate(PRODUCTS):
         props = PROPS_BY_NAME.get(name, "styled with a complementary prop beside it")
         image_prompt = IMAGE_PROMPT_TEMPLATE.format(name=name, props=props)
         image_path = f"products/images/{slugify(name)}.png"
         category_id = category_lookup[category_name]
-        rows.append((name, desc, price, stock, category_id, image_prompt, image_path))
+        rating, review_text = generate_rating_and_review(name, seed_index=i)
+        rows.append((name, desc, price, stock, category_id, image_prompt, image_path, rating, review_text))
 
     conn.executemany(
         """
         INSERT INTO product
-            (name, description, price, stock_quantity, category_id, image_prompt, image_path)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+            (name, description, price, stock_quantity, category_id, image_prompt, image_path, avg_rating, review)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         rows,
     )
@@ -132,6 +161,8 @@ def main():
 
     count = conn.execute("SELECT COUNT(*) FROM product").fetchone()[0]
     print(f"Inserted {count} products, linked to {len(CATEGORIES)} categories, in {DB_PATH}")
+    print("Ratings and reviews set directly on each product (no separate reviewer accounts).")
+
     conn.close()
 
 

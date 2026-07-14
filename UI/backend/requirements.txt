@@ -1,0 +1,6 @@
+fastapi
+uvicorn[standard]
+email-validator
+sqlalchemy
+pandas
+pillow

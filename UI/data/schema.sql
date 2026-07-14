@@ -17,8 +17,8 @@ CREATE TABLE IF NOT EXISTS product (
     category_id     INTEGER NOT NULL,
     image_prompt    TEXT,
     image_path      TEXT,
-    avg_rating      DECIMAL(2,1) DEFAULT 0,     -- auto-calculated from review table
-    rating_count    INTEGER DEFAULT 0,          -- auto-calculated from review table
+    avg_rating      DECIMAL(2,1) DEFAULT 0,     -- 3-5, set directly, no separate reviewer needed
+    review          TEXT,                        -- general 2-line review text for this product
     created_at      TEXT DEFAULT (datetime('now')),
     updated_at      TEXT DEFAULT (datetime('now')),
     FOREIGN KEY (category_id) REFERENCES category(category_id)
@@ -26,13 +26,14 @@ CREATE TABLE IF NOT EXISTS product (
 
 -- ========== PERSON (customers) ==========
 CREATE TABLE IF NOT EXISTS person (
-    person_id   INTEGER PRIMARY KEY AUTOINCREMENT,
-    first_name  TEXT NOT NULL,
-    last_name   TEXT NOT NULL,
-    email       TEXT NOT NULL UNIQUE,
-    phone       TEXT,
-    address     TEXT,
-    created_at  TEXT DEFAULT (datetime('now'))
+    person_id      INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name     TEXT NOT NULL,
+    last_name      TEXT NOT NULL,
+    email          TEXT NOT NULL UNIQUE,
+    password_hash  TEXT,
+    phone          TEXT,
+    address        TEXT,
+    created_at     TEXT DEFAULT (datetime('now'))
 );
 
 -- ========== ORDER_STATUS (lookup table, same idea as category) ==========
@@ -64,47 +65,6 @@ CREATE TABLE IF NOT EXISTS order_items (
     FOREIGN KEY (order_id) REFERENCES orders(order_id),
     FOREIGN KEY (product_id) REFERENCES product(product_id)
 );
-
--- ========== REVIEW (person rates a product, comment optional) ==========
-CREATE TABLE IF NOT EXISTS review (
-    review_id   INTEGER PRIMARY KEY AUTOINCREMENT,
-    person_id   INTEGER NOT NULL,
-    product_id  INTEGER NOT NULL,
-    rating      INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
-    comment     TEXT,                             -- optional text review
-    created_at  TEXT DEFAULT (datetime('now')),
-    FOREIGN KEY (person_id) REFERENCES person(person_id),
-    FOREIGN KEY (product_id) REFERENCES product(product_id),
-    UNIQUE (person_id, product_id)                 -- one rating per person per product
-);
-
--- Auto-update product.avg_rating / rating_count whenever a review changes
-CREATE TRIGGER IF NOT EXISTS trg_review_insert
-AFTER INSERT ON review
-BEGIN
-    UPDATE product
-    SET avg_rating = (SELECT ROUND(AVG(rating), 1) FROM review WHERE product_id = NEW.product_id),
-        rating_count = (SELECT COUNT(*) FROM review WHERE product_id = NEW.product_id)
-    WHERE product_id = NEW.product_id;
-END;
-
-CREATE TRIGGER IF NOT EXISTS trg_review_update
-AFTER UPDATE ON review
-BEGIN
-    UPDATE product
-    SET avg_rating = (SELECT ROUND(AVG(rating), 1) FROM review WHERE product_id = NEW.product_id),
-        rating_count = (SELECT COUNT(*) FROM review WHERE product_id = NEW.product_id)
-    WHERE product_id = NEW.product_id;
-END;
-
-CREATE TRIGGER IF NOT EXISTS trg_review_delete
-AFTER DELETE ON review
-BEGIN
-    UPDATE product
-    SET avg_rating = (SELECT COALESCE(ROUND(AVG(rating), 1), 0) FROM review WHERE product_id = OLD.product_id),
-        rating_count = (SELECT COUNT(*) FROM review WHERE product_id = OLD.product_id)
-    WHERE product_id = OLD.product_id;
-END;
 
 -- ========== Auto-update updated_at on edit (SQLite trigger) ==========
 CREATE TRIGGER IF NOT EXISTS trg_product_updated_at
