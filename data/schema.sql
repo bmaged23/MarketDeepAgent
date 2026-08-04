@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS product (
     image_path      TEXT,
     avg_rating      DECIMAL(2,1) DEFAULT 0,     -- 3-5, set directly, no separate reviewer needed
     review          TEXT,                        -- general 2-line review text for this product
+    image_status    TEXT DEFAULT 'pending',      -- 'done' or 'pending' - track which images are generated
     created_at      TEXT DEFAULT (datetime('now')),
     updated_at      TEXT DEFAULT (datetime('now')),
     FOREIGN KEY (category_id) REFERENCES category(category_id)

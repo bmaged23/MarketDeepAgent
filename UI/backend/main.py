@@ -96,7 +96,7 @@ def get_products(category_id: Optional[int] = None, search: Optional[str] = None
     conn = get_conn()
     query = """
         SELECT p.product_id, p.name, p.description, p.price, p.stock_quantity,
-               p.image_path, p.avg_rating, p.review, c.name AS category
+               p.image_path, p.avg_rating, p.review, p.image_status, c.name AS category
         FROM product p
         JOIN category c ON p.category_id = c.category_id
         WHERE 1=1
@@ -122,7 +122,7 @@ def get_product(product_id: int):
     row = conn.execute(
         """
         SELECT p.product_id, p.name, p.description, p.price, p.stock_quantity,
-               p.image_path, p.avg_rating, p.review, c.name AS category
+               p.image_path, p.avg_rating, p.review, p.image_status, c.name AS category
         FROM product p
         JOIN category c ON p.category_id = c.category_id
         WHERE p.product_id = ?

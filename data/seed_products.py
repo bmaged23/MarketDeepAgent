@@ -55,6 +55,78 @@ PROPS_BY_NAME = {
     "Onions 1kg": "with a woven basket of onions beside it",
     "Apples 1kg": "with a wooden bowl of fresh apples beside it",
     "Cucumbers 1kg": "with sliced cucumber rounds on a small plate beside it",
+
+    # ===== props for the 70 new products =====
+    "Ottoman Turkish Coffee": "with a small brass coffee pot and a tiny cup beside it",
+    "Hibiscus Tea Karkade": "with a glass of ruby red hibiscus tea beside it",
+    "Mango Juice 1L": "with a glass of mango juice and mango slices beside it",
+    "Apple Juice 1L": "with a glass of apple juice and apple slices beside it",
+    "Frost Iced Tea Peach": "with a chilled glass of iced tea and peach slices beside it",
+    "Volt Energy Drink": "with condensation droplets and ice cubes beside it",
+    "Chamomile Tea": "with a cup of chamomile tea and dried chamomile flowers beside it",
+    "Mineral Water 1.5L": "with a glass of water and ice cubes beside it",
+    "Feta Cheese 250g": "with cubed feta on a small plate with olives beside it",
+    "Cream Cheese 200g": "with cream cheese spread on a cracker beside it",
+    "Labneh 500g": "with a drizzle of olive oil over labneh in a small bowl beside it",
+    "Rayeb Fermented Milk 500ml": "with a glass of rayeb beside it",
+    "Golden Slice Cheese": "with a cheese slice unwrapped beside it",
+    "Whipping Cream 250ml": "with a dollop of whipped cream on a spoon beside it",
+    "Condensed Milk 400g": "with condensed milk drizzled on a small plate beside it",
+    "Cheddar Slices": "with a stack of cheddar slices beside it",
+    "Greek Yogurt Drink": "with a glass poured from the bottle beside it",
+    "Baladi Bread 5pcs": "with a woven bread basket beside it",
+    "Pita Bread 6pcs": "with one pita torn open beside it",
+    "Toast Bread": "with two toasted slices on a small plate beside it",
+    "Sugar Ring Donuts": "with a donut with a bite taken beside it",
+    "Chocolate Cake Slice": "with a fork and cake crumbs beside it",
+    "Butter Cookies": "with a few cookies stacked beside it",
+    "Bosco Rusk": "with a rusk dipped in a cup of tea beside it",
+    "Croissant Single": "with a croissant broken open showing flaky layers beside it",
+    "Sesame Bread Sticks": "with breadsticks standing in a small glass beside it",
+    "Sweet Popcorn": "with popcorn spilled from a small bowl beside it",
+    "Twist Pretzels": "with a small bowl of pretzels beside it",
+    "Corn Chips": "with a small bowl of corn chips beside it",
+    "Tahini Halawa 250g": "with a slice of halawa on a small plate beside it",
+    "Turkish Delight": "with dusted powdered sugar pieces beside it",
+    "Dried Fruits Mix": "with a wooden bowl of mixed dried fruits beside it",
+    "PowerBite Granola Bars": "with one granola bar broken in half beside it",
+    "Lentils 1kg": "with a small bowl of cooked lentil soup beside it",
+    "Fava Beans Foul 1kg": "with a bowl of cooked foul medames beside it",
+    "Vermicelli 400g": "with toasted vermicelli in a small pan beside it",
+    "Couscous 500g": "with a bowl of fluffy cooked couscous beside it",
+    "Corn Oil 1L": "with a small glass cruet of oil beside it",
+    "White Vinegar 500ml": "with a small glass dish for dipping beside it",
+    "Black Pepper 100g": "with a pepper grinder beside it",
+    "Ground Cumin 100g": "with a small wooden spoon of cumin beside it",
+    "All-Purpose Flour 1kg": "with a light dusting of flour and a wooden spoon beside it",
+    "Split Peas 1kg": "with a small bowl of cooked split peas beside it",
+    "Chickpeas 1kg": "with a small bowl of cooked chickpeas beside it",
+    "Cocoa Powder 200g": "with a dusting of cocoa powder and a whisk beside it",
+    "Golden Meadow Honey": "with a honey dipper drizzling honey beside it",
+    "Tahini 400g": "with a swirl of tahini in a small bowl beside it",
+    "Oranges 1kg": "with a halved orange showing juicy segments beside it",
+    "Strawberries 500g": "with a few strawberries scattered beside it",
+    "Grapes 1kg": "with a small bunch of grapes beside it",
+    "Watermelon Whole": "with a watermelon slice cut open beside it",
+    "Mango 1kg": "with a sliced mango showing its golden flesh beside it",
+    "Lemon 1kg": "with a halved lemon beside it",
+    "Garlic 250g": "with a few garlic cloves peeled beside it",
+    "Potatoes 1kg": "with a few potatoes in a rustic basket beside it",
+    "Carrots 1kg": "with a bunch of carrots with green tops beside it",
+    "Zucchini 1kg": "with sliced zucchini rounds beside it",
+    "Eggplant 1kg": "with a halved eggplant beside it",
+    "Bell Pepper 1kg": "with sliced bell pepper rings in different colors beside it",
+    "Baby Spinach 500g": "with fresh spinach leaves scattered beside it",
+    "Lettuce Head": "with a few loose lettuce leaves beside it",
+    "Peach 1kg": "with a halved peach showing the pit beside it",
+    "Pear 1kg": "with a sliced pear beside it",
+    "Guava 1kg": "with a halved guava showing pink flesh beside it",
+    "Pomegranate 1kg": "with pomegranate seeds scattered beside it",
+    "Green Peas 500g": "with a pea pod opened beside it",
+    "Green Beans 500g": "with a bundle of green beans tied together beside it",
+    "Cauliflower Head": "with a cauliflower floret broken off beside it",
+    "Cabbage Head": "with a cabbage leaf peeled back beside it",
+    "Molokhia Frozen 400g": "with a bowl of cooked molokhia soup beside it",
 }
 
 
@@ -94,6 +166,78 @@ PRODUCTS = [
     ("Onions 1kg", "Fresh yellow onions, 1kg", 20.00, 120, "Fruits & Vegetables"),
     ("Apples 1kg", "Fresh red apples, 1kg", 60.00, 100, "Fruits & Vegetables"),
     ("Cucumbers 1kg", "Fresh cucumbers, 1kg", 20.00, 110, "Fruits & Vegetables"),
+
+    # ===== 70 new products (batch 2) =====
+    ("Ottoman Turkish Coffee", "Finely ground Turkish coffee, 200g tin", 180.00, 50, "Beverages"),
+    ("Hibiscus Tea Karkade", "Dried hibiscus flowers for traditional karkade tea, 200g", 90.00, 70, "Beverages"),
+    ("Mango Juice 1L", "100% pure mango nectar, chilled carton", 50.00, 80, "Beverages"),
+    ("Apple Juice 1L", "100% pure apple juice, chilled carton", 48.00, 80, "Beverages"),
+    ("Frost Iced Tea Peach", "Peach flavored iced tea, 500ml bottle", 35.00, 100, "Beverages"),
+    ("Volt Energy Drink", "Carbonated energy drink, 250ml can", 40.00, 120, "Beverages"),
+    ("Chamomile Tea", "Soothing chamomile tea bags, 20 count box", 95.00, 60, "Beverages"),
+    ("Mineral Water 1.5L", "Natural mineral water, 1.5L bottle", 15.00, 200, "Beverages"),
+    ("Feta Cheese 250g", "Traditional brined feta cheese, 250g", 140.00, 60, "Dairy"),
+    ("Cream Cheese 200g", "Smooth spreadable cream cheese, 200g tub", 85.00, 70, "Dairy"),
+    ("Labneh 500g", "Strained yogurt cheese, 500g tub", 70.00, 65, "Dairy"),
+    ("Rayeb Fermented Milk 500ml", "Traditional fermented milk drink, 500ml", 30.00, 90, "Dairy"),
+    ("Golden Slice Cheese", "Processed cheese slices, 200g pack", 65.00, 90, "Dairy"),
+    ("Whipping Cream 250ml", "Dairy whipping cream, 250ml carton", 75.00, 55, "Dairy"),
+    ("Condensed Milk 400g", "Sweetened condensed milk, 400g can", 55.00, 80, "Dairy"),
+    ("Cheddar Slices", "Aged cheddar cheese slices, 200g pack", 70.00, 75, "Dairy"),
+    ("Greek Yogurt Drink", "Drinkable Greek yogurt, 250ml bottle", 40.00, 85, "Dairy"),
+    ("Baladi Bread 5pcs", "Traditional Egyptian flatbread, pack of 5", 15.00, 150, "Bakery"),
+    ("Pita Bread 6pcs", "Soft pita bread pockets, pack of 6", 20.00, 130, "Bakery"),
+    ("Toast Bread", "Sliced toast bread loaf, 500g", 28.00, 100, "Bakery"),
+    ("Sugar Ring Donuts", "Glazed sugar ring donuts, pack of 4", 60.00, 50, "Bakery"),
+    ("Chocolate Cake Slice", "Rich chocolate cake slice", 45.00, 40, "Bakery"),
+    ("Butter Cookies", "Classic butter cookies, 300g box", 50.00, 90, "Bakery"),
+    ("Bosco Rusk", "Crunchy sweet rusk toast, 300g pack", 35.00, 100, "Bakery"),
+    ("Croissant Single", "Single buttery croissant", 18.00, 80, "Bakery"),
+    ("Sesame Bread Sticks", "Crunchy sesame breadsticks, 150g pack", 30.00, 90, "Bakery"),
+    ("Sweet Popcorn", "Sweet flavored popcorn, 100g bag", 38.00, 110, "Snacks"),
+    ("Twist Pretzels", "Salted twist pretzels, 150g bag", 42.00, 100, "Snacks"),
+    ("Corn Chips", "Crunchy corn chips, 150g bag", 36.00, 110, "Snacks"),
+    ("Tahini Halawa 250g", "Traditional tahini sweet halva, 250g", 65.00, 60, "Snacks"),
+    ("Turkish Delight", "Assorted Turkish delight, 300g box", 70.00, 55, "Snacks"),
+    ("Dried Fruits Mix", "Assorted dried fruits, 300g pack", 120.00, 45, "Snacks"),
+    ("PowerBite Granola Bars", "Oats and honey granola bars, pack of 5", 80.00, 70, "Snacks"),
+    ("Lentils 1kg", "Red lentils, 1kg bag", 60.00, 90, "Grains & Staples"),
+    ("Fava Beans Foul 1kg", "Dried fava beans for foul medames, 1kg", 45.00, 90, "Grains & Staples"),
+    ("Vermicelli 400g", "Thin pasta vermicelli, 400g pack", 25.00, 100, "Grains & Staples"),
+    ("Couscous 500g", "Fine couscous grains, 500g pack", 55.00, 70, "Grains & Staples"),
+    ("Corn Oil 1L", "Pure corn cooking oil, 1L bottle", 130.00, 60, "Grains & Staples"),
+    ("White Vinegar 500ml", "Distilled white vinegar, 500ml bottle", 18.00, 100, "Grains & Staples"),
+    ("Black Pepper 100g", "Ground black pepper, 100g jar", 40.00, 80, "Grains & Staples"),
+    ("Ground Cumin 100g", "Ground cumin spice, 100g jar", 35.00, 80, "Grains & Staples"),
+    ("All-Purpose Flour 1kg", "Refined wheat flour, 1kg bag", 32.00, 120, "Grains & Staples"),
+    ("Split Peas 1kg", "Yellow split peas, 1kg bag", 55.00, 70, "Grains & Staples"),
+    ("Chickpeas 1kg", "Dried chickpeas, 1kg bag", 58.00, 80, "Grains & Staples"),
+    ("Cocoa Powder 200g", "Unsweetened cocoa powder, 200g tin", 60.00, 60, "Grains & Staples"),
+    ("Golden Meadow Honey", "Pure natural honey, 500g jar", 150.00, 50, "Grains & Staples"),
+    ("Tahini 400g", "Stone-ground sesame tahini, 400g jar", 95.00, 60, "Grains & Staples"),
+    ("Oranges 1kg", "Fresh juicy oranges, 1kg", 30.00, 110, "Fruits & Vegetables"),
+    ("Strawberries 500g", "Fresh ripe strawberries, 500g box", 70.00, 60, "Fruits & Vegetables"),
+    ("Grapes 1kg", "Fresh seedless grapes, 1kg", 65.00, 70, "Fruits & Vegetables"),
+    ("Watermelon Whole", "Fresh whole watermelon", 50.00, 40, "Fruits & Vegetables"),
+    ("Mango 1kg", "Fresh ripe mangoes, 1kg", 80.00, 65, "Fruits & Vegetables"),
+    ("Lemon 1kg", "Fresh lemons, 1kg", 25.00, 100, "Fruits & Vegetables"),
+    ("Garlic 250g", "Fresh garlic bulbs, 250g", 20.00, 100, "Fruits & Vegetables"),
+    ("Potatoes 1kg", "Fresh potatoes, 1kg", 22.00, 130, "Fruits & Vegetables"),
+    ("Carrots 1kg", "Fresh carrots, 1kg", 20.00, 110, "Fruits & Vegetables"),
+    ("Zucchini 1kg", "Fresh zucchini, 1kg", 25.00, 100, "Fruits & Vegetables"),
+    ("Eggplant 1kg", "Fresh eggplant, 1kg", 22.00, 100, "Fruits & Vegetables"),
+    ("Bell Pepper 1kg", "Fresh mixed bell peppers, 1kg", 35.00, 90, "Fruits & Vegetables"),
+    ("Baby Spinach 500g", "Fresh baby spinach leaves, 500g", 20.00, 80, "Fruits & Vegetables"),
+    ("Lettuce Head", "Fresh crisp lettuce, 1 head", 15.00, 90, "Fruits & Vegetables"),
+    ("Peach 1kg", "Fresh juicy peaches, 1kg", 60.00, 60, "Fruits & Vegetables"),
+    ("Pear 1kg", "Fresh sweet pears, 1kg", 55.00, 65, "Fruits & Vegetables"),
+    ("Guava 1kg", "Fresh pink guava, 1kg", 40.00, 70, "Fruits & Vegetables"),
+    ("Pomegranate 1kg", "Fresh ruby pomegranate, 1kg", 70.00, 55, "Fruits & Vegetables"),
+    ("Green Peas 500g", "Fresh green peas, 500g", 30.00, 75, "Fruits & Vegetables"),
+    ("Green Beans 500g", "Fresh green beans, 500g", 28.00, 80, "Fruits & Vegetables"),
+    ("Cauliflower Head", "Fresh cauliflower, 1 head", 25.00, 70, "Fruits & Vegetables"),
+    ("Cabbage Head", "Fresh green cabbage, 1 head", 18.00, 85, "Fruits & Vegetables"),
+    ("Molokhia Frozen 400g", "Frozen chopped molokhia greens, 400g", 45.00, 60, "Fruits & Vegetables"),
 ]
 
 CATEGORIES = [
@@ -141,26 +285,32 @@ def main():
 
     # Insert products, already linked to the right category_id, with rating + review set directly
     rows = []
+    ORIGINAL_COUNT = 30  # first 30 products already have real generated images
+
     for i, (name, desc, price, stock, category_name) in enumerate(PRODUCTS):
         props = PROPS_BY_NAME.get(name, "styled with a complementary prop beside it")
         image_prompt = IMAGE_PROMPT_TEMPLATE.format(name=name, props=props)
         image_path = f"products/images/{slugify(name)}.png"
         category_id = category_lookup[category_name]
         rating, review_text = generate_rating_and_review(name, seed_index=i)
-        rows.append((name, desc, price, stock, category_id, image_prompt, image_path, rating, review_text))
+        image_status = "done" if i < ORIGINAL_COUNT else "pending"
+        rows.append((name, desc, price, stock, category_id, image_prompt, image_path, rating, review_text, image_status))
 
     conn.executemany(
         """
         INSERT INTO product
-            (name, description, price, stock_quantity, category_id, image_prompt, image_path, avg_rating, review)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            (name, description, price, stock_quantity, category_id, image_prompt, image_path, avg_rating, review, image_status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         rows,
     )
     conn.commit()
 
     count = conn.execute("SELECT COUNT(*) FROM product").fetchone()[0]
+    done_count = conn.execute("SELECT COUNT(*) FROM product WHERE image_status = 'done'").fetchone()[0]
+    pending_count = conn.execute("SELECT COUNT(*) FROM product WHERE image_status = 'pending'").fetchone()[0]
     print(f"Inserted {count} products, linked to {len(CATEGORIES)} categories, in {DB_PATH}")
+    print(f"Image status: {done_count} done, {pending_count} pending (need images generated)")
     print("Ratings and reviews set directly on each product (no separate reviewer accounts).")
 
     conn.close()
