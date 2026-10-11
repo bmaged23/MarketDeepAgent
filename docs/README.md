@@ -67,3 +67,12 @@ If Chromium reports missing Linux libraries, run `npm --prefix docs run install-
 Fullscreen video now expands the player across the browser window even when native fullscreen is blocked. Use Exit fullscreen or Escape to restore it; F11 can hide browser chrome in desktop browsers. Refresh the demo page to load the updated player.
 
 The expanded recording completed successfully with all five products verified in the synthetic order.
+
+## Publish the demo (same GitHub Pages approach as the Fitness project)
+
+Push the updated `main` branch. On GitHub go to **Settings → Pages → Build and deployment → Source: Deploy from a branch**, select **main /docs**, then **Save**. Wait for the **pages build and deployment** job under Actions to complete.
+
+- Customer video: https://bmaged23.github.io/MarketDeepAgent/demo.html
+- Architecture explorer: https://bmaged23.github.io/MarketDeepAgent/
+
+The README's left play badge and screenshot both open the hosted demo. On the demo page, the left-side Play demo button starts the real MP4; native playback controls and fullscreen remain available. `docs/.nojekyll` makes this a static Pages site. Hosting is ready in the source tree; enable Pages in repository settings before expecting these URLs to work.

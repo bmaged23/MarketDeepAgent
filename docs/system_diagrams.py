@@ -24,7 +24,7 @@ class Diagram:
     def edge(self,a,b,label,side_a='b',side_b='t',kind='request',via=(),offset_a=0,offset_b=0,label_at=None):
         start=self.anchor(a,side_a,offset_a); end=self.anchor(b,side_b,offset_b)
         points=[start,*via,end]; d='M '+' L '.join(f'{x:g} {y:g}' for x,y in points); c=COLORS[kind]
-        self.paths.append(f'<g class="connection {kind}"><title>{escape(label)}: {escape(a)} → {escape(b)}</title><path class="flow" d="{d}" stroke="{c}" marker-end="url(#{kind})"/><circle class="signal" r="3.5" fill="{c}"><animateMotion dur="3.5s" repeatCount="indefinite" path="{d}"/></circle></g>')
+        self.paths.append(f'<g class="connection {kind}" data-from="{escape(a)}" data-to="{escape(b)}" data-kind="{kind}"><title>{escape(label)}: {escape(a)} → {escape(b)}</title><path class="flow" d="{d}" stroke="{c}" marker-end="url(#{kind})"/><circle class="signal" r="3.5" fill="{c}"><animateMotion dur="3.5s" begin="{1.75 if kind == 'response' else 0}s" repeatCount="indefinite" path="{d}"/></circle></g>')
         if label_at:
             x,y=label_at; w=len(label)*7+18
             self.labels.append(f'<g><rect x="{x-w/2}" y="{y-13}" width="{w}" height="23" rx="7" fill="#0c1729"/><text class="edge-label" x="{x}" y="{y+3}" text-anchor="middle" fill="{c}">{escape(label)}</text></g>')
@@ -67,11 +67,22 @@ def generate(assets):
     d.edge('sql','search','fresh SQL facts','l','r','response',offset_a=20,offset_b=20)
     d.edge('search','vectors','product vector query','b','b',via=((192.5,930),(868.5,930)),label_at=(540,930))
     d.edge('indexing','vectors','upsert / delete','l','r','sync')
+    # Separate return routes: specialist results always come back to the coordinator.
+    d.edge('retrieval','customer','approved evidence + coverage','r','b','response',via=((410,525),(410,355),(1080,355)),offset_b=-105,label_at=(650,355))
+    d.edge('cart','customer','cart state / quote / order facts','t','b','response',via=((750,379),(1260,379)),offset_a=50,offset_b=75,label_at=(1010,379))
+    d.edge('memory','customer','verified personal context','t','b','response',offset_a=55,offset_b=55,label_at=(1270,442))
+    d.edge('search','retrieval','fresh ranked products','t','b','response',via=((245,650),(245,650)),offset_a=52.5,offset_b=30,label_at=(342,650))
+    d.edge('sql','cart','validated cart / order state','t','b','response',via=((500.5,677),(730,677)),offset_a=-30,offset_b=30,label_at=(865,677))
+    d.edge('sql','memory','owned history / facts','t','b','response',via=((610.5,615),(1290,615)),offset_a=80,offset_b=105,label_at=(1020,615))
+    d.edge('vectors','search','semantic candidates','b','b','response',via=((898.5,914),(222.5,914)),offset_a=30,offset_b=30,label_at=(555,914))
+    d.edge('sql','indexing','product / memory sync jobs','b','b','sync',via=((610.5,955),(1280,955)),offset_a=80,offset_b=73.5,label_at=(1090,955))
+    d.edge('memory','vectors','owner-filtered recall','b','t',via=((1105,699),(953.5,699)),offset_a=-80,offset_b=85,label_at=(1075,699))
+    d.edge('vectors','memory','candidate memory IDs','r','b','response',via=((1035,831),(1035,653),(1320,653)),offset_b=135,label_at=(1260,653))
     d.save(assets/'architecture.svg')
 
-    d=Diagram('02 / Retrieval is an evidence loop','Hybrid discovery and SQL selection feed batched approval, then a bounded coverage check.',1160)
+    d=Diagram('02 / Retrieval is an evidence loop','Hybrid discovery and SQL selection feed batched approval, then a bounded coverage check.',1360)
     d.lane(24,105,1352,205,'PLAN','Ollama rewrites the request and chooses hybrid, SQL or both. Product output is schema validated.')
-    d.node('request',50,176,335,'Customer request',['Product question + known context','Expected facts / comparisons'],'INPUT')
+    d.node('request',50,176,335,'Customer coordinator',['Calls retrieval with product question','Expected facts / comparisons'],'SPECIALIST REQUEST')
     d.node('rewrite',535,176,335,'Rewrite + split',['Queries · sources · filters · fields','CatalogQuery / ProductEvidence schema'],'OLLAMA')
     d.node('tasks',1020,176,335,'Search task queue',['New subqueries + paginated selections','Round / search / duplicate limits'],'BOUNDED EXECUTION')
     d.edge('request','rewrite','request','r','l',label_at=(460,235));d.edge('rewrite','tasks','validated plan','r','l',label_at=(945,235))
@@ -95,14 +106,18 @@ def generate(assets):
     d.edge('judge','coverage','approved pool','r','l',label_at=(460,930))
     d.edge('coverage','output','sufficient','r','l','response',label_at=(945,930))
     d.edge('coverage','tasks','missing → follow-up tasks','b','r',kind='request',via=((702.5,1110),(1388,1110),(1388,236)),label_at=(1090,1110))
+    d.node('customer',535,1190,335,'Customer coordinator',['Receives query-grouped approved facts','Combines tools → grounded answer'],'SPECIALIST RESPONSE','response')
+    d.edge('output','customer','approved retrieval result','b','t','response',via=((1187.5,1155),(702.5,1155)),label_at=(955,1155))
     d.save(assets/'architecture-retrieval.svg')
 
-    d=Diagram('03 / From a shopping request to a real order','Cart changes use customer-bound tools. Checkout confirmation comes from the customer’s actual form.',1010)
+    d=Diagram('03 / From a shopping request to a real order','Cart changes use customer-bound tools. Checkout confirmation comes from the customer’s actual form.',1100)
     d.lane(24,105,1352,220,'AGENT-ASSISTED SHOPPING','The coordinator supplies approved product evidence and history to the cart specialist.')
     d.node('customer',50,190,335,'Customer coordinator',['Request + product references','Customer identity bound by application'],'ORCHESTRATION')
     d.node('cart',535,190,335,'Cart agent + tools',['Resolve / add / change / remove','Inspect cart · order history · reviews'],'VALIDATED TOOL CALLS','write')
     d.node('sql',1020,190,335,'SQL cart service',['Check product, quantity, stock, price','Shared cart revision + dollar totals'],'CUSTOMER-SCOPED STATE','write')
-    d.edge('customer','cart','shopping intent','r','l',label_at=(460,245));d.edge('cart','sql','validated operation','r','l','write',label_at=(945,245))
+    d.edge('customer','cart','shopping intent','r','l',offset_a=-20,offset_b=-20,label_at=(460,225));d.edge('cart','sql','validated operation','r','l','write',offset_a=-20,offset_b=-20,label_at=(945,225))
+    d.edge('sql','cart','validated state','l','r','response',offset_a=25,offset_b=25,label_at=(945,285))
+    d.edge('cart','customer','tool results / quote','l','r','response',offset_a=25,offset_b=25,label_at=(460,285))
     d.lane(24,404,1352,221,'QUOTE + EXPLICIT CONFIRMATION','The model can prepare a quote. It cannot supply the trusted customer confirmation.')
     d.node('quote',1020,480,335,'Checkout quote',['Snapshot + expiry + opaque token','Changed stock / price → quote again'],'PREPARE')
     d.node('form',535,480,335,'Browser confirmation form',['Delivery address + COD choice','Customer explicitly confirms order'],'CUSTOMER ACTION','write')
@@ -117,6 +132,7 @@ def generate(assets):
     d.edge('checkout','transaction','commit validated order','b','t','write',label_at=(217,677))
     d.edge('transaction','receipt','committed result','r','l','response',label_at=(460,848))
     d.edge('receipt','browser','receipt + cart refresh','r','l','response',label_at=(945,848))
+    d.edge('browser','customer','next chat carries fresh cart / order context','b','l',via=((1187.5,1015),(12,1015),(12,250)),label_at=(720,1015))
     d.save(assets/'architecture-ordering.svg')
 
     d=Diagram('04 / Private memory across conversations','Conversation history lives in SQL. Optional long-term preferences have a separate derived vector index.',1040)
@@ -140,7 +156,7 @@ def generate(assets):
     d.edge('sync','vectors','upsert / delete vectors','r','t','sync',via=((1388,859),(1388,96),(1187.5,96)),label_at=(1230,96))
     d.save(assets/'architecture-memory.svg')
 
-    d=Diagram('05 / One catalog, two search indexes','SQL product_id and category_id are shared with the product vector payload. New products begin in SQL.',1000)
+    d=Diagram('05 / One catalog, two search indexes','SQL product_id and category_id are shared with the product vector payload. New products begin in SQL.',1040)
     d.lane(24,105,1352,221,'CATALOG WRITE','Seed / import / product changes go through SQL. Prices, stock and nutrition are authoritative here.')
     d.node('input',50,190,335,'Catalog input',['Product details + image references','Create / update / delete'],'PRODUCT DATA')
     d.node('sql',535,190,335,'SQLite product catalog',['Stable product_id + category_id','Search revision + nutrition facts'],'AUTHORITATIVE STORE','write')
@@ -160,4 +176,5 @@ def generate(assets):
     d.edge('bge','vectors','upsert / delete point','b','t','sync',label_at=(1187,710))
     d.edge('vectors','status','operation result','l','r','response',label_at=(945,850))
     d.edge('query','vectors','embedded query','b','b',via=((217.5,952),(1187.5,952)),label_at=(700,952))
+    d.edge('vectors','query','IDs + scores → SQL hydration','b','b','response',via=((1217.5,987),(247.5,987)),offset_a=30,offset_b=30,label_at=(700,987))
     d.save(assets/'architecture-indexing.svg')

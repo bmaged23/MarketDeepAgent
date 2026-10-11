@@ -1,15 +1,17 @@
 # MarketDeepAgent
 
-[![Watch the real five-product customer demo](docs/assets/storefront-poster.png)](https://github.com/bmaged23/MarketDeepAgent/blob/main/docs/assets/storefront-tour.mp4)
+<p>
+  <a href="https://bmaged23.github.io/MarketDeepAgent/demo.html"><img src="docs/assets/play-demo.svg" alt="Play customer demo" width="100"></a>
+  <a href="https://bmaged23.github.io/MarketDeepAgent/demo.html"><img src="docs/assets/storefront-poster.png" alt="Real MarketDeepAgent storefront and AI assistant — click to watch" width="740"></a>
+</p>
 
-**▶ [Watch the customer demo · 5 min 52 sec](https://github.com/bmaged23/MarketDeepAgent/blob/main/docs/assets/storefront-tour.mp4)** — Real storefront, live AI agents, product research and a five-product order.
-
+**[Watch the customer demo · 5 min 52 sec](https://bmaged23.github.io/MarketDeepAgent/demo.html)** — Real storefront, live AI agents, product research and a five-product order.
 
 A grocery marketplace with a page-aware AI assistant. Customers can discover products, ask about product facts, navigate the storefront, update their cart and place orders through a customer coordinator backed by retrieval and cart agents.
 
 **English · USD · Ollama Cloud · BGE embeddings · SQLite · Qdrant · BM25**
 
-[Animated architecture](docs/index.html) · [Database ERD](docs/database.md) · [Customer tour](docs/demo.html) · [Recording guide](docs/record.html)
+[Animated architecture](https://bmaged23.github.io/MarketDeepAgent/) · [Database ERD](docs/database.md) · [Customer tour](https://bmaged23.github.io/MarketDeepAgent/demo.html) · [Recording guide](docs/record.html)
 
 ![System architecture](docs/assets/architecture.svg)
 
@@ -199,7 +201,7 @@ python -m app.product_search.evaluation --sweep --split tune --limit 5 \
   --output data/evaluation_reports/retrieval_vanila.json
 ```
 
-GitHub Actions checks source syntax, migration-derived diagram freshness, publication exclusions and the 19 frontend/platform/architecture checks. Run the full Python suite locally with the pinned test requirements; CI does not install the large CUDA snapshot.
+GitHub Actions checks source syntax, migration-derived diagram freshness, publication exclusions and the 21 frontend/platform/architecture/video checks. Run the full Python suite locally with the pinned test requirements; CI does not install the large CUDA snapshot.
 
 The latest reviewed live journey passed **19/19 checks** and placed two synthetic orders, including stock/idempotence/ownership checks and complete snack calorie answers. This is a small test run, not a claim of comprehensive model quality or a visual browser audit.
 
@@ -253,3 +255,14 @@ tests/                            # Feature tests and frontend DOM tests
 ```
 
 Empty `__init__.py` files are intentional Python package markers. `description/` is private, Git-ignored context maintained for coding assistants. The seeded catalog and public docs contain no customer accounts, checkout tokens or private model credentials.
+
+## Publish the demo with GitHub Pages
+
+After pushing the repository, open **Settings → Pages → Build and deployment**:
+
+1. Choose **Deploy from a branch** under Source.
+2. Choose branch **main** and folder **/docs**.
+3. Click **Save**, then wait for the Pages deployment to finish under **Actions**.
+4. Open **https://bmaged23.github.io/MarketDeepAgent/demo.html**.
+
+The README play button opens that hosted video page; the architecture is at the site root. `docs/.nojekyll` serves these static files directly. These links require the one-time Pages setting above.

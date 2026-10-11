@@ -3,7 +3,15 @@ const tourVideo = document.getElementById('tourVideo');
 const videoSection = document.getElementById('videoSection');
 const fullscreenButton = document.getElementById('videoFullscreen');
 const fullscreenStatus = document.getElementById('fullscreenStatus');
+const playButton = document.getElementById('videoPlay');
 let expanded = false, previousOverflow = '';
+playButton.addEventListener('click', async () => {
+  try { await tourVideo.play(); }
+  catch { document.getElementById('videoAvailability').textContent = 'Playback could not start. Use the native video controls or Open video directly.'; }
+});
+tourVideo.addEventListener('play', () => { playButton.hidden = true; });
+tourVideo.addEventListener('pause', () => { playButton.hidden = false; });
+tourVideo.addEventListener('ended', () => { playButton.hidden = false; });
 function expandPlayer() {
   previousOverflow = document.body.style.overflow;
   document.body.style.overflow = 'hidden';
@@ -44,9 +52,9 @@ document.addEventListener('keydown', event => {
 });
 fetch('assets/storefront-tour.mp4', {method: 'HEAD', cache: 'no-store'})
   .then(response => {
-    if (!response.ok) return;
+    if (!response.ok) throw new Error('Video unavailable');
     videoSection.hidden = false;
     document.getElementById('recordingPending').hidden = true;
     document.getElementById('videoAvailability').textContent = 'Actual storefront recording. Live replies and real UI interactions; long waiting periods trimmed.';
   })
-  .catch(() => {});
+  .catch(() => { document.getElementById('videoAvailability').textContent = 'The customer demo video is unavailable.'; document.getElementById('recordingPending').hidden = false; });
