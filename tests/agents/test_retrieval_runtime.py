@@ -4,7 +4,6 @@ import httpx
 from app.config import Settings
 from app.agents.retrieval.agent import RetrievalAgent
 from app.agents.retrieval.tools import RetrievalTools
-from app.model_clients.jev import JevClient
 from app.utils.llm_json import ask_json, StructuredResponseError
 from app.agents.retrieval.schemas import RetrievalPlan
 
@@ -139,65 +138,6 @@ def test_json_repair_is_bounded():
     assert ask_json(llm,'rewrite',{},RetrievalPlan,retries=1).queries[0].query=='tea'
     with pytest.raises(StructuredResponseError):
         ask_json(ScriptedLLM(['invalid','invalid']),'rewrite',{},RetrievalPlan,retries=1)
-
-
-def test_jev_batches_pairs_thresholds_probabilities_and_maps_ids(products):
-    _,_,items=products
-    def respond(request):
-        body=json.loads(request.content)
-        assert body['model']=='jev-1.13.0'
-        assert len(body['questions'])==2
-        assert body['questions']['chunk_0']['type']=='noul'
-        assert request.headers['Authorization']=='Bearer test-key'
-        return httpx.Response(200,json={'model':'jev-1.13.0','answers':{
-            'chunk_1':{'type':'noul','noul':0.3},'chunk_0':{'type':'noul','noul':0.7}}})
-    settings=Settings(_env_file=None,typesafe_api_key='test-key',retrieval_relevance_threshold=0.6)
-    judge=JevClient(settings,transport=httpx.MockTransport(respond))
-    result=judge.grade('tea',[{'query':'tea','filters':{},'product':p} for p in items[:2]])
-    assert [d['approval'] for d in result['decisions']]==[1,0]
-
-
-def test_jev_missing_answers_rejected(products):
-    _,_,items=products
-    transport=httpx.MockTransport(lambda _:httpx.Response(200,json={'model':'test','answers':{}}))
-    with pytest.raises(RuntimeError,match='chunk IDs'):
-        JevClient(Settings(_env_file=None,typesafe_api_key='test'),transport).grade(
-            'tea',[{'query':'tea','filters':{},'product':items[0]}])
-
-
-def test_jev_key_required_before_network():
-    with pytest.raises(RuntimeError,match='TYPESAFE_API_KEY'):
-        JevClient(Settings(_env_file=None)).grade('tea',[{}])
-
-
-def test_venice_uses_its_key_model_and_decisions_endpoint(products):
-    _,_,items=products
-    def respond(request):
-        assert str(request.url)=='https://api.venice.ai/api/v1/decisions'
-        assert request.headers['Authorization']=='Bearer test-venice-key'
-        assert json.loads(request.content)['model']=='jev-latest'
-        return httpx.Response(200,json={'model':'jev-latest','answers':{'chunk_0':{'type':'noul','noul':0.9}}})
-    settings=Settings(_env_file=None,jev_provider='venice',venice_api_key='test-venice-key',jev_model='jev-latest')
-    result=JevClient(settings,httpx.MockTransport(respond)).grade(
-        'tea',[{'query':'tea','filters':{},'product':items[0]}])
-    assert result['decisions'][0]['approval']==1
-
-
-def test_venice_missing_key_does_not_fall_back_to_typesafe():
-    settings=Settings(_env_file=None,jev_provider='venice',typesafe_api_key='different-key')
-    with pytest.raises(RuntimeError,match='VENICE_API_KEY'):
-        JevClient(settings).grade('tea',[{}])
-
-
-@pytest.mark.parametrize('probability',[float('nan'),float('inf'),-0.1,1.1,True])
-def test_jev_invalid_probabilities_are_rejected(products,probability):
-    from pydantic import ValidationError
-    _,_,items=products
-    transport=httpx.MockTransport(lambda _:httpx.Response(200,json={
-        'model':'test','answers':{'chunk_0':{'type':'noul','noul':probability}}}))
-    with pytest.raises((ValidationError,ValueError)):
-        JevClient(Settings(_env_file=None,typesafe_api_key='test'),transport).grade(
-            'tea',[{'query':'tea','filters':{},'product':items[0]}])
 
 
 def test_calories_reach_relevance_coverage_and_final_context(products):

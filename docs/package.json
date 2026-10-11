@@ -1,0 +1,12 @@
+{
+  "name": "marketdeepagent-browser-recording",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Record the actual marketplace frontend with real live agents",
+  "devDependencies": {
+    "playwright": "1.56.0"
+  },
+  "scripts": {
+    "install-browser": "node setup_browser.mjs"
+  }
+}

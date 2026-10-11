@@ -1,0 +1,40 @@
+name: Source and documentation checks
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-and-docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check Python syntax and migration-derived diagrams
+        run: |
+          python -m compileall -q app data docs
+          python docs/generate.py
+          git diff --exit-code -- docs/assets/architecture.svg docs/assets/database-erd.svg docs/database.md
+      - name: Check JavaScript and frontend behavior
+        run: |
+          for file in UI/frontend/js/*.js docs/*.js docs/*.mjs; do node --check "$file"; done
+          node --test --test-isolation=none tests/frontend/*.test.cjs
+      - name: Check whitespace and publication files
+        run: |
+          git diff --check
+          python - <<'PY'
+          import subprocess
+          from pathlib import Path
+          tracked = subprocess.check_output(['git', 'ls-files'], text=True).splitlines()
+          forbidden = [p for p in tracked if p == '.env' or p.endswith(('.db', '.sqlite', '.sqlite3')) or p.startswith(('description/', 'data/evaluation_reports/', '.venv/'))]
+          assert not forbidden, f'Runtime/private files tracked: {forbidden}'
+          pins = [line for line in Path('requirements.txt').read_text().splitlines() if line and not line.startswith('#')]
+          assert all('==' in line and ' @ ' not in line for line in pins)
+          PY

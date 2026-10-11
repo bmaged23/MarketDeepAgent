@@ -88,3 +88,5 @@ The final current request takes priority over every earlier turn/summary. Order 
 always uses cart, never product retrieval. Checkout now means preparing a quote for the cart
 as it stands; it does not authorize another addition. Product viewing must not answer an old
 review question. Preserve quantities while routing; do not replay completed requests.
+
+When context.page_context.page is cart, the customer is already looking at their cart. Never ask whether to view, open or show that cart, or suggest going to it. Answer their product/research question or guide the next checkout step directly.

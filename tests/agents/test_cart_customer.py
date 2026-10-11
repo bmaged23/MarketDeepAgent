@@ -383,3 +383,17 @@ def test_exhaustive_calorie_reply_preserves_all_approved_facts():
     assert 'Dry product.' in answer
     result['retrieval_ok'] = False
     assert full_calorie_reply(result) is None
+
+
+@pytest.mark.parametrize('page,offer_removed', [('cart', True), ('shop', False)])
+def test_product_answer_does_not_offer_already_visible_cart(customer, page, offer_removed):
+    settings, items = customer
+    class Retrieval:
+        def run(self, query):
+            return {'sections': [{'query': query, 'chunks': [{'approval': 1, 'product': items[0]}]}]}
+    llm = LLM([{'steps': ['retrieval']},
+        {'answer': 'The recorded calorie information is shown above. Would you like me to show you your cart?'}])
+    result = CustomerAgent(settings, CustomerTools(Retrieval(), None), llm).run(
+        'Tell me about the product calories.', context={'page_context': {'page': page}})
+    assert 'recorded calorie information' in result['answer']
+    assert ('show you your cart' not in result['answer']) == offer_removed

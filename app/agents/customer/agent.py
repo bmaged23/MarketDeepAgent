@@ -3,7 +3,7 @@ import re
 import httpx
 from app.utils.money import format_money
 from app.utils.shopping_intent import explicit_shopping_intent
-from app.utils.shopping_replies import cart_receipt, pending_order_reply, full_calorie_reply
+from app.utils.shopping_replies import cart_receipt, pending_order_reply, full_calorie_reply, remove_visible_cart_offer
 from app.agents.customer.schemas import CustomerPlan, CustomerReply
 from app.agents.customer.tools import CustomerTools
 from app.agents.retrieval.schemas import RetrievalRequest
@@ -157,6 +157,7 @@ class CustomerAgent:
                                     cart_result.get("action") == "update_cart" and
                                     cart_result.get("output", {}).get("items")):
             answer = "No product was added to your cart. Please specify the product and quantity."
+        answer = remove_visible_cart_offer(answer, context.get("page_context", {}).get("page"))
         card_ids = list(dict.fromkeys(reply.product_ids))
         if plan.interaction == "view_product" and not results.get("retrieval") and not card_ids:
             choices = context.get("visible_products", []) if context.get("page_context", {}).get("search") else context.get("referenced_products", [])

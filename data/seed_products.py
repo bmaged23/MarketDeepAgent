@@ -10,11 +10,11 @@ import random
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from app.config import PROJECT_ROOT
 from app.database.connection import migrate
 from app.products.nutrition import apply_catalog_nutrition
 
 DB_PATH = Path(__file__).parent / "products.db"
-SCHEMA_PATH = Path(__file__).parent / "schema.sql"
 
 IMAGE_PROMPT_TEMPLATE = (
     "Professional advertisement-style product photography of {name}, placed on "
@@ -274,7 +274,6 @@ def generate_rating_and_review(name: str, seed_index: int):
 def main():
     migrate(DB_PATH)
     conn = sqlite3.connect(DB_PATH)
-    conn.executescript(SCHEMA_PATH.read_text())
 
     # Insert categories first
     for cat_name in CATEGORIES:
@@ -295,7 +294,7 @@ def main():
         image_path = f"products/images/{slugify(name)}.png"
         category_id = category_lookup[category_name]
         rating, review_text = generate_rating_and_review(name, seed_index=i)
-        image_status = "done" if (DB_PATH.parent.parent / image_path).is_file() else "pending"
+        image_status = "done" if (PROJECT_ROOT / image_path).is_file() else "pending"
         rows.append((name, desc, price, stock, category_id, image_prompt, image_path, rating, review_text, image_status))
 
     conn.executemany(

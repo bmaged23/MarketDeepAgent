@@ -1,12 +1,12 @@
 [build-system]
-requires = ["setuptools>=75"]
+requires = ["setuptools==84.0.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "market-deep-agent"
 version = "0.1.0"
-description = "Marketplace product indexing and hybrid retrieval"
-requires-python = ">=3.11"
+description = "Multi-agent grocery marketplace with hybrid retrieval and customer-scoped ordering"
+requires-python = ">=3.13,<3.14"
 dynamic = ["dependencies"]
 
 [tool.setuptools.dynamic]

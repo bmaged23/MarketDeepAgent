@@ -1,39 +1,60 @@
-# Python
-
-notes.txt
-__pycache__/
-*.pyc
-*.pyo
-.ipynb_checkpoints/
-
-# Conda / envs
-.conda/
-venv/
-env/
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Editor
-.vscode/
-.idea/
-
-# Local configuration and secrets
+# Secrets: commit only the blank configuration template
 .env
 .env.*
 !.env.example
+*.pem
+*.key
 
+# Python environments, bytecode, packaging and test output
 .venv/
-.pytest_cache/
+.venv-*/
+venv/
+env/
+.conda/
+__pycache__/
+*.py[cod]
 *.egg-info/
+build/
+dist/
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Runtime data: regenerate the catalog from data/seed_products.py
+*.db
+*.sqlite
+*.sqlite3
 *.db-wal
 *.db-shm
-
+*.db-journal
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-wal
+*.sqlite3-shm
 data/model_cache/
-
 data/backups/
 data/evaluation_reports/
+qdrant_storage/
 
-# Local project context for LLMs
+# Browser recording dependencies and intermediate captures
+node_modules/
+.playwright/
+test-results/
+playwright-report/
+docs/assets/raw-recordings/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+notes.txt
+
+# Private local context for coding assistants
 /description/

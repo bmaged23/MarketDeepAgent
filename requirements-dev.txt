@@ -1,2 +1,5 @@
+# Test tooling; runtime environment is pinned separately.
 -r requirements.txt
-pytest>=8,<10
+pytest==9.0.2
+iniconfig==2.1.0
+pluggy==1.6.0

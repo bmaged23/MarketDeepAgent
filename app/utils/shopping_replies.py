@@ -36,3 +36,17 @@ def full_calorie_reply(retrieval):
     lines = [f"- **{product['name']}** — {nutrition_summary(product) or 'Calorie information is unavailable.'}"
              for product in products.values()]
     return f"Calorie information for all {len(products)} matching products:\n\n" + '\n'.join(lines)
+
+
+def remove_visible_cart_offer(answer, page):
+    """Remove redundant navigation offers while preserving the rest of the reply."""
+    if page != 'cart':
+        return answer
+    import re
+    offer = re.compile(
+        r"\b(?:would you like(?: me)? to|do you want(?: me)? to|shall i|can i|you can(?: also)?)"
+        r"\s+(?:show(?: you)?|open|view|see|check)\s+(?:your|the)(?: shopping)? cart[^.!?\n]*[.!?]?",
+        re.I,
+    )
+    cleaned = offer.sub('', answer).strip()
+    return cleaned or 'Your cart is already open.'

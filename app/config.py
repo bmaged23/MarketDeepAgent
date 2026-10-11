@@ -37,14 +37,6 @@ class Settings(BaseSettings):
     qdrant_timeout_seconds: float = Field(default=10, gt=0)
     ollama_timeout_seconds: float = Field(default=120, gt=0)
     ollama_temperature: float = Field(default=0, ge=0, le=2)
-    typesafe_api_key: SecretStr = SecretStr("")
-    typesafe_base_url: str = "https://api.typesafe.ai"
-    jev_provider: Literal["typesafe", "venice"] = "typesafe"
-    venice_api_key: SecretStr = SecretStr("")
-    venice_base_url: str = "https://api.venice.ai"
-    jev_model: str = "jev-1.13.0"
-    jev_timeout_seconds: float = Field(default=30, gt=0)
-    retrieval_relevance_threshold: float = Field(default=0.5, gt=0, le=1, allow_inf_nan=False)
     retrieval_max_rounds: int = Field(default=3, ge=1, le=10)
     retrieval_max_searches: int = Field(default=8, ge=1, le=30)
     retrieval_queries_per_round: int = Field(default=3, ge=1, le=10)

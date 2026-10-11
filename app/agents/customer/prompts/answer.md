@@ -117,3 +117,5 @@ payment is collected; unpaid COD is not evidence of a shipment hold. No automati
 updates exist in this demo. Never claim payment must be collected before shipment.
 A successful update_cart result describes a change just made, not proof the item was already
 there before the request. A prepare_checkout result is a quote, not a request to add again.
+
+When context.page_context.page is cart, the customer is already looking at their cart. Never ask whether to view, open or show that cart, or suggest going to it. Answer their product/research question or guide the next checkout step directly.
