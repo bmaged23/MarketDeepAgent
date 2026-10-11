@@ -14,11 +14,11 @@
   body {
     background: var(--sand);
     color: var(--ink);
-    font-family: 'Tajawal', sans-serif;
+    font-family: 'Inter', sans-serif;
     min-height: 100vh;
   }
 
-  h1, h2, h3, .brand { font-family: 'Cairo', sans-serif; }
+  h1, h2, h3, .brand { font-family: 'Inter', sans-serif; }
 
   /* ===== Header with woven-awning scalloped edge (signature element) ===== */
   header {
@@ -76,7 +76,7 @@
     color: white;
     padding: 13px 26px;
     border-radius: 999px;
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 14px;
     opacity: 0;
@@ -108,9 +108,9 @@
   }
   .brand .dot { color: var(--saffron); }
 
-  .brand-wrap { display: flex; flex-direction: column; align-items: flex-end; line-height: 1; }
+  .brand-wrap { display: flex; flex-direction: column; align-items: flex-start; line-height: 1; }
   .brand-en {
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 11px;
     letter-spacing: 4px;
     color: var(--saffron);
@@ -124,7 +124,7 @@
     border: none;
     padding: 10px 22px;
     border-radius: 999px;
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 14px;
     cursor: pointer;
@@ -156,10 +156,10 @@
   }
   .search-wrap input {
     width: 100%;
-    padding: 15px 50px 15px 20px;
+    padding: 15px 20px 15px 50px;
     border-radius: 999px;
     border: none;
-    font-family: 'Tajawal', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 15px;
     background: white;
     box-shadow: 0 4px 16px rgba(0,0,0,0.15);
@@ -167,7 +167,7 @@
   .search-wrap input:focus { outline: 3px solid var(--saffron); }
   .search-wrap .search-icon {
     position: absolute;
-    right: 18px;
+    left: 18px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 18px;
@@ -225,7 +225,7 @@
     transition: transform 0.2s ease;
   }
   .cat-card:hover .cat-icon-badge { transform: scale(1.1) rotate(-4deg); }
-  .cat-name { font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 15px; }
+  .cat-name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px; }
 
   /* ===== Products ===== */
   .prod-grid {
@@ -259,7 +259,7 @@
 
   .prod-info { padding: 14px 16px 16px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
   .prod-cat { font-size: 11px; color: var(--teal); font-weight: 700; }
-  .prod-name { font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 15px; line-height: 1.4; }
+  .prod-name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px; line-height: 1.4; }
   .prod-rating { font-size: 13px; }
   .star-filled { color: #F5B301; }
   .star-empty { color: #E0DDD3; }
@@ -273,7 +273,7 @@
     overflow: hidden;
   }
   .prod-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
-  .prod-price { font-family: 'Cairo', sans-serif; font-weight: 900; font-size: 17px; color: var(--rust); }
+  .prod-price { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 17px; color: var(--rust); }
   .prod-add {
     background: var(--teal);
     color: white;
@@ -317,7 +317,7 @@
     padding: 11px 14px;
     border-radius: 10px;
     border: 1.5px solid #e0d8c8;
-    font-family: 'Tajawal', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
   }
   .field input:focus { outline: 2px solid var(--teal); border-color: transparent; }
@@ -328,7 +328,7 @@
     border: none;
     padding: 13px;
     border-radius: 10px;
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 15px;
     cursor: pointer;
@@ -336,7 +336,7 @@
   }
   .modal-submit:hover { background: var(--teal-deep); }
   .modal-close {
-    background: none; border: none; float: left;
+    background: none; border: none; float: right;
     font-size: 20px; cursor: pointer; color: #999;
   }
   .modal-msg { font-size: 13px; margin-top: 10px; text-align: center; }
@@ -350,7 +350,7 @@
     border-radius: 10px;
     border: 1.5px solid #e0d8c8;
     background: none;
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 13px;
     cursor: pointer;
@@ -363,7 +363,7 @@
     align-items: center;
     gap: 10px;
     color: white;
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 14px;
   }
@@ -373,7 +373,7 @@
     color: white;
     padding: 8px 16px;
     border-radius: 999px;
-    font-family: 'Tajawal', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 12px;
     cursor: pointer;
   }
@@ -408,7 +408,7 @@
     align-items: center;
     gap: 10px;
   }
-  .cart-item-name { font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 13px; flex: 1; }
+  .cart-item-name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; flex: 1; }
   .cart-item-qty { display: flex; align-items: center; gap: 8px; }
   .cart-item-qty button {
     width: 24px; height: 24px;
@@ -418,7 +418,7 @@
     cursor: pointer;
     font-size: 14px;
   }
-  .cart-item-price { font-family: 'Cairo', sans-serif; font-weight: 700; color: var(--rust); font-size: 13px; min-width: 55px; text-align: left; }
+  .cart-item-price { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--rust); font-size: 13px; min-width: 55px; text-align: left; }
   .cart-empty { text-align: center; color: #999; padding: 40px 0; }
   .cart-total-row {
     margin-top: auto;
@@ -427,7 +427,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 900;
     font-size: 18px;
   }
@@ -438,7 +438,7 @@
     border: none;
     padding: 14px;
     border-radius: 10px;
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 15px;
     cursor: pointer;
@@ -501,7 +501,7 @@
     gap: 12px;
   }
   .detail-cat { font-size: 12px; color: var(--teal); font-weight: 700; }
-  .detail-name { font-family: 'Cairo', sans-serif; font-weight: 900; font-size: 24px; }
+  .detail-name { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 24px; }
   .detail-rating { font-size: 18px; }
   .detail-rating .num { font-size: 14px; color: #999; margin-right: 6px; }
   .detail-desc { font-size: 14px; color: #555; line-height: 1.7; }
@@ -512,9 +512,9 @@
     font-size: 13.5px;
     color: #555;
     line-height: 1.7;
-    border-right: 3px solid var(--saffron);
+    border-left: 3px solid var(--saffron);
   }
-  .detail-review-label { font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 12px; color: var(--ink); margin-bottom: 6px; }
+  .detail-review-label { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 12px; color: var(--ink); margin-bottom: 6px; }
   .detail-footer {
     margin-top: auto;
     display: flex;
@@ -523,14 +523,14 @@
     padding-top: 16px;
     border-top: 1px solid var(--sand-deep);
   }
-  .detail-price { font-family: 'Cairo', sans-serif; font-weight: 900; font-size: 26px; color: var(--rust); }
+  .detail-price { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 26px; color: var(--rust); }
   .detail-add-btn {
     background: var(--teal);
     color: white;
     border: none;
     padding: 12px 28px;
     border-radius: 999px;
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 14px;
     cursor: pointer;
@@ -547,3 +547,47 @@
   }
 
   .loading { text-align: center; padding: 40px; color: #999; }
+
+/* Persistent assistant dock and application views. */
+:root { --assistant-width: 390px; }
+[hidden] { display: none !important; }
+body.assistant-open { padding-right: var(--assistant-width); transition: padding-right .18s; }
+.page-nav { display:flex; gap:10px; flex-wrap:wrap; max-width:1200px; margin:20px auto; padding:0 24px; }
+.page-nav button, .app-page button, .chat-message button, .assistant-header button { border:1px solid #d5e4dd; background:#fff; color:#1b6355; border-radius:8px; padding:9px 13px; cursor:pointer; }
+.app-page { min-height:50vh; }
+.app-page label, .checkout-confirmation label { display:block; margin:12px 0; }
+.app-page input:not([type=checkbox]), .app-page textarea, .app-page select { display:block; width:100%; max-width:600px; padding:10px; border:1px solid #ccd9d3; border-radius:8px; font:inherit; }
+.order-card, .memory-card, .checkout-confirmation { border:1px solid #d5e4dd; border-radius:12px; padding:20px; margin:16px 0; background:white; }
+.order-card button, .memory-card button { margin:6px; }
+.assistant-tab { position:fixed; right:0; top:45%; z-index:60; writing-mode:vertical-rl; border:0; border-radius:10px 0 0 10px; padding:18px 12px; background:#1b6355; color:white; cursor:pointer; }
+.assistant-open .assistant-tab { display:none; }
+.assistant-panel { position:fixed; right:0; top:0; bottom:0; width:var(--assistant-width); display:flex; flex-direction:column; background:#fafcfb; border-left:1px solid #cbdad3; box-shadow:-8px 0 30px #153b2412; z-index:55; }
+.assistant-header { display:flex; align-items:center; gap:8px; padding:18px; border-bottom:1px solid #d5e4dd; background:white; }
+.assistant-header > div { flex:1; }.assistant-header small { display:block; margin-top:5px; color:#61776c; }
+.assistant-resize { position:absolute; left:-4px; top:0; bottom:0; width:8px; cursor:col-resize; touch-action:none; }
+.chat-messages { flex:1; overflow:auto; padding:18px; }
+.chat-message { white-space:pre-wrap; overflow-wrap:anywhere; border:1px solid #e0e8e2; background:white; border-radius:12px; padding:13px; margin:12px 0; line-height:1.6; }
+.chat-message.user { background:#e1f0e8; margin-left:30px; }.chat-message button { display:block; margin-top:10px; white-space:normal; }
+.chat-intro { color:#61776c; line-height:1.6; }.chat-status { padding:0 18px 8px; font-size:12px; color:#61776c; }
+.chat-form { padding:16px; border-top:1px solid #d5e4dd; background:white; }
+.chat-form textarea { width:100%; resize:vertical; min-height:70px; max-height:200px; padding:12px; border:1px solid #ccd9d3; border-radius:10px; font:inherit; box-sizing:border-box; }
+.chat-form button { display:block; margin-top:8px; margin-left:auto; background:#1b6355; color:white; padding:10px 24px; border:0; border-radius:8px; cursor:pointer; }
+button:disabled { opacity:.55; cursor:wait; }.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+.assistant-open .detail-overlay { right:var(--assistant-width); }
+@media(max-width:760px) { body.assistant-open { padding-right:0; }.assistant-panel { width:100%; }.assistant-resize { display:none; }.assistant-open .detail-overlay { right:0; } }
+
+.chat-messages { min-height:0; overflow-anchor:none; }
+.chat-message.assistant { white-space:normal; }
+.chat-message.assistant p { margin:0 0 10px; white-space:pre-wrap; }
+.chat-message.assistant p:last-child { margin-bottom:0; }
+.chat-message.assistant ul, .chat-message.assistant ol { padding-left:22px; margin:8px 0; }
+.chat-message.assistant h1, .chat-message.assistant h2, .chat-message.assistant h3,
+.chat-message.assistant h4, .chat-message.assistant h5, .chat-message.assistant h6 { font-size:1.05em; margin:12px 0 6px; }
+.chat-message.assistant code { background:#eef2ef; padding:2px 4px; border-radius:4px; font-size:.9em; }
+.chat-message.assistant pre { overflow-x:auto; background:#eef2ef; padding:10px; margin:10px 0; white-space:pre; border-radius:8px; }
+.chat-message.assistant blockquote { border-left:3px solid #9bbcad; padding-left:10px; margin:8px 0; }
+.chat-message.assistant a { color:#1b6355; text-decoration:underline; }
+
+.prod-nutrition { font-size:11px; color:#61776c; margin:6px 0; }
+.detail-nutrition { background:#edf5f0; border-radius:8px; padding:12px; margin:12px 0; font-size:14px; }
+.detail-nutrition p { margin-top:6px; color:#61776c; line-height:1.5; }

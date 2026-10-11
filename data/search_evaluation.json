@@ -1,0 +1,1232 @@
+[
+  {
+    "case_id": "retrieval-001",
+    "split": "tune",
+    "query_type": "exact_name",
+    "query": "Lipton Yellow Label Tea",
+    "filters": {},
+    "relevant_product_names": [
+      "Lipton Yellow Label Tea"
+    ],
+    "agent_expectations": {
+      "user_message": "Lipton Yellow Label Tea",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Lipton Yellow Label Tea"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-002",
+    "split": "test",
+    "query_type": "exact_name",
+    "query": "Lavazza Espresso Coffee",
+    "filters": {},
+    "relevant_product_names": [
+      "Lavazza Espresso Coffee"
+    ],
+    "agent_expectations": {
+      "user_message": "Lavazza Espresso Coffee",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Lavazza Espresso Coffee"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-003",
+    "split": "tune",
+    "query_type": "exact_name",
+    "query": "Greek Yogurt Drink",
+    "filters": {},
+    "relevant_product_names": [
+      "Greek Yogurt Drink"
+    ],
+    "agent_expectations": {
+      "user_message": "Greek Yogurt Drink",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Greek Yogurt Drink"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-004",
+    "split": "test",
+    "query_type": "exact_name",
+    "query": "Golden Meadow Honey",
+    "filters": {},
+    "relevant_product_names": [
+      "Golden Meadow Honey"
+    ],
+    "agent_expectations": {
+      "user_message": "Golden Meadow Honey",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Golden Meadow Honey"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-005",
+    "split": "tune",
+    "query_type": "keyword",
+    "query": "black tea",
+    "filters": {},
+    "relevant_product_names": [
+      "Lipton Yellow Label Tea",
+      "Twinings English Breakfast Tea"
+    ],
+    "agent_expectations": {
+      "user_message": "black tea",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Lipton Yellow Label Tea",
+        "Twinings English Breakfast Tea"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-006",
+    "split": "test",
+    "query_type": "keyword",
+    "query": "coffee",
+    "filters": {},
+    "relevant_product_names": [
+      "Nescafe Gold Coffee",
+      "Lavazza Espresso Coffee",
+      "Ottoman Turkish Coffee"
+    ],
+    "agent_expectations": {
+      "user_message": "coffee",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Nescafe Gold Coffee",
+        "Lavazza Espresso Coffee",
+        "Ottoman Turkish Coffee"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-007",
+    "split": "tune",
+    "query_type": "keyword",
+    "query": "croissants",
+    "filters": {},
+    "relevant_product_names": [
+      "Croissants Pack of 4",
+      "Croissant Single"
+    ],
+    "agent_expectations": {
+      "user_message": "croissants",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Croissants Pack of 4",
+        "Croissant Single"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-008",
+    "split": "test",
+    "query_type": "keyword",
+    "query": "cheddar cheese",
+    "filters": {},
+    "relevant_product_names": [
+      "Cheddar Cheese Block",
+      "Cheddar Slices"
+    ],
+    "agent_expectations": {
+      "user_message": "cheddar cheese",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Cheddar Cheese Block",
+        "Cheddar Slices"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-009",
+    "split": "tune",
+    "query_type": "description",
+    "query": "instant coffee in a jar",
+    "filters": {},
+    "relevant_product_names": [
+      "Nescafe Gold Coffee"
+    ],
+    "agent_expectations": {
+      "user_message": "instant coffee in a jar",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Nescafe Gold Coffee"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-010",
+    "split": "test",
+    "query_type": "description",
+    "query": "finely ground Turkish coffee in a tin",
+    "filters": {},
+    "relevant_product_names": [
+      "Ottoman Turkish Coffee"
+    ],
+    "agent_expectations": {
+      "user_message": "finely ground Turkish coffee in a tin",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Ottoman Turkish Coffee"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-011",
+    "split": "tune",
+    "query_type": "description",
+    "query": "carbonated mineral water",
+    "filters": {},
+    "relevant_product_names": [
+      "Sparkling Water"
+    ],
+    "agent_expectations": {
+      "user_message": "carbonated mineral water",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Sparkling Water"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-012",
+    "split": "test",
+    "query_type": "description",
+    "query": "soft bread pockets",
+    "filters": {},
+    "relevant_product_names": [
+      "Pita Bread 6pcs"
+    ],
+    "agent_expectations": {
+      "user_message": "soft bread pockets",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Pita Bread 6pcs"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-013",
+    "split": "tune",
+    "query_type": "paraphrase",
+    "query": "tea made from dried hibiscus flowers",
+    "filters": {},
+    "relevant_product_names": [
+      "Hibiscus Tea Karkade"
+    ],
+    "agent_expectations": {
+      "user_message": "tea made from dried hibiscus flowers",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Hibiscus Tea Karkade"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-014",
+    "split": "test",
+    "query_type": "paraphrase",
+    "query": "a fermented milk drink",
+    "filters": {},
+    "relevant_product_names": [
+      "Rayeb Fermented Milk 500ml"
+    ],
+    "agent_expectations": {
+      "user_message": "a fermented milk drink",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Rayeb Fermented Milk 500ml"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-015",
+    "split": "tune",
+    "query_type": "paraphrase",
+    "query": "a spread made from ground sesame",
+    "filters": {},
+    "relevant_product_names": [
+      "Tahini 400g"
+    ],
+    "agent_expectations": {
+      "user_message": "a spread made from ground sesame",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Tahini 400g"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-016",
+    "split": "test",
+    "query_type": "paraphrase",
+    "query": "a mix of roasted nuts",
+    "filters": {},
+    "relevant_product_names": [
+      "Mixed Nuts 500g"
+    ],
+    "agent_expectations": {
+      "user_message": "a mix of roasted nuts",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Mixed Nuts 500g"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-017",
+    "split": "tune",
+    "query_type": "specific_attribute",
+    "query": "unsweetened cocoa for baking",
+    "filters": {},
+    "relevant_product_names": [
+      "Cocoa Powder 200g"
+    ],
+    "agent_expectations": {
+      "user_message": "unsweetened cocoa for baking",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Cocoa Powder 200g"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-018",
+    "split": "test",
+    "query_type": "specific_attribute",
+    "query": "salted butter block",
+    "filters": {},
+    "relevant_product_names": [
+      "Butter 250g"
+    ],
+    "agent_expectations": {
+      "user_message": "salted butter block",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Butter 250g"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-019",
+    "split": "tune",
+    "query_type": "specific_attribute",
+    "query": "seedless grapes",
+    "filters": {},
+    "relevant_product_names": [
+      "Grapes 1kg"
+    ],
+    "agent_expectations": {
+      "user_message": "seedless grapes",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Grapes 1kg"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-020",
+    "split": "test",
+    "query_type": "specific_attribute",
+    "query": "frozen chopped greens for molokhia",
+    "filters": {},
+    "relevant_product_names": [
+      "Molokhia Frozen 400g"
+    ],
+    "agent_expectations": {
+      "user_message": "frozen chopped greens for molokhia",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Molokhia Frozen 400g"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-021",
+    "split": "tune",
+    "query_type": "shopping_intent",
+    "query": "sliced bread loaves for sandwiches",
+    "filters": {},
+    "relevant_product_names": [
+      "White Sandwich Bread",
+      "Whole Wheat Bread",
+      "Toast Bread"
+    ],
+    "agent_expectations": {
+      "user_message": "sliced bread loaves for sandwiches",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "White Sandwich Bread",
+        "Whole Wheat Bread",
+        "Toast Bread"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-022",
+    "split": "test",
+    "query_type": "shopping_intent",
+    "query": "whipping cream for a dessert",
+    "filters": {},
+    "relevant_product_names": [
+      "Whipping Cream 250ml"
+    ],
+    "agent_expectations": {
+      "user_message": "whipping cream for a dessert",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Whipping Cream 250ml"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-023",
+    "split": "tune",
+    "query_type": "shopping_intent",
+    "query": "microwave popcorn for movie night",
+    "filters": {},
+    "relevant_product_names": [
+      "Popcorn Microwave"
+    ],
+    "agent_expectations": {
+      "user_message": "microwave popcorn for movie night",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Popcorn Microwave"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-024",
+    "split": "test",
+    "query_type": "shopping_intent",
+    "query": "flour for baking",
+    "filters": {},
+    "relevant_product_names": [
+      "All-Purpose Flour 1kg"
+    ],
+    "agent_expectations": {
+      "user_message": "flour for baking",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "All-Purpose Flour 1kg"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-025",
+    "split": "tune",
+    "query_type": "disambiguation",
+    "query": "fresh whole oranges rather than juice",
+    "filters": {},
+    "relevant_product_names": [
+      "Oranges 1kg"
+    ],
+    "agent_expectations": {
+      "user_message": "fresh whole oranges rather than juice",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Oranges 1kg"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-026",
+    "split": "test",
+    "query_type": "disambiguation",
+    "query": "orange juice in a carton",
+    "filters": {},
+    "relevant_product_names": [
+      "Orange Juice 1L"
+    ],
+    "agent_expectations": {
+      "user_message": "orange juice in a carton",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Orange Juice 1L"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-027",
+    "split": "tune",
+    "query_type": "disambiguation",
+    "query": "fresh mango fruit",
+    "filters": {},
+    "relevant_product_names": [
+      "Mango 1kg"
+    ],
+    "agent_expectations": {
+      "user_message": "fresh mango fruit",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Mango 1kg"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-028",
+    "split": "test",
+    "query_type": "disambiguation",
+    "query": "mango nectar drink",
+    "filters": {},
+    "relevant_product_names": [
+      "Mango Juice 1L"
+    ],
+    "agent_expectations": {
+      "user_message": "mango nectar drink",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Mango Juice 1L"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-029",
+    "split": "tune",
+    "query_type": "filtered",
+    "query": "basmati rice under 20 USD",
+    "filters": {
+      "max_price": 20
+    },
+    "relevant_product_names": [
+      "Basmati Rice 5kg"
+    ],
+    "agent_expectations": {
+      "user_message": "basmati rice under 20 USD",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Basmati Rice 5kg"
+      ],
+      "expected_filters": {
+        "max_price": 20
+      },
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-030",
+    "split": "test",
+    "query_type": "filtered",
+    "query": "olive oil available in stock",
+    "filters": {
+      "in_stock": true
+    },
+    "relevant_product_names": [
+      "Olive Oil 1L"
+    ],
+    "agent_expectations": {
+      "user_message": "olive oil available in stock",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Olive Oil 1L"
+      ],
+      "expected_filters": {
+        "in_stock": true
+      },
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-031",
+    "split": "tune",
+    "query_type": "filtered",
+    "query": "fresh apples available in stock",
+    "filters": {
+      "in_stock": true
+    },
+    "relevant_product_names": [
+      "Apples 1kg"
+    ],
+    "agent_expectations": {
+      "user_message": "fresh apples available in stock",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Apples 1kg"
+      ],
+      "expected_filters": {
+        "in_stock": true
+      },
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-032",
+    "split": "test",
+    "query_type": "filtered",
+    "query": "sparkling water under 1.50 USD",
+    "filters": {
+      "max_price": 1.5
+    },
+    "relevant_product_names": [
+      "Sparkling Water"
+    ],
+    "agent_expectations": {
+      "user_message": "sparkling water under 1.50 USD",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Sparkling Water"
+      ],
+      "expected_filters": {
+        "max_price": 1.5
+      },
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-033",
+    "split": "tune",
+    "query_type": "semantic",
+    "query": "fizzy drinking water",
+    "filters": {},
+    "relevant_product_names": [
+      "Sparkling Water"
+    ],
+    "agent_expectations": {
+      "user_message": "fizzy drinking water",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Sparkling Water"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-034",
+    "split": "test",
+    "query_type": "semantic",
+    "query": "still bottled drinking water",
+    "filters": {},
+    "relevant_product_names": [
+      "Mineral Water 1.5L"
+    ],
+    "agent_expectations": {
+      "user_message": "still bottled drinking water",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Mineral Water 1.5L"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-035",
+    "split": "tune",
+    "query_type": "semantic",
+    "query": "a bag of assorted roasted kernels to snack on",
+    "filters": {},
+    "relevant_product_names": [
+      "Mixed Nuts 500g"
+    ],
+    "agent_expectations": {
+      "user_message": "a bag of assorted roasted kernels to snack on",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Mixed Nuts 500g"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-036",
+    "split": "test",
+    "query_type": "semantic",
+    "query": "tiny bread pockets I can stuff with a filling",
+    "filters": {},
+    "relevant_product_names": [
+      "Pita Bread 6pcs"
+    ],
+    "agent_expectations": {
+      "user_message": "tiny bread pockets I can stuff with a filling",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Pita Bread 6pcs"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-037",
+    "split": "tune",
+    "query_type": "semantic",
+    "query": "sesame paste for making hummus",
+    "filters": {},
+    "relevant_product_names": [
+      "Tahini 400g"
+    ],
+    "agent_expectations": {
+      "user_message": "sesame paste for making hummus",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Tahini 400g"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-038",
+    "split": "test",
+    "query_type": "semantic",
+    "query": "dried garbanzo beans",
+    "filters": {},
+    "relevant_product_names": [
+      "Chickpeas 1kg"
+    ],
+    "agent_expectations": {
+      "user_message": "dried garbanzo beans",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Chickpeas 1kg"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-039",
+    "split": "tune",
+    "query_type": "semantic",
+    "query": "a sweet natural bee product in a jar",
+    "filters": {},
+    "relevant_product_names": [
+      "Golden Meadow Honey"
+    ],
+    "agent_expectations": {
+      "user_message": "a sweet natural bee product in a jar",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Golden Meadow Honey"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-040",
+    "split": "test",
+    "query_type": "semantic",
+    "query": "powdered chocolate ingredient with no added sugar",
+    "filters": {},
+    "relevant_product_names": [
+      "Cocoa Powder 200g"
+    ],
+    "agent_expectations": {
+      "user_message": "powdered chocolate ingredient with no added sugar",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Cocoa Powder 200g"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-041",
+    "split": "tune",
+    "query_type": "semantic",
+    "query": "a box of buttery crescent pastries",
+    "filters": {},
+    "relevant_product_names": [
+      "Croissants Pack of 4"
+    ],
+    "agent_expectations": {
+      "user_message": "a box of buttery crescent pastries",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Croissants Pack of 4"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-042",
+    "split": "test",
+    "query_type": "semantic",
+    "query": "a dairy ingredient to whip for a dessert topping",
+    "filters": {},
+    "relevant_product_names": [
+      "Whipping Cream 250ml"
+    ],
+    "agent_expectations": {
+      "user_message": "a dairy ingredient to whip for a dessert topping",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Whipping Cream 250ml"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-043",
+    "split": "tune",
+    "query_type": "semantic",
+    "query": "a milk product that has been cultured and fermented",
+    "filters": {},
+    "relevant_product_names": [
+      "Rayeb Fermented Milk 500ml"
+    ],
+    "agent_expectations": {
+      "user_message": "a milk product that has been cultured and fermented",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Rayeb Fermented Milk 500ml"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-044",
+    "split": "test",
+    "query_type": "semantic",
+    "query": "long thin noodles for an Italian meal",
+    "filters": {},
+    "relevant_product_names": [
+      "Spaghetti Pasta"
+    ],
+    "agent_expectations": {
+      "user_message": "long thin noodles for an Italian meal",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Spaghetti Pasta"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-045",
+    "split": "tune",
+    "query_type": "semantic",
+    "query": "a floral drink made with karkade",
+    "filters": {},
+    "relevant_product_names": [
+      "Hibiscus Tea Karkade"
+    ],
+    "agent_expectations": {
+      "user_message": "a floral drink made with karkade",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Hibiscus Tea Karkade"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-046",
+    "split": "test",
+    "query_type": "typo",
+    "query": "liptton yellow label tee",
+    "filters": {},
+    "relevant_product_names": [
+      "Lipton Yellow Label Tea"
+    ],
+    "agent_expectations": {
+      "user_message": "liptton yellow label tee",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Lipton Yellow Label Tea"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-047",
+    "split": "tune",
+    "query_type": "typo",
+    "query": "nescaffe gold coffe",
+    "filters": {},
+    "relevant_product_names": [
+      "Nescafe Gold Coffee"
+    ],
+    "agent_expectations": {
+      "user_message": "nescaffe gold coffe",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Nescafe Gold Coffee"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  },
+  {
+    "case_id": "retrieval-048",
+    "split": "test",
+    "query_type": "typo",
+    "query": "basmati rcie 5 kg",
+    "filters": {},
+    "relevant_product_names": [
+      "Basmati Rice 5kg"
+    ],
+    "agent_expectations": {
+      "user_message": "basmati rcie 5 kg",
+      "expected_action": "search_products",
+      "expected_product_names": [
+        "Basmati Rice 5kg"
+      ],
+      "expected_filters": {},
+      "factual_source": "current SQL product data",
+      "must_not_invent": [
+        "products",
+        "prices",
+        "stock",
+        "unsupported nutritional or medical claims"
+      ]
+    }
+  }
+]

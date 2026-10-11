@@ -18,3 +18,22 @@ Thumbs.db
 # Editor
 .vscode/
 .idea/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+.venv/
+.pytest_cache/
+*.egg-info/
+*.db-wal
+*.db-shm
+
+data/model_cache/
+
+data/backups/
+data/evaluation_reports/
+
+# Local project context for LLMs
+/description/

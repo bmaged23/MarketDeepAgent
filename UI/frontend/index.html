@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سوق ذكاء | SmartCart</title>
+<title>Zaka Market | SmartCart</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -13,11 +13,11 @@
 <header>
   <div class="nav-row">
     <div class="brand-wrap">
-      <div class="brand">سوق <span class="dot">ذكاء</span></div>
+      <div class="brand">Zaka <span class="dot">Market</span></div>
       <div class="brand-en">ZAKA MARKET</div>
     </div>
     <div class="nav-actions" style="display:flex; align-items:center; gap:14px;">
-      <button class="cart-btn" title="السلة" onclick="openCart()">
+      <button class="cart-btn" title="Cart" onclick="openCart()">
         <span style="font-size:20px;">🛒</span>
         <span class="cart-badge" id="cartBadge" style="display:none;">0</span>
       </button>
@@ -25,10 +25,10 @@
     </div>
   </div>
   <div class="hero">
-    <h1>كل احتياجات بيتك، <span>بلمسة ذكاء</span></h1>
-    <p>منتجات طازجة، أسعار عادلة، وتوصيل يفهم احتياجك</p>
+    <h1>Everything your home needs, <span>with a smart touch</span></h1>
+    <p>Fresh products, fair prices, and delivery that fits your needs</p>
     <div class="search-wrap">
-      <input type="text" id="searchInput" placeholder="ابحث عن منتج... مثلاً: شاي، أرز، تفاح">
+      <input type="text" id="searchInput" placeholder="Search for a product... e.g. tea, rice, apples">
       <span class="search-icon">🔍</span>
     </div>
   </div>
@@ -37,59 +37,58 @@
   </svg>
 </header>
 
+<nav class="page-nav" aria-label="Market pages"><button onclick="navigatePage('shop')">Shop</button><button onclick="navigatePage('orders')">Orders</button><button onclick="navigatePage('profile')">Profile</button><button onclick="navigatePage('settings')">Settings</button></nav>
 <main>
+<div id="shopPage">
   <section>
-    <div class="section-title">تسوّق حسب القسم</div>
+    <div class="section-title">Shop by category</div>
     <div class="cat-grid" id="categories">
-      <div class="loading">جارِ التحميل...</div>
+      <div class="loading">Loading...</div>
     </div>
   </section>
 
   <section>
-    <div class="section-title" id="products-title">كل المنتجات</div>
+    <div class="section-title" id="products-title">All products</div>
     <div class="prod-grid" id="products">
-      <div class="loading">جارِ التحميل...</div>
+      <div class="loading">Loading...</div>
     </div>
   </section>
+</div>
+<section id="ordersPage" class="app-page" hidden><h2>Your orders</h2><div id="ordersContent"></div></section>
+<section id="profilePage" class="app-page" hidden><h2>Your profile</h2><div id="profileContent"></div></section>
+<section id="settingsPage" class="app-page" hidden><h2>Assistant settings</h2><div id="settingsContent"></div></section>
+<section id="cartPage" class="app-page" hidden><h2>Shopping cart</h2><div id="cartItemsWrap"></div></section>
 </main>
 
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">×</button>
     <div class="modal-tabs">
-      <button class="modal-tab active" id="tabRegister" onclick="switchTab('register')">حساب جديد</button>
-      <button class="modal-tab" id="tabLogin" onclick="switchTab('login')">تسجيل الدخول</button>
+      <button class="modal-tab active" id="tabRegister" onclick="switchTab('register')">Create account</button>
+      <button class="modal-tab" id="tabLogin" onclick="switchTab('login')">Sign in</button>
     </div>
 
     <form id="registerForm">
-      <h2>انضم إلينا</h2>
-      <p class="sub">أنشئ حسابك للبدء في التسوق</p>
-      <div class="field"><label>الاسم الأول</label><input type="text" id="first_name" required></div>
-      <div class="field"><label>الاسم الأخير</label><input type="text" id="last_name" required></div>
-      <div class="field"><label>البريد الإلكتروني</label><input type="email" id="email" required></div>
-      <div class="field"><label>كلمة المرور</label><input type="password" id="password" required minlength="4"></div>
-      <div class="field"><label>رقم الهاتف (اختياري)</label><input type="tel" id="phone"></div>
-      <div class="field"><label>العنوان (اختياري)</label><input type="text" id="address"></div>
-      <button type="submit" class="modal-submit">إنشاء الحساب</button>
+      <h2>Join us</h2>
+      <p class="sub">Create your account to start shopping</p>
+      <div class="field"><label>First name</label><input type="text" id="first_name" required></div>
+      <div class="field"><label>Last name</label><input type="text" id="last_name" required></div>
+      <div class="field"><label>Email</label><input type="email" id="email" required></div>
+      <div class="field"><label>Password</label><input type="password" id="password" required minlength="4"></div>
+      <div class="field"><label>Phone (optional)</label><input type="tel" id="phone"></div>
+      <div class="field"><label>Address (optional)</label><input type="text" id="address"></div>
+      <button type="submit" class="modal-submit">Create account</button>
       <div class="modal-msg" id="modalMsg"></div>
     </form>
 
     <form id="loginForm" style="display:none;">
-      <h2>مرحباً بعودتك</h2>
-      <p class="sub">سجّل الدخول لمتابعة التسوق</p>
-      <div class="field"><label>البريد الإلكتروني</label><input type="email" id="login_email" required></div>
-      <div class="field"><label>كلمة المرور</label><input type="password" id="login_password" required></div>
-      <button type="submit" class="modal-submit">تسجيل الدخول</button>
+      <h2>Welcome back</h2>
+      <p class="sub">Sign in to continue shopping</p>
+      <div class="field"><label>Email</label><input type="email" id="login_email" required></div>
+      <div class="field"><label>Password</label><input type="password" id="login_password" required></div>
+      <button type="submit" class="modal-submit">Sign in</button>
       <div class="modal-msg" id="loginMsg"></div>
     </form>
-  </div>
-</div>
-
-<div class="cart-overlay" id="cartOverlay">
-  <div class="cart-drawer">
-    <button class="modal-close" onclick="closeCart()">×</button>
-    <h2>سلة التسوق</h2>
-    <div id="cartItemsWrap"></div>
   </div>
 </div>
 
@@ -100,8 +99,19 @@
   </div>
 </div>
 
-<div class="toast" id="toast">✓ تمت الإضافة إلى السلة</div>
+<div class="toast" id="toast">✓ Added to cart</div>
 
+<button id="assistantTab" class="assistant-tab" aria-expanded="false" aria-controls="assistantPanel">✦ AI assistant</button>
+<aside id="assistantPanel" class="assistant-panel" aria-label="Customer assistant" hidden>
+  <div id="assistantResize" class="assistant-resize" role="separator" aria-label="Resize assistant" aria-orientation="vertical" tabindex="0"></div>
+  <div class="assistant-header"><div><strong>Market assistant</strong><small id="assistantPageLabel">Shop</small></div><button id="newChat" title="New conversation">＋</button><button id="closeAssistant" aria-label="Close assistant">×</button></div>
+  <div id="chatMessages" class="chat-messages" role="log" aria-live="polite"><p class="chat-intro">Find products, manage your cart, or ask about your orders. Sign in to chat.</p></div>
+  <div id="chatStatus" class="chat-status" role="status"></div>
+  <form id="chatForm" class="chat-form"><label class="sr-only" for="chatInput">Message</label><textarea id="chatInput" required maxlength="2000" rows="3" placeholder="Ask your market assistant… (Enter to send, Shift+Enter for a new line)"></textarea><button id="chatSend" type="submit">Send</button></form>
+</aside>
+<script src="js/api.js"></script>
 <script src="js/app.js"></script>
+<script src="js/markdown.js"></script>
+<script src="js/assistant.js"></script>
 </body>
 </html>

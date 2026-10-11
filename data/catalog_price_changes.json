@@ -1,0 +1,708 @@
+{
+  "created_at": "2026-10-11T17:15:40.162772+00:00",
+  "currency": "USD",
+  "pricing_basis": "Illustrative US-style demo retail prices, adjusted individually for product type and package size. Not live vendor quotes or foreign-exchange conversion.",
+  "benchmark_source": "https://www.bls.gov/regions/mid-atlantic/data/averageretailfoodandenergyprices_usandWest_table.htm",
+  "changes": [
+    {
+      "product_id": 1,
+      "name": "Lipton Yellow Label Tea",
+      "previous_price": 85,
+      "new_price": 5.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 2,
+      "name": "Twinings English Breakfast Tea",
+      "previous_price": 250,
+      "new_price": 5.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 3,
+      "name": "Nescafe Gold Coffee",
+      "previous_price": 220,
+      "new_price": 9.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 4,
+      "name": "Lavazza Espresso Coffee",
+      "previous_price": 450,
+      "new_price": 7.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 5,
+      "name": "Green Tea Matcha",
+      "previous_price": 180,
+      "new_price": 5.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 6,
+      "name": "Orange Juice 1L",
+      "previous_price": 45,
+      "new_price": 2.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 7,
+      "name": "Sparkling Water",
+      "previous_price": 20,
+      "new_price": 1.29,
+      "currency": "USD"
+    },
+    {
+      "product_id": 8,
+      "name": "Whole Milk 1L",
+      "previous_price": 35,
+      "new_price": 1.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 9,
+      "name": "Greek Yogurt",
+      "previous_price": 60,
+      "new_price": 3.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 10,
+      "name": "Cheddar Cheese Block",
+      "previous_price": 150,
+      "new_price": 3.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 11,
+      "name": "Butter 250g",
+      "previous_price": 90,
+      "new_price": 3.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 12,
+      "name": "White Sandwich Bread",
+      "previous_price": 25,
+      "new_price": 2.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 13,
+      "name": "Croissants Pack of 4",
+      "previous_price": 55,
+      "new_price": 4.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 14,
+      "name": "Whole Wheat Bread",
+      "previous_price": 30,
+      "new_price": 3.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 15,
+      "name": "Chocolate Muffins",
+      "previous_price": 65,
+      "new_price": 5.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 16,
+      "name": "Potato Chips Salted",
+      "previous_price": 35,
+      "new_price": 2.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 17,
+      "name": "Mixed Nuts 500g",
+      "previous_price": 180,
+      "new_price": 8.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 18,
+      "name": "Chocolate Bar",
+      "previous_price": 40,
+      "new_price": 1.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 19,
+      "name": "Popcorn Microwave",
+      "previous_price": 50,
+      "new_price": 3.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 20,
+      "name": "Biscuits Digestive",
+      "previous_price": 45,
+      "new_price": 3.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 21,
+      "name": "Basmati Rice 5kg",
+      "previous_price": 350,
+      "new_price": 16.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 22,
+      "name": "Spaghetti Pasta",
+      "previous_price": 40,
+      "new_price": 1.79,
+      "currency": "USD"
+    },
+    {
+      "product_id": 23,
+      "name": "Olive Oil 1L",
+      "previous_price": 280,
+      "new_price": 11.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 24,
+      "name": "Sugar 1kg",
+      "previous_price": 30,
+      "new_price": 1.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 25,
+      "name": "Salt 500g",
+      "previous_price": 10,
+      "new_price": 0.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 26,
+      "name": "Fresh Bananas 1kg",
+      "previous_price": 35,
+      "new_price": 1.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 27,
+      "name": "Tomatoes 1kg",
+      "previous_price": 25,
+      "new_price": 2.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 28,
+      "name": "Onions 1kg",
+      "previous_price": 20,
+      "new_price": 1.79,
+      "currency": "USD"
+    },
+    {
+      "product_id": 29,
+      "name": "Apples 1kg",
+      "previous_price": 60,
+      "new_price": 3.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 30,
+      "name": "Cucumbers 1kg",
+      "previous_price": 20,
+      "new_price": 1.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 31,
+      "name": "Ottoman Turkish Coffee",
+      "previous_price": 180,
+      "new_price": 6.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 32,
+      "name": "Hibiscus Tea Karkade",
+      "previous_price": 90,
+      "new_price": 4.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 33,
+      "name": "Mango Juice 1L",
+      "previous_price": 50,
+      "new_price": 2.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 34,
+      "name": "Apple Juice 1L",
+      "previous_price": 48,
+      "new_price": 2.29,
+      "currency": "USD"
+    },
+    {
+      "product_id": 35,
+      "name": "Frost Iced Tea Peach",
+      "previous_price": 35,
+      "new_price": 1.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 36,
+      "name": "Volt Energy Drink",
+      "previous_price": 40,
+      "new_price": 1.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 37,
+      "name": "Chamomile Tea",
+      "previous_price": 95,
+      "new_price": 3.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 38,
+      "name": "Mineral Water 1.5L",
+      "previous_price": 15,
+      "new_price": 0.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 39,
+      "name": "Feta Cheese 250g",
+      "previous_price": 140,
+      "new_price": 4.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 40,
+      "name": "Cream Cheese 200g",
+      "previous_price": 85,
+      "new_price": 2.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 41,
+      "name": "Labneh 500g",
+      "previous_price": 70,
+      "new_price": 4.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 42,
+      "name": "Rayeb Fermented Milk 500ml",
+      "previous_price": 30,
+      "new_price": 1.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 43,
+      "name": "Golden Slice Cheese",
+      "previous_price": 65,
+      "new_price": 2.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 44,
+      "name": "Whipping Cream 250ml",
+      "previous_price": 75,
+      "new_price": 2.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 45,
+      "name": "Condensed Milk 400g",
+      "previous_price": 55,
+      "new_price": 2.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 46,
+      "name": "Cheddar Slices",
+      "previous_price": 70,
+      "new_price": 2.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 47,
+      "name": "Greek Yogurt Drink",
+      "previous_price": 40,
+      "new_price": 1.79,
+      "currency": "USD"
+    },
+    {
+      "product_id": 48,
+      "name": "Baladi Bread 5pcs",
+      "previous_price": 15,
+      "new_price": 1.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 49,
+      "name": "Pita Bread 6pcs",
+      "previous_price": 20,
+      "new_price": 2.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 50,
+      "name": "Toast Bread",
+      "previous_price": 28,
+      "new_price": 2.29,
+      "currency": "USD"
+    },
+    {
+      "product_id": 51,
+      "name": "Sugar Ring Donuts",
+      "previous_price": 60,
+      "new_price": 4.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 52,
+      "name": "Chocolate Cake Slice",
+      "previous_price": 45,
+      "new_price": 2.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 53,
+      "name": "Butter Cookies",
+      "previous_price": 50,
+      "new_price": 3.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 54,
+      "name": "Bosco Rusk",
+      "previous_price": 35,
+      "new_price": 2.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 55,
+      "name": "Croissant Single",
+      "previous_price": 18,
+      "new_price": 1.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 56,
+      "name": "Sesame Bread Sticks",
+      "previous_price": 30,
+      "new_price": 1.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 57,
+      "name": "Sweet Popcorn",
+      "previous_price": 38,
+      "new_price": 1.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 58,
+      "name": "Twist Pretzels",
+      "previous_price": 42,
+      "new_price": 2.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 59,
+      "name": "Corn Chips",
+      "previous_price": 36,
+      "new_price": 2.29,
+      "currency": "USD"
+    },
+    {
+      "product_id": 60,
+      "name": "Tahini Halawa 250g",
+      "previous_price": 65,
+      "new_price": 3.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 61,
+      "name": "Turkish Delight",
+      "previous_price": 70,
+      "new_price": 4.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 62,
+      "name": "Dried Fruits Mix",
+      "previous_price": 120,
+      "new_price": 5.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 63,
+      "name": "PowerBite Granola Bars",
+      "previous_price": 80,
+      "new_price": 3.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 64,
+      "name": "Lentils 1kg",
+      "previous_price": 60,
+      "new_price": 3.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 65,
+      "name": "Fava Beans Foul 1kg",
+      "previous_price": 45,
+      "new_price": 2.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 66,
+      "name": "Vermicelli 400g",
+      "previous_price": 25,
+      "new_price": 1.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 67,
+      "name": "Couscous 500g",
+      "previous_price": 55,
+      "new_price": 2.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 68,
+      "name": "Corn Oil 1L",
+      "previous_price": 130,
+      "new_price": 3.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 69,
+      "name": "White Vinegar 500ml",
+      "previous_price": 18,
+      "new_price": 1.29,
+      "currency": "USD"
+    },
+    {
+      "product_id": 70,
+      "name": "Black Pepper 100g",
+      "previous_price": 40,
+      "new_price": 2.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 71,
+      "name": "Ground Cumin 100g",
+      "previous_price": 35,
+      "new_price": 2.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 72,
+      "name": "All-Purpose Flour 1kg",
+      "previous_price": 32,
+      "new_price": 1.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 73,
+      "name": "Split Peas 1kg",
+      "previous_price": 55,
+      "new_price": 2.79,
+      "currency": "USD"
+    },
+    {
+      "product_id": 74,
+      "name": "Chickpeas 1kg",
+      "previous_price": 58,
+      "new_price": 3.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 75,
+      "name": "Cocoa Powder 200g",
+      "previous_price": 60,
+      "new_price": 3.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 76,
+      "name": "Golden Meadow Honey",
+      "previous_price": 150,
+      "new_price": 6.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 77,
+      "name": "Tahini 400g",
+      "previous_price": 95,
+      "new_price": 4.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 78,
+      "name": "Oranges 1kg",
+      "previous_price": 30,
+      "new_price": 2.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 79,
+      "name": "Strawberries 500g",
+      "previous_price": 70,
+      "new_price": 3.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 80,
+      "name": "Grapes 1kg",
+      "previous_price": 65,
+      "new_price": 4.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 81,
+      "name": "Watermelon Whole",
+      "previous_price": 50,
+      "new_price": 5.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 82,
+      "name": "Mango 1kg",
+      "previous_price": 80,
+      "new_price": 4.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 83,
+      "name": "Lemon 1kg",
+      "previous_price": 25,
+      "new_price": 2.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 84,
+      "name": "Garlic 250g",
+      "previous_price": 20,
+      "new_price": 1.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 85,
+      "name": "Potatoes 1kg",
+      "previous_price": 22,
+      "new_price": 1.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 86,
+      "name": "Carrots 1kg",
+      "previous_price": 20,
+      "new_price": 1.79,
+      "currency": "USD"
+    },
+    {
+      "product_id": 87,
+      "name": "Zucchini 1kg",
+      "previous_price": 25,
+      "new_price": 2.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 88,
+      "name": "Eggplant 1kg",
+      "previous_price": 22,
+      "new_price": 2.29,
+      "currency": "USD"
+    },
+    {
+      "product_id": 89,
+      "name": "Bell Pepper 1kg",
+      "previous_price": 35,
+      "new_price": 3.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 90,
+      "name": "Baby Spinach 500g",
+      "previous_price": 20,
+      "new_price": 3.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 91,
+      "name": "Lettuce Head",
+      "previous_price": 15,
+      "new_price": 1.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 92,
+      "name": "Peach 1kg",
+      "previous_price": 60,
+      "new_price": 4.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 93,
+      "name": "Pear 1kg",
+      "previous_price": 55,
+      "new_price": 3.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 94,
+      "name": "Guava 1kg",
+      "previous_price": 40,
+      "new_price": 3.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 95,
+      "name": "Pomegranate 1kg",
+      "previous_price": 70,
+      "new_price": 5.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 96,
+      "name": "Green Peas 500g",
+      "previous_price": 30,
+      "new_price": 2.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 97,
+      "name": "Green Beans 500g",
+      "previous_price": 28,
+      "new_price": 2.29,
+      "currency": "USD"
+    },
+    {
+      "product_id": 98,
+      "name": "Cauliflower Head",
+      "previous_price": 25,
+      "new_price": 2.49,
+      "currency": "USD"
+    },
+    {
+      "product_id": 99,
+      "name": "Cabbage Head",
+      "previous_price": 18,
+      "new_price": 1.99,
+      "currency": "USD"
+    },
+    {
+      "product_id": 100,
+      "name": "Molokhia Frozen 400g",
+      "previous_price": 45,
+      "new_price": 2.99,
+      "currency": "USD"
+    }
+  ]
+}

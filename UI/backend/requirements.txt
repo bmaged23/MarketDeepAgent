@@ -1,6 +1,1 @@
-fastapi
-uvicorn[standard]
-email-validator
-sqlalchemy
-pandas
-pillow
+-r ../../requirements.txt

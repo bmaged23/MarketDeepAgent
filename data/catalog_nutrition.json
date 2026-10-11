@@ -1,0 +1,906 @@
+{
+  "schema_version": 1,
+  "disclaimer": "All values are approximate demo food-type estimates. No exact product label has been verified. Per 100 g or 100 ml as explicitly specified, never per whole pack.",
+  "products": [
+    {
+      "name": "Lipton Yellow Label Tea",
+      "calories_per_100": 0,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Prepared unsweetened drink; brewed with water, without milk or sugar. Not dry leaves, bags or coffee powder.",
+      "reference_url": null
+    },
+    {
+      "name": "Twinings English Breakfast Tea",
+      "calories_per_100": 0,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Prepared unsweetened drink; brewed with water, without milk or sugar. Not dry leaves, bags or coffee powder.",
+      "reference_url": null
+    },
+    {
+      "name": "Nescafe Gold Coffee",
+      "calories_per_100": 2,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Prepared unsweetened drink; brewed with water, without milk or sugar. Not dry leaves, bags or coffee powder.",
+      "reference_url": null
+    },
+    {
+      "name": "Lavazza Espresso Coffee",
+      "calories_per_100": 1,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Prepared unsweetened drink; brewed with water, without milk or sugar. Not dry leaves, bags or coffee powder.",
+      "reference_url": null
+    },
+    {
+      "name": "Green Tea Matcha",
+      "calories_per_100": 0,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Prepared unsweetened drink; brewed with water, without milk or sugar. Not dry leaves, bags or coffee powder.",
+      "reference_url": null
+    },
+    {
+      "name": "Orange Juice 1L",
+      "calories_per_100": 45,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Sparkling Water",
+      "calories_per_100": 0,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Whole Milk 1L",
+      "calories_per_100": 61,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Greek Yogurt",
+      "calories_per_100": 97,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Cheddar Cheese Block",
+      "calories_per_100": 403,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Butter 250g",
+      "calories_per_100": 717,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "White Sandwich Bread",
+      "calories_per_100": 266,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Croissants Pack of 4",
+      "calories_per_100": 406,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Whole Wheat Bread",
+      "calories_per_100": 247,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Chocolate Muffins",
+      "calories_per_100": 400,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Potato Chips Salted",
+      "calories_per_100": 536,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Mixed Nuts 500g",
+      "calories_per_100": 607,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Chocolate Bar",
+      "calories_per_100": 535,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Popcorn Microwave",
+      "calories_per_100": 500,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Popped butter-flavored popcorn; typical prepared food estimate.",
+      "reference_url": null
+    },
+    {
+      "name": "Biscuits Digestive",
+      "calories_per_100": 480,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Basmati Rice 5kg",
+      "calories_per_100": 365,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Dry uncooked product; cooking or adding ingredients changes calories per 100 g.",
+      "reference_url": null
+    },
+    {
+      "name": "Spaghetti Pasta",
+      "calories_per_100": 371,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Dry uncooked product; cooking or adding ingredients changes calories per 100 g.",
+      "reference_url": null
+    },
+    {
+      "name": "Olive Oil 1L",
+      "calories_per_100": 824,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Sugar 1kg",
+      "calories_per_100": 387,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Dry uncooked product; cooking or adding ingredients changes calories per 100 g.",
+      "reference_url": null
+    },
+    {
+      "name": "Salt 500g",
+      "calories_per_100": 0,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Dry uncooked product; cooking or adding ingredients changes calories per 100 g.",
+      "reference_url": null
+    },
+    {
+      "name": "Fresh Bananas 1kg",
+      "calories_per_100": 89,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Tomatoes 1kg",
+      "calories_per_100": 18,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Onions 1kg",
+      "calories_per_100": 40,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Apples 1kg",
+      "calories_per_100": 52,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Cucumbers 1kg",
+      "calories_per_100": 15,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Ottoman Turkish Coffee",
+      "calories_per_100": 1,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Prepared unsweetened drink; brewed with water, without milk or sugar. Not dry leaves, bags or coffee powder.",
+      "reference_url": null
+    },
+    {
+      "name": "Hibiscus Tea Karkade",
+      "calories_per_100": 0,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Prepared unsweetened drink; brewed with water, without milk or sugar. Not dry leaves, bags or coffee powder.",
+      "reference_url": null
+    },
+    {
+      "name": "Mango Juice 1L",
+      "calories_per_100": 54,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Apple Juice 1L",
+      "calories_per_100": 46,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Frost Iced Tea Peach",
+      "calories_per_100": 30,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Volt Energy Drink",
+      "calories_per_100": 45,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Chamomile Tea",
+      "calories_per_100": 0,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Prepared unsweetened drink; brewed with water, without milk or sugar. Not dry leaves, bags or coffee powder.",
+      "reference_url": null
+    },
+    {
+      "name": "Mineral Water 1.5L",
+      "calories_per_100": 0,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Feta Cheese 250g",
+      "calories_per_100": 264,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Cream Cheese 200g",
+      "calories_per_100": 342,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Labneh 500g",
+      "calories_per_100": 194,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Food-type estimate based on comparable labneh; not the exact product label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": "https://eng.pinar.com.tr/products/detail-milk/Pinar-Labaneh/2072/2240/0"
+    },
+    {
+      "name": "Rayeb Fermented Milk 500ml",
+      "calories_per_100": 60,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Golden Slice Cheese",
+      "calories_per_100": 300,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Whipping Cream 250ml",
+      "calories_per_100": 340,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Condensed Milk 400g",
+      "calories_per_100": 321,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Cheddar Slices",
+      "calories_per_100": 403,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Greek Yogurt Drink",
+      "calories_per_100": 70,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Baladi Bread 5pcs",
+      "calories_per_100": 275,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Pita Bread 6pcs",
+      "calories_per_100": 275,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Toast Bread",
+      "calories_per_100": 266,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Sugar Ring Donuts",
+      "calories_per_100": 420,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Chocolate Cake Slice",
+      "calories_per_100": 370,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Butter Cookies",
+      "calories_per_100": 500,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Bosco Rusk",
+      "calories_per_100": 400,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Croissant Single",
+      "calories_per_100": 406,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Sesame Bread Sticks",
+      "calories_per_100": 412,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Sweet Popcorn",
+      "calories_per_100": 400,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Twist Pretzels",
+      "calories_per_100": 380,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Corn Chips",
+      "calories_per_100": 500,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Tahini Halawa 250g",
+      "calories_per_100": 516,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Turkish Delight",
+      "calories_per_100": 350,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Dried Fruits Mix",
+      "calories_per_100": 300,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "PowerBite Granola Bars",
+      "calories_per_100": 450,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Lentils 1kg",
+      "calories_per_100": 352,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Dry uncooked product; cooking or adding ingredients changes calories per 100 g.",
+      "reference_url": null
+    },
+    {
+      "name": "Fava Beans Foul 1kg",
+      "calories_per_100": 341,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Dry uncooked product; cooking or adding ingredients changes calories per 100 g.",
+      "reference_url": null
+    },
+    {
+      "name": "Vermicelli 400g",
+      "calories_per_100": 371,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Dry uncooked product; cooking or adding ingredients changes calories per 100 g.",
+      "reference_url": null
+    },
+    {
+      "name": "Couscous 500g",
+      "calories_per_100": 376,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Dry uncooked product; cooking or adding ingredients changes calories per 100 g.",
+      "reference_url": null
+    },
+    {
+      "name": "Corn Oil 1L",
+      "calories_per_100": 824,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "White Vinegar 500ml",
+      "calories_per_100": 18,
+      "calorie_basis": "per_100ml",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Black Pepper 100g",
+      "calories_per_100": 251,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Dry uncooked product; cooking or adding ingredients changes calories per 100 g.",
+      "reference_url": null
+    },
+    {
+      "name": "Ground Cumin 100g",
+      "calories_per_100": 375,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Dry uncooked product; cooking or adding ingredients changes calories per 100 g.",
+      "reference_url": null
+    },
+    {
+      "name": "All-Purpose Flour 1kg",
+      "calories_per_100": 364,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Dry uncooked product; cooking or adding ingredients changes calories per 100 g.",
+      "reference_url": null
+    },
+    {
+      "name": "Split Peas 1kg",
+      "calories_per_100": 341,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Dry uncooked product; cooking or adding ingredients changes calories per 100 g.",
+      "reference_url": null
+    },
+    {
+      "name": "Chickpeas 1kg",
+      "calories_per_100": 378,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Dry uncooked product; cooking or adding ingredients changes calories per 100 g.",
+      "reference_url": null
+    },
+    {
+      "name": "Cocoa Powder 200g",
+      "calories_per_100": 228,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Dry uncooked product; cooking or adding ingredients changes calories per 100 g.",
+      "reference_url": null
+    },
+    {
+      "name": "Golden Meadow Honey",
+      "calories_per_100": 304,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Tahini 400g",
+      "calories_per_100": 595,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "As sold; typical food-type estimate. Actual recipe may vary.",
+      "reference_url": null
+    },
+    {
+      "name": "Oranges 1kg",
+      "calories_per_100": 47,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Strawberries 500g",
+      "calories_per_100": 32,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Grapes 1kg",
+      "calories_per_100": 69,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Watermelon Whole",
+      "calories_per_100": 30,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Mango 1kg",
+      "calories_per_100": 60,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Lemon 1kg",
+      "calories_per_100": 29,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Garlic 250g",
+      "calories_per_100": 149,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Potatoes 1kg",
+      "calories_per_100": 77,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Carrots 1kg",
+      "calories_per_100": 41,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Zucchini 1kg",
+      "calories_per_100": 17,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Eggplant 1kg",
+      "calories_per_100": 25,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Bell Pepper 1kg",
+      "calories_per_100": 26,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Baby Spinach 500g",
+      "calories_per_100": 23,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Lettuce Head",
+      "calories_per_100": 15,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Peach 1kg",
+      "calories_per_100": 39,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Pear 1kg",
+      "calories_per_100": 57,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Guava 1kg",
+      "calories_per_100": 68,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Pomegranate 1kg",
+      "calories_per_100": 83,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Green Peas 500g",
+      "calories_per_100": 81,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Green Beans 500g",
+      "calories_per_100": 31,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Cauliflower Head",
+      "calories_per_100": 25,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Cabbage Head",
+      "calories_per_100": 25,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Raw edible portion, excluding peel, seeds or other discarded parts where applicable.",
+      "reference_url": null
+    },
+    {
+      "name": "Molokhia Frozen 400g",
+      "calories_per_100": 35,
+      "calorie_basis": "per_100g",
+      "calorie_status": "estimated",
+      "calorie_source": "Editorial food-type estimate; not a verified product nutrition label.",
+      "calorie_notes": "Frozen plain greens, without added oil; typical edible portion estimate.",
+      "reference_url": null
+    }
+  ]
+}

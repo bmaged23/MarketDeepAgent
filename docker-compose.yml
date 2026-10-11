@@ -1,0 +1,11 @@
+# Optional: your existing Qdrant container can be used instead.
+# This service uses port 6335 to avoid colliding with the existing container on 6333.
+services:
+  market-qdrant:
+    image: qdrant/qdrant:v1.17.0
+    ports:
+      - "127.0.0.1:6335:6333"
+    volumes:
+      - market-qdrant-data:/qdrant/storage
+volumes:
+  market-qdrant-data:

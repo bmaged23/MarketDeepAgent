@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS product (
     product_id      INTEGER PRIMARY KEY AUTOINCREMENT,
     name            TEXT NOT NULL,
     description     TEXT,
-    price           DECIMAL(10, 2) NOT NULL CHECK (price >= 0),   -- EGP
+    price           DECIMAL(10, 2) NOT NULL CHECK (price >= 0),   -- USD
     stock_quantity  INTEGER NOT NULL DEFAULT 0 CHECK (stock_quantity >= 0),
     category_id     INTEGER NOT NULL,
     image_prompt    TEXT,
