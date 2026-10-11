@@ -109,6 +109,8 @@ def main():
                 # Skip the initial blank browser frame for a meaningful real-UI thumbnail.
                 seconds=float(subprocess.check_output(['ffprobe','-v','error','-show_entries','format=duration','-of','csv=p=0',str(output)],text=True))
                 subprocess.run(['ffmpeg','-v','error','-ss',str(seconds*.35),'-i',str(output),'-frames:v','1','-y',str(ROOT/'docs/assets/storefront-poster.png')],check=True)
+                from demo_thumbnail import generate as generate_thumbnail
+                generate_thumbnail()
                 print(f'Recorded real application walkthrough: {output}')
                 print('Real frontend, real live agent replies, one synthetic order. Long waiting periods trimmed. Production SQL and user memory untouched.')
             finally:

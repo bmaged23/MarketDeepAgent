@@ -2,9 +2,9 @@
 
 MarketDeepAgent is a grocery marketplace with an AI shopping assistant. A customer agent coordinates retrieval and cart specialists to help shoppers research products, compare prices and nutrition, navigate the store, manage their cart and confirm orders.
 
-[![Watch the real storefront and AI assistant demo](docs/assets/storefront-poster.png)](https://bmaged23.github.io/MarketDeepAgent/demo.html)
+[![Play the real storefront and AI assistant demo — bottom-left play button](docs/assets/demo-preview.svg)](https://bmaged23.github.io/MarketDeepAgent/demo.html)
 
-**[Watch the customer demo · 5 min 52 sec](https://bmaged23.github.io/MarketDeepAgent/demo.html)** — Product research and a five-product order with live agents. The play button sits inside the video on the left.
+**[Watch the customer demo · 5 min 52 sec](https://bmaged23.github.io/MarketDeepAgent/demo.html)** — Product research and a five-product order with live agents. Click the play control at the bottom-left of the preview to open the hosted video player.
 
 **English · USD · Ollama Cloud · BGE embeddings · SQLite · Qdrant · BM25**
 
