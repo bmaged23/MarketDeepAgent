@@ -1,13 +1,10 @@
 # MarketDeepAgent
 
-<p>
-  <a href="https://bmaged23.github.io/MarketDeepAgent/demo.html"><img src="docs/assets/play-demo.svg" alt="Play customer demo" width="100"></a>
-  <a href="https://bmaged23.github.io/MarketDeepAgent/demo.html"><img src="docs/assets/storefront-poster.png" alt="Real MarketDeepAgent storefront and AI assistant — click to watch" width="740"></a>
-</p>
+MarketDeepAgent is a grocery marketplace with an AI shopping assistant. A customer agent coordinates retrieval and cart specialists to help shoppers research products, compare prices and nutrition, navigate the store, manage their cart and confirm orders.
 
-**[Watch the customer demo · 5 min 52 sec](https://bmaged23.github.io/MarketDeepAgent/demo.html)** — Real storefront, live AI agents, product research and a five-product order.
+[![Watch the real storefront and AI assistant demo](docs/assets/storefront-poster.png)](https://bmaged23.github.io/MarketDeepAgent/demo.html)
 
-A grocery marketplace with a page-aware AI assistant. Customers can discover products, ask about product facts, navigate the storefront, update their cart and place orders through a customer coordinator backed by retrieval and cart agents.
+**[Watch the customer demo · 5 min 52 sec](https://bmaged23.github.io/MarketDeepAgent/demo.html)** — Product research and a five-product order with live agents. The play button sits inside the video on the left.
 
 **English · USD · Ollama Cloud · BGE embeddings · SQLite · Qdrant · BM25**
 
@@ -265,4 +262,4 @@ After pushing the repository, open **Settings → Pages → Build and deployment
 3. Click **Save**, then wait for the Pages deployment to finish under **Actions**.
 4. Open **https://bmaged23.github.io/MarketDeepAgent/demo.html**.
 
-The README play button opens that hosted video page; the architecture is at the site root. `docs/.nojekyll` serves these static files directly. These links require the one-time Pages setting above.
+The README video preview opens that hosted video page; the architecture is at the site root. `docs/.nojekyll` serves these static files directly. These links require the one-time Pages setting above.

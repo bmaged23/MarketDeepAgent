@@ -75,4 +75,4 @@ Push the updated `main` branch. On GitHub go to **Settings → Pages → Build a
 - Customer video: https://bmaged23.github.io/MarketDeepAgent/demo.html
 - Architecture explorer: https://bmaged23.github.io/MarketDeepAgent/
 
-The README's left play badge and screenshot both open the hosted demo. On the demo page, the left-side Play demo button starts the real MP4; native playback controls and fullscreen remain available. `docs/.nojekyll` makes this a static Pages site. Hosting is ready in the source tree; enable Pages in repository settings before expecting these URLs to work.
+The README introduces the project first, then shows a clickable video preview that opens the hosted demo. On the demo page, the left-side Play demo button starts the real MP4; native playback controls and fullscreen remain available. `docs/.nojekyll` makes this a static Pages site. Hosting is ready in the source tree; enable Pages in repository settings before expecting these URLs to work.
