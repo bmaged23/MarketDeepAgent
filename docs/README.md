@@ -9,6 +9,8 @@ python -m http.server 8700 --bind 127.0.0.1 --directory docs
 
 Open http://127.0.0.1:8700 for the animated architecture, database ERD and demo page.
 
+The architecture explorer has five selectable views: overview, retrieval loop, cart/checkout, private memory and product indexing. Colored arrowheads distinguish requests, responses, authoritative writes and embedding/synchronization. Each view includes a workflow explanation, keyboard-accessible tabs, component inspection, motion controls and a full-size SVG link. `system_diagrams.py` generates the five source-backed architecture assets; `generate.py` also derives the ERD from migrations.
+
 The generated presentation was rejected and removed from public docs. **The actual storefront recording is now available at `assets/storefront-tour.mp4`: 1440×900 H.264, about 5 minutes 52 seconds.** The demo page displays the actual video only after a successful recording creates it.
 
 ## Automatically record the actual marketplace

@@ -21,7 +21,7 @@ jobs:
         run: |
           python -m compileall -q app data docs
           python docs/generate.py
-          git diff --exit-code -- docs/assets/architecture.svg docs/assets/database-erd.svg docs/database.md
+          git diff --exit-code -- docs/assets/architecture*.svg docs/assets/database-erd.svg docs/database.md
       - name: Check JavaScript and frontend behavior
         run: |
           for file in UI/frontend/js/*.js docs/*.js docs/*.mjs; do node --check "$file"; done

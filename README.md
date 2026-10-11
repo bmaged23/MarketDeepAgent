@@ -1,5 +1,10 @@
 # MarketDeepAgent
 
+[![Watch the real five-product customer demo](docs/assets/storefront-poster.png)](https://github.com/bmaged23/MarketDeepAgent/blob/main/docs/assets/storefront-tour.mp4)
+
+**▶ [Watch the customer demo · 5 min 52 sec](https://github.com/bmaged23/MarketDeepAgent/blob/main/docs/assets/storefront-tour.mp4)** — Real storefront, live AI agents, product research and a five-product order.
+
+
 A grocery marketplace with a page-aware AI assistant. Customers can discover products, ask about product facts, navigate the storefront, update their cart and place orders through a customer coordinator backed by retrieval and cart agents.
 
 **English · USD · Ollama Cloud · BGE embeddings · SQLite · Qdrant · BM25**
@@ -194,7 +199,7 @@ python -m app.product_search.evaluation --sweep --split tune --limit 5 \
   --output data/evaluation_reports/retrieval_vanila.json
 ```
 
-GitHub Actions checks source syntax, migration-derived diagram freshness, publication exclusions and the 17 frontend/platform checks. Run the full Python suite locally with the pinned test requirements; CI does not install the large CUDA snapshot.
+GitHub Actions checks source syntax, migration-derived diagram freshness, publication exclusions and the 19 frontend/platform/architecture checks. Run the full Python suite locally with the pinned test requirements; CI does not install the large CUDA snapshot.
 
 The latest reviewed live journey passed **19/19 checks** and placed two synthetic orders, including stock/idempotence/ownership checks and complete snack calorie answers. This is a small test run, not a claim of comprehensive model quality or a visual browser audit.
 

@@ -1,6 +1,21 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MarketDeepAgent · System map</title><link rel="stylesheet" href="style.css"></head><body>
-<header><div><div class="eyebrow">MarketDeepAgent</div><h1>A marketplace with three collaborating agents</h1></div><nav><a href="index.html">Architecture</a><a href="erd.html">Database ERD</a><a href="demo.html">Customer tour</a><a href="record.html">Record the storefront</a></nav></header>
-<main><p>Explore the customer coordinator, retrieval loop, cart tools and their shared data. Moving arrows illustrate the architecture; they are not connected to live runtime events.</p>
-<div class="controls"><button id="motion">Pause animation</button><span>Hover or focus a component to inspect it.</span></div><object id="map" class="diagram" data="assets/architecture.svg" type="image/svg+xml" aria-label="Animated architecture diagram"><a href="assets/architecture.svg">Open architecture SVG</a></object><p id="detail" aria-live="polite">The customer agent connects conversation to product discovery, SQL carts, order history and page navigation.</p>
-<section class="cards"><div class="card"><h2>Retrieval</h2><p>Rewrite/split → hybrid or SQL search → batch relevance approval → coverage check → more subqueries or complete.</p></div><div class="card"><h2>Ordering</h2><p>Resolve products → validate stock → update the SQL cart → quote → explicit confirmation → atomic order and stock deduction.</p></div><div class="card"><h2>Memory</h2><p>Explicit preferences are owned and versioned in SQL. Separate Qdrant memory vectors are filtered by customer and checked against SQL.</p></div></section>
-</main><footer>English · USD · Ollama Cloud · BGE 1024 · SQLite FTS5 · Qdrant</footer><script src="architecture.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MarketDeepAgent · Architecture explorer</title><link rel="stylesheet" href="style.css?v=3"></head>
+<body class="architecture-page">
+<header><div><div class="eyebrow">MarketDeepAgent / inside the system</div><h1>From a conversation to a real order.</h1></div><nav><a href="index.html" aria-current="page">Architecture</a><a href="erd.html">Database ERD</a><a href="demo.html">Watch the demo ↗</a></nav></header>
+<main>
+<div class="architecture-intro"><p>Follow the customer request through the specialists, inspect the evidence loop, and see exactly where application state lives.</p><span class="architecture-pill">3 agents · 1 catalog · 2 vector collections</span></div>
+<div class="view-tabs" role="tablist" aria-label="Architecture workflows">
+<button id="tab-overview" role="tab" aria-selected="true" aria-controls="diagramPanel" data-view="overview">01 <span>Overview</span></button>
+<button id="tab-retrieval" role="tab" aria-selected="false" aria-controls="diagramPanel" tabindex="-1" data-view="retrieval">02 <span>Retrieval loop</span></button>
+<button id="tab-ordering" role="tab" aria-selected="false" aria-controls="diagramPanel" tabindex="-1" data-view="ordering">03 <span>Cart &amp; checkout</span></button>
+<button id="tab-memory" role="tab" aria-selected="false" aria-controls="diagramPanel" tabindex="-1" data-view="memory">04 <span>Private memory</span></button>
+<button id="tab-indexing" role="tab" aria-selected="false" aria-controls="diagramPanel" tabindex="-1" data-view="indexing">05 <span>Indexing</span></button>
+</div>
+<div class="diagram-toolbar"><div class="flow-legend" aria-label="Arrow legend"><span class="request">→ Request / call</span><span class="response">⇢ Response / evidence</span><span class="write">→ Authoritative write</span><span class="sync">⇢ Embedding / sync</span></div><button id="motion" aria-pressed="false">Pause animation</button><a id="openDiagram" href="assets/architecture.svg" target="_blank" rel="noopener">Open full size ↗</a></div>
+<section id="diagramPanel" role="tabpanel" aria-labelledby="tab-overview" class="diagram-panel"><div class="diagram-scroll"><object id="map" class="diagram" data="assets/architecture.svg" type="image/svg+xml" aria-label="System overview diagram"><a href="assets/architecture.svg">Open architecture SVG</a></object></div></section>
+<div class="inspection"><span class="eyebrow">Inspect a component</span><p id="detail" aria-live="polite">Select a workflow above. Hover, focus or click a component for its responsibility.</p></div>
+<section class="workflow-story"><div><span class="eyebrow" id="storyLabel">01 / Overview</span><h2 id="storyTitle">One coordinator. Two specialists.</h2><p id="storyDescription">The browser sends authenticated requests and page context to FastAPI. The customer agent delegates discovery and shopping operations, then returns a grounded reply and allowlisted UI actions.</p></div><ol id="storySteps"><li>Customer + page context → authenticated application</li><li>Coordinator → retrieval / cart specialists</li><li>Facts + tool results → reply + storefront actions</li></ol></section>
+<p class="diagram-note">Arrows show the actual architectural direction, with separate return paths where shown. Overview groups services; each workflow view expands the calls. Motion is illustrative, not live telemetry. Hover/focus shows details; reduced-motion preferences are respected.</p>
+</main><footer>English · USD · Ollama Cloud / gpt-oss:120b · BGE 1024 · SQLite FTS5 · Qdrant</footer><script src="architecture.js?v=3"></script>
+</body></html>

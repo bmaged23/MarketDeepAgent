@@ -74,30 +74,8 @@ def svg_start(width,height):
 
 
 def architecture():
-    nodes = [
-        ('ui',30,75,'Customer / storefront','Page context · safe UI actions','The storefront shares the authenticated SQL cart. Page and recently viewed product IDs give the customer agent context.'),
-        ('customer',370,75,'Customer coordinator','Chat · routing · grounded answer','The customer agent delegates to retrieval and cart. Typed actions navigate pages. It does not execute generated JavaScript.'),
-        ('ollama',710,75,'Ollama Cloud','gpt-oss:120b · validated JSON','Cloud LLM plans, rewrites queries, approves chunks in batches, checks coverage and answers. SQL safeguards enforce business invariants.'),
-        ('retrieval',30,275,'Retrieval agent','Rewrite → search → approve → cover','Hybrid and schema-driven SQL retrieval. Keep binary-approved evidence; request follow-up subqueries when coverage is incomplete.'),
-        ('cart',370,275,'Cart agent','Validate → quote → explicit confirm','Bound customer tools change the cart, read order history and validate reviews. Final checkout confirmation comes from a trusted form.'),
-        ('memory',710,275,'Memory + conversations','Owner filters · SQL versions','SQL stores chat and approved explicit preferences. Separate memory vectors recall only the same customer’s active version.'),
-        ('hybrid',30,475,'Hybrid search / SQL query','30% BM25 + 70% vector · top-3','Min-max-normalized weighted fusion. SQL filters and fresh product facts are authoritative. Full-category SQL uses pagination.'),
-        ('sql',370,475,'SQLite database','Products · cart · orders · users','Transactions check stock and subtract once on confirmed checkout. Repeated tokens return the same order. SQL triggers update BM25 and queue vectors.'),
-        ('memoryvd',710,475,'Qdrant: customer_memories','memory_id ↔ SQL · person_id','Separate collection; point IDs match SQL memory IDs, with owner/model/version filtering and a SQL recheck.'),
-        ('bm25',30,675,'BM25 · SQLite FTS5','Names · descriptions · nutrition','Persistent keyword index, synchronized by SQL triggers in product-change transactions. It is not a separate BM25 server.'),
-        ('productvd',370,675,'Qdrant: market_products','product_id / category_id ↔ SQL','Derived product vectors and payloads; SQL IDs are shared. Fresh prices, stock and nutrition come from SQL.'),
-        ('index',710,675,'Indexing + BGE embeddings','1024 dimensions · retry jobs','Durable product jobs encode latest SQL documents, upsert points, retry safely and reconcile stale/orphan vectors. Memory has separate sync jobs.')]
-    edges = [('ui','customer'),('customer','ollama'),('customer','retrieval'),('customer','cart'),('customer','memory'),('retrieval','hybrid'),('cart','sql'),('memory','memoryvd'),('memory','sql'),('hybrid','bm25'),('hybrid','productvd'),('hybrid','sql'),('sql','index'),('index','productvd')]
-    lookup={n[0]:n for n in nodes}; content=[svg_start(1030,870),'<text class="heading" x="30" y="36">MarketDeepAgent · animated system map</text>']
-    for i,(a,b) in enumerate(edges):
-        na,nb=lookup[a],lookup[b];x,y=na[1]+135,na[2]+100;tx,ty=nb[1]+135,nb[2]
-        if na[2]==nb[2]:x,y,tx,ty=na[1]+270,na[2]+50,nb[1],nb[2]+50
-        d=f'M {x} {y} C {x} {y+60}, {tx} {ty-60}, {tx} {ty}'
-        content.append(f'<path id="flow{i}" class="flow" d="{d}" marker-end="url(#arrow)"/><circle class="signal" r="3"><animateMotion dur="{2+i%3}s" repeatCount="indefinite" path="{d}"/></circle>')
-    for key,x,y,title,subtitle,detail in nodes:
-        content.append(f'<g class="node" tabindex="0" data-detail="{html.escape(detail,quote=True)}"><title>{html.escape(detail)}</title><rect class="entity" x="{x}" y="{y}" width="270" height="100" rx="13"/><text class="title" x="{x+12}" y="{y+36}">{html.escape(title)}</text><text x="{x+12}" y="{y+66}">{html.escape(subtitle)}</text></g>')
-    content.append('<text x="30" y="830">Moving arrows show conceptual flow, not live runtime telemetry. Hover a component for details.</text></svg>')
-    ASSETS.joinpath('architecture.svg').write_text(''.join(content))
+    from system_diagrams import generate
+    generate(ASSETS)
 
 
 def main():
