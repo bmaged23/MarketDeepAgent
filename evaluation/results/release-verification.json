@@ -1,0 +1,37 @@
+{
+  "verified_date": "2026-10-23",
+  "run_url": "https://github.com/bmaged23/MarketDeepAgent/actions/runs/39986061885",
+  "run_conclusion": "success",
+  "gate": {
+    "passed": true,
+    "errors": [],
+    "dataset_sha256": "3b9604166dd7c409789361a4c6a9de611e6b40293485d58c5ba60216ac9814c8",
+    "image_id": "sha256:ec8cd29cb9b085f525e14e83c88ca6390dbab76a7beffdb1096f627f7fa3a4db"
+  },
+  "publication": {
+    "image_id": "sha256:ec8cd29cb9b085f525e14e83c88ca6390dbab76a7beffdb1096f627f7fa3a4db",
+    "tags": [
+      "bmaged23/market-deep-agent:cpu",
+      "bmaged23/market-deep-agent:latest",
+      "bmaged23/market-deep-agent:sha-cdf3f28575bc0777aef12cf91194e3f80d2d54ef"
+    ],
+    "repository_digests": [
+      "bmaged23/market-deep-agent@sha256:c30936dd22c71e0ecdfb81725028e14b45495295d3544194c525fcf970835114"
+    ],
+    "source_commit": "cdf3f28575bc0777aef12cf91194e3f80d2d54ef"
+  },
+  "langsmith": {
+    "dataset": "market-agents-v1-3b9604166dd7",
+    "project": "market-image-39986061885-1",
+    "project_id": "cefb3eaf-5e41-43d9-8c21-bfba47f91ea3",
+    "cases_uploaded": 100,
+    "endpoint": "https://eu.api.smith.langchain.com"
+  },
+  "langsmith_independent_verification": {
+    "project": "market-image-39986061885-1",
+    "project_id": "cefb3eaf-5e41-43d9-8c21-bfba47f91ea3",
+    "root_cases_verified": 100
+  },
+  "container_smoke_before_and_after_public_pull": "passed in successful release workflow",
+  "native_gpu_has_same_application_fingerprint": true
+}

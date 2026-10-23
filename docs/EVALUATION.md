@@ -2,7 +2,7 @@
 
 ## References precede execution
 
-`evaluation/datasets/market-agents-v1.jsonl` freezes 100 synthetic scenarios, with a seeded catalog snapshot and SHA-256 manifest. Its coverage is 30 retrieval, 25 cart, 25 coordinator and 20 six-turn journeys. Retrieval labels reuse the first30 source-labelled starter queries transparently; extra relevant alternatives may not be exhaustively labelled. Workflow variants and journeys are mechanically authored from catalog facts, not generated from the model's output. The set is exposed regression data, not an untouched generalization benchmark or human-adjudicated real shoppers.
+`evaluation/datasets/market-agents-v1.jsonl` freezes 100 synthetic scenarios, with a seeded catalog snapshot and SHA-256 manifest. Its coverage is 30 retrieval, 25 cart, 25 coordinator and 20 six-turn journeys. Retrieval labels reuse the first 30 source-labelled starter queries transparently; extra relevant alternatives may not be exhaustively labelled. Workflow variants and journeys are mechanically authored from catalog facts, not generated from the model's output. The set is exposed regression data, not an untouched generalization benchmark or human-adjudicated real shoppers.
 
 Reference evidence contains **stable product IDs plus frozen facts**. Constraints are separate structured fields. Qdrant point IDs equal SQL product IDs; runtime labels such as `chunk_0` are not the reference identity. Cart/coordinator cases include initial synthetic state, expected decisions and forbidden changes. Journeys share the same conversation and cart across six actual turns, including corrections, then explicit confirmation and retry/ownership checks.
 
@@ -29,13 +29,13 @@ Agents use `gpt-oss:120b` on Ollama Cloud. `gemma4:31b` judges 145 coordinator/j
 1. **Correctness/completeness/relevance:** question, actual answer and frozen catalog/expected-state references. Judge only facts/actions requested by that question, not every field in the reference.
 2. **Faithfulness:** question, actual answer and actual tool evidence; no reference answer is supplied. Unsupported factual/action claims are recorded explicitly.
 
-Each rubric score is an integer0–4, normalized by dividing by4. Report means and coverage per metric; there is no combined overall answer score. These judgments need human calibration and cannot independently certify truth. Correctness and faithfulness are different: an answer can accurately repeat incomplete evidence while failing to answer the question.
+Each rubric score is an integer 0–4, normalized by dividing by 4. Report means and coverage per metric; there is no combined overall answer score. These judgments need human calibration and cannot independently certify truth. Correctness and faithfulness are different: an answer can accurately repeat incomplete evidence while failing to answer the question.
 
-The parser accepts exact JSON code fences but enforces required fields, score ranges and schema. Only invalid responses or transient requests get bounded repair/retry (maximum3 judge attempts). Valid low scores are never retried. Earlier failed tooling attempts are kept privately and are not counted as successful judgments. Monetary cost is not inferred without billing rates.
+The parser accepts exact JSON code fences but enforces required fields, score ranges and schema. Only invalid responses or transient requests get bounded repair/retry (maximum 3 judge attempts). Valid low scores are never retried. Earlier failed tooling attempts are kept privately and are not counted as successful judgments. Monetary cost is not inferred without billing rates.
 
 ## Baseline and candidate are separate
 
-The original native-GPU source baseline completed100 cases and passed91: retrieval27/30,cart23/25,coordinator23/25,journeys18/20. Its direct-ranking recall/MRR/nDCG@5 were1.0 on30 known starter queries; precision@5 was0.2467. Answer means over145 replies: correctness0.8879,completeness0.9172,relevance0.9517,faithfulness0.9483. These narrow results do not establish universal accuracy.
+The original native-GPU source baseline completed100 cases and passed91: retrieval27/30,cart23/25,coordinator23/25,journeys18/20. Its direct-ranking recall/MRR/nDCG@5 were1.0 on30 known starter queries; precision@5 was0.2467. Answer means over 145 replies: correctness0.8879,completeness0.9172,relevance0.9517,faithfulness0.9483. These narrow results do not establish universal accuracy.
 
 Observed failures informed changes to original-request preservation, owned review context, quote-only routing and focused retrieval planning. Baseline outputs remain unchanged under ignored `.evaluation-local/source-baseline`; public aggregates are in `evaluation/results/`. The full release evaluation runs **inside the exact candidate image**, using an isolated100-product catalog and its own Qdrant volume, not the host source checkout or existing customer data.
 
@@ -64,7 +64,7 @@ LangSmith stores frozen examples, per-agent/tool traces and feedback. Inference 
 
 ## Intermediate candidate finding
 
-The first full CPU-image candidate passed97/100: retrieval30/30,cart25/25,coordinator25/25,journeys17/20. Despite the higher total, its journey score0.85 is below the declared0.87 floor, so it is not promoted. The three failures were multi-product SQL lookups without name/ID selectors. A new server-side resolver uses literal catalog names (not evaluation labels) to fill missing SQL selectors; targeted reruns of those three journeys passed. A new full-image run is still required. Earlier candidate results remain in `evaluation/results/candidate-iteration1.json`; targeted checks do not replace the benchmark.
+The first full CPU-image candidate passed 97/100: retrieval 30/30, cart 25/25, coordinator 25/25, journeys 17/20. Its journey score 0.85 was below the declared 0.87 floor, so it was rejected. The three failures were multi-product SQL lookups without name/ID selectors. A new server-side resolver uses literal catalog names (not evaluation labels) to fill missing SQL selectors; targeted reruns of those three journeys passed. The subsequent complete image evaluation passed 100/100 and the unchanged gate, as recorded below. Earlier candidate results remain in `evaluation/results/candidate-iteration1.json`; targeted checks do not replace the benchmark.
 
 Long-term preference-memory proposals are not enabled in these live journeys; conversation history is exercised, while owner/version/deletion memory guards have separate offline tests. Do not claim complete live long-term-memory quality from this set.
 
@@ -74,3 +74,20 @@ Long-term preference-memory proposals are not enabled in these live journeys; co
 New runs capture worker CPU/RAM and, on native CUDA, sampled whole-device VRAM/utilization. Per-case observations describe the shared worker while that case runs; parallel cases overlap and cannot be charged individual resource ownership. Summary peaks include model startup and exclude the browser, Qdrant and cloud servers. These are sampled observations, not continuous peak guarantees.
 
 Release gating also checks raw judge IDs, schema-valid score coverage and aggregate arithmetic rather than trusting summary counters alone. Failed-but-completed runs are exported to LangSmith even when the gate blocks publication. SQL projections may omit eligibility fields; constraints are checked against frozen SQL facts while any contradictory returned facts still fail.
+
+Cart/coordinator counts include paraphrase variants of 12 and 10 underlying operation templates; they are not 25 independent behavior types or independent statistical trials. The 20 journeys use different product pairs. This coverage remains narrower than real shopper traffic.
+
+## Verified released candidate — 23 October 2026
+
+Both the released Docker CPU image and native GPU workflow run passed **100/100**: retrieval 30/30, cart 25/25, coordinator 25/25 and journeys 20/20. The released image passed every required critical check and the unchanged quality policy. Its application fingerprint matches the native GPU run.
+
+| Released CPU answer metric | Normalized mean | Coverage |
+|---|---:|---:|
+| Correctness | 90.34% | 145/145 replies |
+| Completeness | 93.10% | 145/145 replies |
+| Relevance | 95.00% | 145/145 replies |
+| Faithfulness | 95.69% | 145/145 replies |
+
+All **290/290** rubric judgments were valid. These are normalized judge means, not percentages of conversations passed. Baseline means were correctness 88.79%, completeness 91.72%, relevance 95.17% and faithfulness 94.83%; relevance did not improve. No statistical significance or held-out generalization is claimed. The earlier 97/100 CPU candidate and interrupted vector-service failure remain retained separately; neither substitutes for final release evidence.
+
+The released CPU experiment is `market-image-39986061885-1` in LangSmith; 100 root case IDs were independently checked against the frozen dataset after export. [Public release record](RELEASE_VERIFICATION.md), [CPU summary](../evaluation/results/docker-cpu-final.json), [answer scores](../evaluation/results/docker-answer-judgments.json), [GPU summary](../evaluation/results/native-gpu-final.json).

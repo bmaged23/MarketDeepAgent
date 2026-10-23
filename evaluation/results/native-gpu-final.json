@@ -1,0 +1,405 @@
+{
+  "dataset_version": "market-agents-v1",
+  "dataset_sha256": "3b9604166dd7c409789361a4c6a9de611e6b40293485d58c5ba60216ac9814c8",
+  "application_sha256": "7d7ec598dc23523ed4ba5317fc31484323b888612554c4e5d4834a629531d5b8",
+  "selected_cases": 100,
+  "completed": 100,
+  "mode": "live_ollama_real_tools",
+  "model": "gpt-oss:120b",
+  "embedding_device": "cuda",
+  "model_load_seconds": 6.1596032090001245,
+  "wall_seconds": 1496.262899159,
+  "resumed_cases": 0,
+  "wall_time_scope": "This invocation only; per-case durations retain prior attempts.",
+  "workers": 2,
+  "scopes": {
+    "retrieval": {
+      "cases": 30,
+      "passed": 30,
+      "pass_rate": 1.0,
+      "median_seconds": 18.676022702999944,
+      "checks": {
+        "approved_only": {
+          "passed": 30,
+          "scored": 30
+        },
+        "constraints_satisfied": {
+          "passed": 30,
+          "scored": 30
+        },
+        "expected_products_found": {
+          "passed": 30,
+          "scored": 30
+        },
+        "facts_match_sql": {
+          "passed": 30,
+          "scored": 30
+        },
+        "no_degraded_search": {
+          "passed": 30,
+          "scored": 30
+        },
+        "no_mutation_tools": {
+          "passed": 30,
+          "scored": 30
+        },
+        "retrieval_complete": {
+          "passed": 30,
+          "scored": 30
+        },
+        "search_budget": {
+          "passed": 30,
+          "scored": 30
+        },
+        "sql_pagination_complete": {
+          "passed": 30,
+          "scored": 30
+        }
+      },
+      "ranking": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.24666666666666667,
+        "reciprocal_rank": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ranking_scored": 30
+    },
+    "cart": {
+      "cases": 25,
+      "passed": 25,
+      "pass_rate": 1.0,
+      "median_seconds": 3.8806604840001455,
+      "checks": {
+        "asks_to_resolve_product": {
+          "passed": 2,
+          "scored": 2
+        },
+        "blocks_early_review": {
+          "passed": 2,
+          "scored": 2
+        },
+        "cart_quantities": {
+          "passed": 25,
+          "scored": 25
+        },
+        "correct_action": {
+          "passed": 21,
+          "scored": 21
+        },
+        "detects_insufficient_stock": {
+          "passed": 2,
+          "scored": 2
+        },
+        "no_unconfirmed_orders": {
+          "passed": 25,
+          "scored": 25
+        },
+        "owned_history": {
+          "passed": 2,
+          "scored": 2
+        },
+        "quote_requires_confirmation": {
+          "passed": 2,
+          "scored": 2
+        },
+        "recorded_status": {
+          "passed": 2,
+          "scored": 2
+        },
+        "review_saved_exactly": {
+          "passed": 2,
+          "scored": 2
+        },
+        "stock_not_deducted_by_cart_action": {
+          "passed": 25,
+          "scored": 25
+        }
+      }
+    },
+    "customer": {
+      "cases": 25,
+      "passed": 25,
+      "pass_rate": 1.0,
+      "median_seconds": 14.866518613000153,
+      "checks": {
+        "answer_model_excludes_checkout_token": {
+          "passed": 23,
+          "scored": 23
+        },
+        "answer_present": {
+          "passed": 23,
+          "scored": 23
+        },
+        "blocks_early_review": {
+          "passed": 2,
+          "scored": 2
+        },
+        "cart_cleared": {
+          "passed": 2,
+          "scored": 2
+        },
+        "cart_quantities": {
+          "passed": 19,
+          "scored": 19
+        },
+        "correct_action": {
+          "passed": 17,
+          "scored": 17
+        },
+        "correct_specialists": {
+          "passed": 23,
+          "scored": 23
+        },
+        "currency_is_usd": {
+          "passed": 23,
+          "scored": 23
+        },
+        "no_cart_mutation": {
+          "passed": 3,
+          "scored": 3
+        },
+        "no_degraded_search": {
+          "passed": 3,
+          "scored": 3
+        },
+        "no_unconfirmed_orders": {
+          "passed": 19,
+          "scored": 19
+        },
+        "order_placed": {
+          "passed": 2,
+          "scored": 2
+        },
+        "owned_history": {
+          "passed": 2,
+          "scored": 2
+        },
+        "payment_not_fabricated": {
+          "passed": 2,
+          "scored": 2
+        },
+        "quote_requires_confirmation": {
+          "passed": 5,
+          "scored": 5
+        },
+        "recorded_status": {
+          "passed": 2,
+          "scored": 2
+        },
+        "repeat_idempotent": {
+          "passed": 2,
+          "scored": 2
+        },
+        "requested_product_approved": {
+          "passed": 3,
+          "scored": 3
+        },
+        "retrieval_before_cart_mutation": {
+          "passed": 3,
+          "scored": 3
+        },
+        "review_saved_exactly": {
+          "passed": 2,
+          "scored": 2
+        },
+        "stock_deducted_once": {
+          "passed": 2,
+          "scored": 2
+        },
+        "stock_not_deducted_by_cart_action": {
+          "passed": 19,
+          "scored": 19
+        }
+      }
+    },
+    "journey": {
+      "cases": 20,
+      "passed": 20,
+      "pass_rate": 1.0,
+      "median_seconds": 76.9103068774998,
+      "checks": {
+        "cart_empty_after_checkout": {
+          "passed": 20,
+          "scored": 20
+        },
+        "cross_customer_checkout_blocked": {
+          "passed": 20,
+          "scored": 20
+        },
+        "cross_customer_order_blocked": {
+          "passed": 20,
+          "scored": 20
+        },
+        "final_total": {
+          "passed": 20,
+          "scored": 20
+        },
+        "idempotent_checkout": {
+          "passed": 20,
+          "scored": 20
+        },
+        "one_owned_order": {
+          "passed": 20,
+          "scored": 20
+        },
+        "other_orders_isolated": {
+          "passed": 20,
+          "scored": 20
+        },
+        "stock_deducted_once": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_1.answer_present": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_1.cart_quantities": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_1.no_early_stock_deduction": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_1.no_other_customer_mutation": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_1.no_unconfirmed_order": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_1.requested_products_found": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_2.answer_present": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_2.cart_quantities": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_2.no_early_stock_deduction": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_2.no_other_customer_mutation": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_2.no_unconfirmed_order": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_3.answer_present": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_3.cart_quantities": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_3.no_early_stock_deduction": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_3.no_other_customer_mutation": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_3.no_unconfirmed_order": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_4.answer_present": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_4.cart_quantities": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_4.no_early_stock_deduction": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_4.no_other_customer_mutation": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_4.no_unconfirmed_order": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_5.answer_present": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_5.cart_quantities": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_5.no_early_stock_deduction": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_5.no_other_customer_mutation": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_5.no_unconfirmed_order": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_6.answer_present": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_6.cart_quantities": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_6.no_early_stock_deduction": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_6.no_other_customer_mutation": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_6.no_unconfirmed_order": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_6.quote_ready": {
+          "passed": 20,
+          "scored": 20
+        },
+        "turn_6.quoted_total": {
+          "passed": 20,
+          "scored": 20
+        },
+        "unpaid_cash_on_delivery": {
+          "passed": 20,
+          "scored": 20
+        }
+      }
+    }
+  },
+  "resource_usage": {
+    "peak_worker_rss_mib": 2029.21484375,
+    "mean_worker_cpu_percent_one_core_100": 2.442711209597167,
+    "whole_device_peak_vram_mib": 1463.0,
+    "whole_device_peak_gpu_utilization_percent": 30.0,
+    "scope": "Evaluation worker incl. model startup; excludes Qdrant, browser and cloud servers. GPU observations include other device users."
+  },
+  "limitations": [
+    "Synthetic regression cases, not independent human-adjudicated shoppers.",
+    "Ranked retrieval and SQL/agent evidence are scored separately.",
+    "Parallel case times overlap; shared process/GPU resource use is not attributable to one user.",
+    "No live customer database or memory is modified; journeys use isolated synthetic SQL."
+  ]
+}

@@ -1,8 +1,8 @@
 # Docker setup
 
-The intended public repository is https://hub.docker.com/r/bmaged23/market-deep-agent; publication is verified only when recorded in [release evidence](RELEASE_VERIFICATION.md).
+The tested public image is [bmaged23/market-deep-agent](https://hub.docker.com/r/bmaged23/market-deep-agent). The complete evaluation, publication and public pull/smoke checks passed on 23 October 2026; exact commit and digest are in [release evidence](RELEASE_VERIFICATION.md).
 
-The Linuxamd64 CPU image contains the FastAPI application, storefront assets, seeded100-product catalog, indexing tools, SQLite migrations and pinned BGE model weights. It contains no API keys, user database or private evaluation traces. A fresh model download and repository clone are not required. BGE's upstream model card declares MIT licensing and its README is included with the pinned weights.
+The Linux amd64 CPU image contains the FastAPI application, storefront assets, seeded 100-product catalog, indexing tools, SQLite migrations and pinned BGE model weights. It contains no API keys, user database or private evaluation traces. A fresh model download and repository clone are not required. BGE's upstream model card declares MIT licensing and its README is included with the pinned weights.
 
 ## Two files, then run
 
@@ -13,7 +13,7 @@ curl -fL https://raw.githubusercontent.com/bmaged23/MarketDeepAgent/main/docker-
 curl -fL https://raw.githubusercontent.com/bmaged23/MarketDeepAgent/main/.env.example -o .env
 ```
 
-Edit`.env`to set`OLLAMA_API_KEY`, an accessible`OLLAMA_MODEL`and optionally`ADMIN_API_KEY`for administration. You supply your own cloud account; the120B LLM is not bundled or hosted locally.
+Edit `.env` to set `OLLAMA_API_KEY`, an accessible `OLLAMA_MODEL` and optionally `ADMIN_API_KEY` for administration. You supply your own cloud account; the 120B LLM is not bundled or hosted locally.
 
 ```bash
 docker pull bmaged23/market-deep-agent:cpu
@@ -27,7 +27,7 @@ Open http://localhost:8600 and register/sign in. API docs: http://localhost:8600
 
 ## Data, updates and cleanup
 
-Named volumes hold`/app/storage`and Qdrant storage. Bundled seed assets stay in the image so updates do not mount an old copy of source code over them. A nonempty catalog is preserved on restart; it is not silently reset to the seed.
+Named volumes hold `/app/storage` and Qdrant storage. Bundled seed assets stay in the image so updates do not mount an old copy of source code over them. A nonempty catalog is preserved on restart; it is not silently reset to the seed.
 
 ```bash
 docker compose down
@@ -36,13 +36,13 @@ docker compose pull
 docker compose up -d
 ```
 
-Only use`docker compose down -v`when intentionally erasing accounts, carts, orders, conversations and vectors. The tests use uniquely named disposable resources, not your regular Qdrant instance.
+Only use `docker compose down -v` when intentionally erasing accounts, carts, orders, conversations and vectors. The tests use uniquely named disposable resources, not your regular Qdrant instance.
 
 ## CPU and GPU
 
-The public portable image uses CPU embeddings and needs no NVIDIA hardware. Native CUDA12.4 inference and resource comparison are verified separately. A GPU build stage is included for future verification but no tested public GPU image is claimed. Allow at least 8 GB available RAM and 8 GB free disk as an initial CPU budget; runtime peaks depend on concurrent model processes. Native Windows/macOS/ARM behavior is not universally certified.
+The public portable image uses CPU embeddings and needs no NVIDIA hardware. Native CUDA 12.4 inference and resource comparison are verified separately. A GPU build stage is included for future verification but no tested public GPU image is claimed. Allow at least 8 GB available RAM and 8 GB free disk as an initial CPU budget; runtime peaks depend on concurrent model processes. Native Windows/macOS/ARM behavior is not universally certified.
 
-For source development,`docker/compose.storage.yml`starts only Qdrant on localhost6335. The root`docker-compose.yml`runs the complete packaged application. See the main README for native GPU setup.
+For source development,`docker/compose.storage.yml` starts only Qdrant on localhost:6335. The root `docker-compose.yml` runs the complete packaged application. See the main README for native GPU setup.
 
 ## Container verification
 
@@ -50,7 +50,7 @@ For source development,`docker/compose.storage.yml`starts only Qdrant on localho
 python -m scripts.release.smoke_image --image bmaged23/market-deep-agent:cpu
 ```
 
-This creates a separate network, SQL volume and Qdrant container. It checks real inference/search, UI/API routes, signup/session/CSRF, cart totals, quote-only stock preservation, confirmed cash-on-delivery checkout, idempotent retry, exact stock deduction and persistence across replacement containers. It removes only its own resources. It is distinct from the100-case live-agent evaluation.
+This creates a separate network, SQL volume and Qdrant container. It checks real inference/search, UI/API routes, signup/session/CSRF, cart totals, quote-only stock preservation, confirmed cash-on-delivery checkout, idempotent retry, exact stock deduction and persistence across replacement containers. It removes only its own resources. It is distinct from the 100-case live-agent evaluation.
 
 ## Troubleshooting
 

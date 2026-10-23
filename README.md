@@ -51,11 +51,11 @@ The original source/GPU baseline passed **91/100** workflows: retrieval 27/30, c
 
 Baseline judging covered **145 replies and 290 valid assessments**: correctness **88.79%**, completeness **91.72%**, relevance **95.17%**, faithfulness **94.83%**. These are normalized rubric means, not percentages of conversations passed. The set is synthetic and source-validated, not independently human-adjudicated traffic. Valid low scores are retained.
 
-Baseline failures informed fixes for retrieval planning, review context, checkout routing and original cart instructions during delegation. Final candidate results are recorded separately. **Release evaluation runs inside the built Docker image before publication**, using isolated SQL and Qdrant. [Methodology](docs/EVALUATION.md) · [Frozen references](evaluation/README.md) · [Release evidence](docs/RELEASE_VERIFICATION.md).
+Baseline failures informed fixes for retrieval planning, review context, checkout routing and original cart instructions during delegation. **The released Docker CPU image and native GPU run each passed 100/100 workflows.** Released-image judging covered 145 replies / 290 valid assessments: correctness **90.34%**, completeness **93.10%**, relevance **95.00%**, faithfulness **95.69%**. These are regression results and normalized rubric means, not guaranteed real-world accuracy. Native peak worker RAM was **2029.2 MiB**, with observed whole-device peak VRAM **1463 MiB**. [Per-agent latency and resource results](docs/PERFORMANCE.md). **Release evaluation runs inside the built Docker image before publication**, using isolated SQL and Qdrant. [Methodology](docs/EVALUATION.md) · [Frozen references](evaluation/README.md) · [Release evidence](docs/RELEASE_VERIFICATION.md).
 
 ## Docker: pull, configure and run
 
-Publication is verified only when recorded in the release evidence. The intended public image is `bmaged23/market-deep-agent:cpu`. No repository clone, compilation or Python installation is needed for this route.
+The verified public image is [`bmaged23/market-deep-agent:cpu`](https://hub.docker.com/r/bmaged23/market-deep-agent). CI published the gated image, pulled it publicly and repeated its smoke checks. [Exact release and digest](docs/RELEASE_VERIFICATION.md). No repository clone, compilation or Python installation is needed for this route.
 
 Download the two small configuration files:
 
