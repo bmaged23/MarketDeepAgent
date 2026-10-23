@@ -74,6 +74,7 @@ jobs:
       - name: Enforce coverage, per-agent quality and critical checks
         run: python -m scripts.evaluation.check_gate --candidate .evaluation-local/candidate
       - name: Store per-agent and tool traces in LangSmith
+        if: ${{ !cancelled() && hashFiles('.evaluation-local/candidate/cases.jsonl') != '' && hashFiles('.evaluation-local/candidate/judge/judgments.jsonl') != '' }}
         run: |
           python -m scripts.evaluation.export_langsmith \
             --input .evaluation-local/candidate \

@@ -24,6 +24,7 @@ from app.conversations.service import ConversationService
 from app.customer_memory.service import MemoryService
 from app.agents.customer.journey_evaluation import NoMemoryVectors
 from app.utils.errors import ServiceError
+from scripts.performance.benchmark_embeddings import Resources
 
 ROOT=PROJECT_ROOT
 RETRIEVAL_METHODS={'categories','resolve_named_products','search_products','query_products','product_details','compare_products'}
@@ -44,10 +45,11 @@ def oracle_product_checks(evidence,gold,filters):
     for chunk in evidence:
         p=chunk['product'];ref=by_id.get(p['product_id'])
         facts &= ref is not None and all(v==ref.get(k) for k,v in p.items())
+        eligibility={**(ref or {}),**p}  # SQL projections may omit filter fields.
         constraints &= (filters.get('category_id') is None or p['category_id']==filters['category_id'])
-        constraints &= (filters.get('min_price') is None or p.get('price',-math.inf)>=filters['min_price'])
-        constraints &= (filters.get('max_price') is None or p.get('price',math.inf)<=filters['max_price'])
-        constraints &= (not filters.get('in_stock') or p.get('stock_quantity',0)>0)
+        constraints &= (filters.get('min_price') is None or eligibility.get('price',-math.inf)>=filters['min_price'])
+        constraints &= (filters.get('max_price') is None or eligibility.get('price',math.inf)<=filters['max_price'])
+        constraints &= (not filters.get('in_stock') or eligibility.get('stock_quantity',0)>0)
     return {'facts_match_sql':bool(facts),'constraints_satisfied':bool(constraints),
             'approved_only':all(c.get('approval')==1 for c in evidence)}
 
@@ -146,8 +148,11 @@ def journey(case,settings,embeddings,vectors):
         else:all_checks['confirmed_checkout_possible']=False
         return {'output':turns,'calls':records,'checks':all_checks,'passed':all(all_checks.values())}
 
-def execute(case,settings,embeddings,vectors):
+def execute(case,settings,embeddings,vectors,resources=None):
     started=time.perf_counter()
+    cpu_started=time.process_time()
+    rss_start=len(resources.rss) if resources else 0
+    gpu_start=len(resources.gpu) if resources else 0
     started_at=datetime.now(timezone.utc).isoformat()
     try:
         if case['scope']=='retrieval':row=retrieval(case,settings,embeddings,vectors)
@@ -157,6 +162,13 @@ def execute(case,settings,embeddings,vectors):
     except Exception as e:row={'passed':False,'error_type':type(e).__name__,'checks':{},'calls':[]}
     row.update(case_id=case['case_id'],scope=case['scope'],duration_seconds=time.perf_counter()-started,
         started_at=started_at,ended_at=datetime.now(timezone.utc).isoformat())
+    if resources:
+        gpu=resources.gpu[gpu_start:]
+        row['resource_observations']={'shared_process_peak_rss_mib':max(resources.rss[rss_start:] or resources.rss[-1:],default=None),
+            'shared_process_cpu_percent_one_core_100':100*(time.process_time()-cpu_started)/row['duration_seconds'],
+            'whole_device_peak_vram_mib':max((g[0] for g in gpu),default=None),
+            'whole_device_peak_gpu_percent':max((g[1] for g in gpu),default=None),
+            'scope':'Shared worker during this case; overlapping cases/other GPU users are included, not per-user attribution.'}
     return row
 
 def validate_dataset(root=ROOT):
@@ -170,16 +182,26 @@ def validate_dataset(root=ROOT):
     assert {s:sum(c['scope']==s for c in cases) for s in manifest['counts']}==manifest['counts']
     return manifest,cases
 
+def application_fingerprint():
+    digest=hashlib.sha256()
+    for path in sorted((ROOT/'app').rglob('*')):
+        if path.is_file() and path.suffix in {'.py','.md','.sql'}:
+            digest.update(path.relative_to(ROOT).as_posix().encode()+b'\0'+path.read_bytes()+b'\0')
+    return digest.hexdigest()
+
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--scope',choices=['all','retrieval','cart','customer','journey'],default='all')
     parser.add_argument('--limit',type=int);parser.add_argument('--workers',type=int,default=2)
     parser.add_argument('--resume',action='store_true',help='Keep every completed result, including failures; execute only missing case IDs')
     parser.add_argument('--output',type=Path,default=ROOT/'.evaluation-local/live');args=parser.parse_args()
     if args.workers<1 or (args.limit is not None and args.limit<1):parser.error('workers and limit must be positive')
-    manifest,cases=validate_dataset();cases=[c for c in cases if args.scope=='all' or c['scope']==args.scope]
+    manifest,cases=validate_dataset();application_sha=application_fingerprint()
+    cases=[c for c in cases if args.scope=='all' or c['scope']==args.scope]
     if args.limit:cases=cases[:args.limit]
     args.output.mkdir(parents=True,exist_ok=True)
     settings=get_settings();embeddings=embedding_client(settings);vectors=vector_index(settings)
+    resources=Resources(sample_gpu=settings.embedding_device.startswith('cuda'));resources.start()
+    resource_wall=time.perf_counter();resource_cpu=time.process_time()
     # Model startup is recorded separately; case times are warm except model-specific cloud startup.
     t=time.perf_counter();embeddings.encode_query('Warm up catalog retrieval');startup=time.perf_counter()-t
     rows=[];started=time.perf_counter()
@@ -191,16 +213,23 @@ def main():
         assert all(expected.get(r['case_id'])==r['scope'] for r in rows),'Completed cases do not match selected dataset'
     completed_ids={r['case_id'] for r in rows}
     pending=[c for c in cases if c['case_id'] not in completed_ids]
-    (args.output/'configuration.json').write_text(json.dumps({'dataset_sha256':manifest['dataset_sha256'],
+    configuration={'dataset_sha256':manifest['dataset_sha256'],'application_sha256':application_sha,
         'model':settings.ollama_model,'embedding_revision':settings.embedding_revision,
-        'embedding_device':settings.embedding_device,'resume_existing_cases':len(rows)},indent=2)+'\n')
+        'embedding_device':settings.embedding_device,'resume_existing_cases':len(rows)}
+    config_path=args.output/'configuration.json'
+    if args.resume and config_path.exists():
+        previous=json.loads(config_path.read_text())
+        for key in ['dataset_sha256','application_sha256','model','embedding_revision','embedding_device']:
+            if key in previous:assert previous[key]==configuration[key],f'Cannot resume changed {key}; use a new experiment'
+    config_path.write_text(json.dumps(configuration,indent=2)+'\n')
     try:
         with case_path.open('a' if args.resume else 'w') as handle,ThreadPoolExecutor(max_workers=args.workers) as executor:
-            jobs={executor.submit(execute,c,settings,embeddings,vectors):c['case_id'] for c in pending}
+            jobs={executor.submit(execute,c,settings,embeddings,vectors,resources):c['case_id'] for c in pending}
             for future in as_completed(jobs):
                 row=future.result();rows.append(row);handle.write(json.dumps(row,ensure_ascii=False)+'\n');handle.flush()
                 print(json.dumps({'case_id':row['case_id'],'passed':row['passed'],'seconds':round(row['duration_seconds'],2),'failed_checks':[k for k,v in row.get('checks',{}).items() if not v],'error_type':row.get('error_type')}),flush=True)
-    finally:vectors.close()
+    finally:
+        vectors.close();resources.finish()
     summaries={}
     for scope in manifest['counts']:
         subset=[r for r in rows if r['scope']==scope]
@@ -212,8 +241,13 @@ def main():
             scored=[r for r in subset if 'ranking' in r]
             summaries[scope]['ranking']={k:statistics.mean(r['ranking'][k] for r in scored) for k in scored[0]['ranking']} if scored else {}
             summaries[scope]['ranking_scored']=len(scored)
-    summary={'dataset_version':manifest['version'],'dataset_sha256':manifest['dataset_sha256'],'selected_cases':len(cases),'completed':len(rows),'mode':'live_ollama_real_tools',
+    summary={'dataset_version':manifest['version'],'dataset_sha256':manifest['dataset_sha256'],'application_sha256':application_sha,'selected_cases':len(cases),'completed':len(rows),'mode':'live_ollama_real_tools',
         'model':settings.ollama_model,'embedding_device':settings.embedding_device,'model_load_seconds':startup,'wall_seconds':time.perf_counter()-started,'resumed_cases':len(completed_ids),'wall_time_scope':'This invocation only; per-case durations retain prior attempts.','workers':args.workers,'scopes':summaries,
+        'resource_usage':{'peak_worker_rss_mib':max(resources.rss,default=None),
+            'mean_worker_cpu_percent_one_core_100':100*(time.process_time()-resource_cpu)/(time.perf_counter()-resource_wall),
+            'whole_device_peak_vram_mib':max((g[0] for g in resources.gpu),default=None),
+            'whole_device_peak_gpu_utilization_percent':max((g[1] for g in resources.gpu),default=None),
+            'scope':'Evaluation worker incl. model startup; excludes Qdrant, browser and cloud servers. GPU observations include other device users.'},
         'limitations':['Synthetic regression cases, not independent human-adjudicated shoppers.','Ranked retrieval and SQL/agent evidence are scored separately.','Parallel case times overlap; shared process/GPU resource use is not attributable to one user.','No live customer database or memory is modified; journeys use isolated synthetic SQL.']}
     (args.output/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
     print(json.dumps(summary,indent=2))

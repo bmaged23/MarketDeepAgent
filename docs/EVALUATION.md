@@ -67,3 +67,10 @@ LangSmith stores frozen examples, per-agent/tool traces and feedback. Inference 
 The first full CPU-image candidate passed97/100: retrieval30/30,cart25/25,coordinator25/25,journeys17/20. Despite the higher total, its journey score0.85 is below the declared0.87 floor, so it is not promoted. The three failures were multi-product SQL lookups without name/ID selectors. A new server-side resolver uses literal catalog names (not evaluation labels) to fill missing SQL selectors; targeted reruns of those three journeys passed. A new full-image run is still required. Earlier candidate results remain in `evaluation/results/candidate-iteration1.json`; targeted checks do not replace the benchmark.
 
 Long-term preference-memory proposals are not enabled in these live journeys; conversation history is exercised, while owner/version/deletion memory guards have separate offline tests. Do not claim complete live long-term-memory quality from this set.
+
+
+## Resource and failure audit
+
+New runs capture worker CPU/RAM and, on native CUDA, sampled whole-device VRAM/utilization. Per-case observations describe the shared worker while that case runs; parallel cases overlap and cannot be charged individual resource ownership. Summary peaks include model startup and exclude the browser, Qdrant and cloud servers. These are sampled observations, not continuous peak guarantees.
+
+Release gating also checks raw judge IDs, schema-valid score coverage and aggregate arithmetic rather than trusting summary counters alone. Failed-but-completed runs are exported to LangSmith even when the gate blocks publication. SQL projections may omit eligibility fields; constraints are checked against frozen SQL facts while any contradictory returned facts still fail.

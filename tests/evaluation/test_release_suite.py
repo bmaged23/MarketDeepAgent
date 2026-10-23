@@ -72,3 +72,24 @@ def test_release_gate_blocks_missing_coverage_nan_and_critical_failures():
     assert assess(summary,bad_rows,judge,policy,summary)
     bad_judge=copy.deepcopy(judge);bad_judge['valid_judgments']=1
     assert assess(summary,rows,bad_judge,policy,summary)
+
+
+def test_projected_sql_rows_use_frozen_eligibility_without_inventing_missing_fields():
+    gold=[{'product_id':7,'name':'Apples','price':4.0,'stock_quantity':3,'category_id':2}]
+    projected={'product':{'product_id':7,'name':'Apples','category_id':2},'approval':1}
+    assert all(oracle_product_checks([projected],gold,{'max_price':5,'in_stock':True}).values())
+
+
+def test_raw_judge_coverage_arithmetic_and_valid_low_scores():
+    import copy
+    from scripts.evaluation.check_gate import validate_judgment_records
+    cases=[{'case_id':'c','scope':'customer'}]
+    records=[{'id':'c','criterion':'correctness','valid':True,'scores':{'correctness':.25,'completeness':.5,'relevance':.75}},
+             {'id':'c','criterion':'faithfulness','valid':True,'scores':{'faithfulness':1.0}}]
+    summary={'metrics':{k:{'mean':v} for k,v in {'correctness':.25,'completeness':.5,'relevance':.75,'faithfulness':1.0}.items()}}
+    assert not validate_judgment_records(records,cases,summary)
+    assert validate_judgment_records([records[0],records[0]],cases,summary)
+    bad=copy.deepcopy(records);bad[0]['scores']['correctness']=float('nan')
+    assert validate_judgment_records(bad,cases,summary)
+    bad_summary=copy.deepcopy(summary);bad_summary['metrics']['correctness']['mean']=1.0
+    assert validate_judgment_records(records,cases,bad_summary)

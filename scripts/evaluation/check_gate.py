@@ -42,6 +42,30 @@ def assess(summary,rows,judge,policy,baseline):
         if valid:require(value>=floor,f'{metric}: below quality floor')
     return errors
 
+def validate_judgment_records(records,cases,summary):
+    """Validate raw coverage and aggregate arithmetic, not just reported counters."""
+    answer_ids=[]
+    for case in cases:
+        if case['scope']=='customer':answer_ids.append(case['case_id'])
+        elif case['scope']=='journey':answer_ids.extend(case['case_id']+f'.turn{i+1}' for i in range(len(case['turns'])))
+    expected={(identifier,kind) for identifier in answer_ids for kind in ['correctness','faithfulness']}
+    actual=[(r.get('id'),r.get('criterion')) for r in records]
+    errors=[]
+    if len(set(actual))!=len(actual) or set(actual)!=expected:errors.append('Raw judge IDs are missing, unexpected or duplicated')
+    for row in records:
+        keys={'correctness','completeness','relevance'} if row.get('criterion')=='correctness' else {'faithfulness'}
+        if row.get('valid') is not True or set(row.get('scores',{}))!=keys:
+            errors.append('Invalid or incomplete raw judge record');continue
+        if any(type(v) not in {float,int} or not math.isfinite(v) or not 0<=v<=1 for v in row['scores'].values()):
+            errors.append('Non-finite or out-of-range raw judge score')
+    if not errors:
+        for metric in ['correctness','completeness','relevance','faithfulness']:
+            values=[r['scores'][metric] for r in records if metric in r['scores']]
+            reported=summary.get('metrics',{}).get(metric,{}).get('mean')
+            if not values or type(reported) not in {float,int} or not math.isfinite(reported) or abs(sum(values)/len(values)-reported)>1e-8:
+                errors.append(f'{metric}: aggregate does not match raw judgments')
+    return errors
+
 def main():
     p=argparse.ArgumentParser();p.add_argument('--candidate',type=Path,required=True);a=p.parse_args()
     policy=json.loads((PROJECT_ROOT/'evaluation/release-policy.json').read_text())
@@ -50,6 +74,10 @@ def main():
     rows=[json.loads(l) for l in (a.candidate/'cases.jsonl').read_text().splitlines()]
     judge=json.loads((a.candidate/'judge/summary.json').read_text())
     errors=assess(summary,rows,judge,policy,baseline)
+    cases=[json.loads(line) for line in (PROJECT_ROOT/'evaluation/datasets/market-agents-v1.jsonl').read_text().splitlines()]
+    if {row['case_id'] for row in rows}!={case['case_id'] for case in cases}:errors.append('Candidate IDs do not match frozen cases')
+    judgments=[json.loads(line) for line in (a.candidate/'judge/judgments.jsonl').read_text().splitlines()]
+    errors.extend(validate_judgment_records(judgments,cases,judge))
     report={'passed':not errors,'errors':errors,'dataset_sha256':policy['dataset_sha256'],'image_id':summary.get('image_id')}
     (a.candidate/'gate.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))
     return int(bool(errors))

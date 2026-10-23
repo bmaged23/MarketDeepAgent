@@ -26,3 +26,5 @@ Required repository secrets:
 Raw cases, model outputs, tokens and credentials are not uploaded as public GitHub artifacts. Only aggregate summary/gate/publication evidence is retained. Model calls incur provider usage; token counts are recorded but monetary cost is not invented.
 
 Documentation-only pushes avoid repeating live cloud evaluation and unchanged-image publication. Model/reference changes require an explicitly versioned dataset/baseline; do not silently loosen a gate or retry valid low scores to obtain a green release. See [evaluation policy](EVALUATION.md) and`evaluation/release-policy.json`.
+
+Failed-but-completed evaluations are also exported to LangSmith when their files exist, so a quality failure does not hide its traces. The failed gate still prevents all publication steps. Cancellation is respected. Artifact counters and raw judge coverage/arithmetic are both checked.

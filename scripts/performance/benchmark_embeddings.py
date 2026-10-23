@@ -10,7 +10,7 @@ def percentile(values,q):
     return values[low]+(values[high]-values[low])*(position-low)
 
 class Resources:
-    def __init__(self):self.rss=[];self.gpu=[];self.stop=threading.Event()
+    def __init__(self,sample_gpu=True):self.rss=[];self.gpu=[];self.stop=threading.Event();self.sample_gpu_enabled=sample_gpu
     def sample(self):
         while not self.stop.is_set():
             try:
@@ -25,7 +25,8 @@ class Resources:
             except (OSError,ValueError,subprocess.TimeoutExpired):pass
             self.stop.wait(.25)
     def start(self):
-        self.threads=[threading.Thread(target=self.sample,daemon=True),threading.Thread(target=self.sample_gpu,daemon=True)]
+        self.threads=[threading.Thread(target=self.sample,daemon=True)]
+        if self.sample_gpu_enabled:self.threads.append(threading.Thread(target=self.sample_gpu,daemon=True))
         for t in self.threads:t.start()
     def finish(self):
         self.stop.set()
