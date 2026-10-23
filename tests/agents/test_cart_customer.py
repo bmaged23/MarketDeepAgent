@@ -397,3 +397,42 @@ def test_product_answer_does_not_offer_already_visible_cart(customer, page, offe
         'Tell me about the product calories.', context={'page_context': {'page': page}})
     assert 'recorded calorie information' in result['answer']
     assert ('show you your cart' not in result['answer']) == offer_removed
+
+
+def test_prepare_checkout_with_placement_prohibition_is_only_a_quote(customer):
+    from app.utils.shopping_intent import explicit_shopping_intent
+    query='Prepare checkout, but do not place the order until I confirm using the checkout form.'
+    assert explicit_shopping_intent(query)=='prepare_checkout'
+    assert explicit_shopping_intent('Do not prepare checkout') is None
+    settings,items=customer
+    cart=create_runner(settings,1,LLM([]))
+    cart.tools.update_cart([{'product_id':items[0]['product_id'],'quantity':1}])
+    result=cart.run(query)
+    assert result['action']=='prepare_checkout' and result['output']['ready']
+    assert not cart.tools.order_history()
+
+
+def test_customer_passes_original_cart_action_when_search_rewrite_drops_it(customer):
+    settings,items=customer
+    cart=create_runner(settings,1,LLM([{'action':'update_cart','items':[{'product_id':items[0]['product_id'],'quantity':2}]}]))
+    calls=[]
+    original=cart.run
+    def recorded(query,**kwargs):
+        calls.append(query);return original(query,**kwargs)
+    cart.run=recorded
+    model=LLM([{'steps':['cart'],'specialist_query':'Product details only'}, {'answer':'Done'}])
+    query='Add 2 of this product as well.'
+    result=CustomerAgent(settings,CustomerTools(None,cart),model).run(query,context={'selected_product':items[0]})
+    assert calls==[query]
+    assert result['results']['cart']['output']['items'][0]['quantity']==2
+
+
+def test_review_order_status_is_not_mistaken_for_a_product_rating(customer):
+    settings,items=customer
+    cart=create_runner(settings,1,LLM([]))
+    cart.tools.update_cart([{'product_id':items[0]['product_id'],'quantity':1}])
+    quote=cart.tools.prepare_checkout()
+    order=cart.tools.complete_order({'token':quote['confirmation_token'],'confirmed':True,
+        'payment_method':'cash_on_delivery','delivery_address':'Synthetic address'})['order']
+    result=cart.run(f"Review the status of my order {order['order_id']}")
+    assert result['action']=='order_status' and result['status']=='ok'

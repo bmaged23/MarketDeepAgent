@@ -210,3 +210,36 @@ def test_large_sql_result_is_graded_in_bounded_batches(products):
     agent,_,judge,_ = runner(products,[p,coverage(True)],[[1,1],[1]],retrieval_relevance_batch_size=2)
     assert agent.run('All product information')['retrieval_ok']
     assert [len(batch) for batch in judge.calls] == [2,1]
+
+
+def test_named_sql_lookup_fills_missing_selector_from_real_catalog(products):
+    database,_,items=products
+    bread=next(p for p in items if p['name']=='Bread')
+    p={'rewritten_query':'Bread price','queries':[{'query':'Bread price','source':'sql','catalog':{'fields':['price'],'limit':1}}]}
+    agent,_,_,search=runner(products,[p,coverage(True)],[[1]])
+    result=agent.run('What is the price of Bread?')
+    assert result['retrieval_ok']
+    assert [c['product']['product_id'] for c in result['sections'][0]['chunks']]==[bread['product_id']]
+    assert result['sections'][0]['task']['catalog']['product_ids']==[bread['product_id']]
+    assert not search.calls
+
+
+def test_exact_name_resolution_does_not_guess_semantic_ids(products):
+    database,_,items=products
+    tools=RetrievalTools(database,None)
+    assert tools.resolve_named_products('Find Black Tea and Bread')==[
+        {'product_id':items[0]['product_id'],'name':'Black Tea'},
+        {'product_id':items[2]['product_id'],'name':'Bread'}]
+    assert tools.resolve_named_products('a warm drink')==[]
+
+
+def test_literal_resolver_retains_duplicate_names_instead_of_guessing_one_id(products):
+    database,service,items=products
+    duplicate=service.create({'name':'Black Tea','description':'Different pack','price':99,'stock_quantity':4,'category_id':1})['product']
+    tools=RetrievalTools(database,None)
+    matches=tools.resolve_named_products('Black Tea price')
+    assert {p['product_id'] for p in matches}=={items[0]['product_id'],duplicate['product_id']}
+    p={'rewritten_query':'Black Tea','queries':[{'query':'Black Tea','source':'sql','catalog':{'limit':1}}]}
+    agent,_,_,_=runner(products,[p,coverage(True)],[[1,1]])
+    result=agent.run('Black Tea price')
+    assert len(result['sections'][0]['chunks'])==2

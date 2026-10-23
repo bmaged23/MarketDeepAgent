@@ -7,6 +7,12 @@ import re
 
 def explicit_shopping_intent(query):
     text = query.strip().casefold()
+    # Preparing a quote remains explicit when the later clause forbids placement.
+    # This never authorizes confirmation or turns a negated checkout into an action.
+    if re.match(r'^(?:(?:can|could|would) you\s+)?(?:please\s+)?(?:prepare|start|begin)\s+(?:the\s+)?(?:checkout|check out)\b', text):
+        first_clause = re.split(r'[,;]|\bbut\b', text, maxsplit=1)[0]
+        if not re.search(r"\b(?:don't|do not|never|cancel|how|what|if|maybe)\b", first_clause):
+            return 'prepare_checkout'
     # Do not turn a negative or hypothetical request into a tool operation.
     if re.search(r"\b(?:don't|do not|never|cancel)\b", text):
         return None

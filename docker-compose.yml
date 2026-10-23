@@ -1,11 +1,26 @@
-# Optional: your existing Qdrant container can be used instead.
-# This service uses port 6335 to avoid colliding with the existing container on 6333.
 services:
-  market-qdrant:
-    image: qdrant/qdrant:v1.17.0
+  market:
+    image: bmaged23/market-deep-agent:cpu
+    env_file: .env
+    environment:
+      DATABASE_PATH: /app/storage/products.db
+      QDRANT_URL: http://qdrant:6333
+      EMBEDDING_CACHE_DIR: /opt/model-cache
+      EMBEDDING_DEVICE: cpu
+      EMBEDDING_MODEL: BAAI/bge-large-en-v1.5
+      EMBEDDING_REVISION: d4aa6901d3a41ba39fb536a557fa166f842b0e09
     ports:
-      - "127.0.0.1:6335:6333"
+      - "127.0.0.1:8600:8600"
     volumes:
-      - market-qdrant-data:/qdrant/storage
+      - market-data:/app/storage
+    depends_on:
+      - qdrant
+    restart: unless-stopped
+  qdrant:
+    image: qdrant/qdrant@sha256:b7b0444c4c351c970b98e90a6f89c2ee4287c65b44e52b4cb503fa5b2aa927ad
+    volumes:
+      - market-vectors:/qdrant/storage
+    restart: unless-stopped
 volumes:
-  market-qdrant-data:
+  market-data:
+  market-vectors:

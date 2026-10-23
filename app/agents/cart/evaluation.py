@@ -16,13 +16,14 @@ CASES = ("view_empty", "add_products", "change_quantity", "remove_product", "cle
 
 
 
-def evaluate_cases(settings, selected, offline=False):
+def evaluate_cases(settings, selected, offline=False, query_override=None):
     reports = []
     for case_id in selected:
         records = []
         try:
             with evaluation_catalog(settings) as (isolated, _, products):
                 query, decision, context, validate = cart_scenario(isolated, products, case_id)
+                query = query_override or query
                 llm = ScriptedLLM([decision]) if offline else OllamaClient(isolated)
                 runner = trace_cart(create_runner(isolated, 1, llm), records)
                 row = record_case(case_id, query, lambda: runner.run(query, evidence=context), validate, records)

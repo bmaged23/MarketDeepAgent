@@ -47,6 +47,21 @@ class RetrievalAgent:
                  "products": [chunk["product"] for chunk in section["chunks"] if chunk["approval"] == 1]}
                 for section in sections if any(chunk["approval"] == 1 for chunk in section["chunks"])]
 
+    def _resolve_selectors(self, tasks):
+        result = []
+        for task in tasks:
+            catalog = task.catalog or CatalogQuery()
+            if (task.source in {'sql','both'} and not catalog.all_matches and catalog.offset == 0
+                and not catalog.product_ids and not catalog.name_contains
+                and catalog.min_calories is None and catalog.max_calories is None):
+                named = self.tools.resolve_named_products(task.query)
+                if named and len(named) <= 100:
+                    task = task.model_copy(update={'catalog':catalog.model_copy(update={
+                        'product_ids':[p['product_id'] for p in named],
+                        'limit':max(catalog.limit,len(named))})})
+            result.append(task)
+        return result
+
     def run(self, query):
         query = RetrievalRequest(query=query).query
         settings = self.settings
@@ -55,9 +70,10 @@ class RetrievalAgent:
                          "max_queries": settings.retrieval_max_searches,
                          "catalog_query_schema": CatalogQuery.model_json_schema(),
                          "product_output_schema": ProductEvidence.model_json_schema(),
-                         "sql_max_results": settings.retrieval_sql_max_results}, RetrievalPlan,
+                         "sql_max_results": settings.retrieval_sql_max_results,
+                         "known_named_products": self.tools.resolve_named_products(query)}, RetrievalPlan,
                         settings.retrieval_json_retries)
-        initial_tasks = self._expand(plan.queries)
+        initial_tasks = self._expand(self._resolve_selectors(plan.queries))
         pending, visited, sections, trace = list(initial_tasks), set(), [], []
         complete, missing, stop_reason = False, [], "round_limit"
         for round_number in range(1, settings.retrieval_max_rounds + 1):
@@ -159,7 +175,7 @@ class RetrievalAgent:
             if complete:
                 stop_reason = "complete"
                 break
-            pending.extend(self._expand(coverage.followup_queries))
+            pending.extend(self._expand(self._resolve_selectors(coverage.followup_queries)))
             if len(visited) >= settings.retrieval_max_searches:
                 stop_reason = "search_limit"
                 break

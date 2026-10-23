@@ -1,0 +1,108 @@
+name: Evaluate candidate image and publish
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'UI/**'
+      - 'products/**'
+      - 'data/**'
+      - 'scripts/**'
+      - '!scripts/**/*.md'
+      - 'tests/**'
+      - 'evaluation/**'
+      - '!evaluation/**/*.md'
+      - '!evaluation/results/**'
+      - 'evaluation/results/source-baseline.json'
+      - 'requirements/**'
+      - 'requirements*.txt'
+      - 'docker/**'
+      - 'docker-compose.yml'
+      - 'pyproject.toml'
+      - '.dockerignore'
+      - '.env.example'
+      - '.github/workflows/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: market-image-release
+  cancel-in-progress: false
+jobs:
+  offline:
+    uses: ./.github/workflows/checks.yml
+  evaluate-and-publish:
+    needs: offline
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
+      LANGSMITH_API_KEY: ${{ secrets.LANGSMITH_API_KEY }}
+      LANGSMITH_ENDPOINT: https://eu.api.smith.langchain.com
+      MARKET_CANDIDATE: market-deep-agent:candidate-cpu
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements/evaluation.txt
+      - name: Install pinned orchestration and judge tools
+        run: |
+          python -m pip install -r requirements/evaluation.txt
+          python -m pip check
+      - uses: docker/setup-buildx-action@v3
+      - name: Build candidate without publishing
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile
+          build-args: DEVICE=cpu
+          platforms: linux/amd64
+          load: true
+          tags: market-deep-agent:candidate-cpu
+          labels: org.opencontainers.image.revision=${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=min
+      - name: Evaluate all 100 cases inside the actual candidate image
+        run: python -m scripts.release.evaluate_image --image "$MARKET_CANDIDATE" --output .evaluation-local/candidate
+      - name: Judge every coordinator and journey answer separately
+        run: |
+          python -m scripts.evaluation.judge_answers \
+            --input .evaluation-local/candidate/cases.jsonl \
+            --output .evaluation-local/candidate/judge --workers 3
+      - name: Enforce coverage, per-agent quality and critical checks
+        run: python -m scripts.evaluation.check_gate --candidate .evaluation-local/candidate
+      - name: Store per-agent and tool traces in LangSmith
+        run: |
+          python -m scripts.evaluation.export_langsmith \
+            --input .evaluation-local/candidate \
+            --project "market-image-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+      - name: Test real API, embeddings, checkout and persistence
+        run: python -m scripts.release.smoke_image --image "$MARKET_CANDIDATE"
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Publish exactly the gated image
+        run: |
+          python -m scripts.release.publish_image \
+            --candidate "$MARKET_CANDIDATE" --evaluation .evaluation-local/candidate \
+            --repository bmaged23/market-deep-agent --commit "$GITHUB_SHA"
+      - name: Pull the published image and repeat its checks
+        run: |
+          docker pull "bmaged23/market-deep-agent:sha-${GITHUB_SHA}"
+          python -m scripts.release.smoke_image --image "bmaged23/market-deep-agent:sha-${GITHUB_SHA}"
+      - name: Save aggregate evidence only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-release-${{ github.sha }}
+          path: |
+            .evaluation-local/candidate/summary.json
+            .evaluation-local/candidate/judge/summary.json
+            .evaluation-local/candidate/gate.json
+            .evaluation-local/candidate/langsmith.json
+            .evaluation-local/candidate/publication.json
+          if-no-files-found: warn
+          retention-days: 30

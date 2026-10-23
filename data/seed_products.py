@@ -10,11 +10,11 @@ import random
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from app.config import PROJECT_ROOT
+from app.config import PROJECT_ROOT, get_settings
 from app.database.connection import migrate
 from app.products.nutrition import apply_catalog_nutrition
 
-DB_PATH = Path(__file__).parent / "products.db"
+DB_PATH = get_settings().database_path
 
 IMAGE_PROMPT_TEMPLATE = (
     "Professional advertisement-style product photography of {name}, placed on "

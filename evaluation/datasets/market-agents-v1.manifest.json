@@ -1,0 +1,18 @@
+{
+  "version": "market-agents-v1",
+  "seed": 20261023,
+  "cases": 100,
+  "counts": {
+    "retrieval": 30,
+    "cart": 25,
+    "customer": 25,
+    "journey": 20
+  },
+  "dataset_sha256": "3b9604166dd7c409789361a4c6a9de611e6b40293485d58c5ba60216ac9814c8",
+  "catalog_sha256": "1d06619dcec6bb0f7879f4fcd668d2604ae349ae2d6f843a8c4d298954b66cf7",
+  "embedding_model": "BAAI/bge-large-en-v1.5",
+  "embedding_revision": "d4aa6901d3a41ba39fb536a557fa166f842b0e09",
+  "provenance": "Existing starter retrieval labels plus mechanically frozen synthetic workflow expectations from the seeded SQL catalog; not real shoppers or independent human gold.",
+  "split": "Exposed regression set; no untouched held-out accuracy claim.",
+  "reference_policy": "Freeze before live evaluation; product_id is stable evidence identity, runtime chunk labels are not gold. SQL rows/constraints and business state are checked independently of prose."
+}

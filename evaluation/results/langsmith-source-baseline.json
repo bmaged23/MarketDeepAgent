@@ -1,0 +1,9 @@
+{
+  "dataset": "market-agents-v1-3b9604166dd7",
+  "project": "market-source-baseline-20261023",
+  "project_id": "36fe5927-bf67-4fe6-b64b-1ad6b2e17c2c",
+  "cases_uploaded": 100,
+  "endpoint": "https://eu.api.smith.langchain.com",
+  "verified_root_cases": 100,
+  "project_url": "https://eu.smith.langchain.com/o/01cb8af4-5866-49ad-bca6-26844f87da18/projects/p/36fe5927-bf67-4fe6-b64b-1ad6b2e17c2c"
+}

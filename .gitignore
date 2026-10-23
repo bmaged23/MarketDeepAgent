@@ -58,3 +58,10 @@ notes.txt
 
 # Private local context for coding assistants
 /description/
+
+# Local caches, evaluation evidence and release scratch data
+.cache/
+.evaluation-local/
+.release-local/
+/reports/
+/tmp/

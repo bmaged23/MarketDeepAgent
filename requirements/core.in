@@ -1,0 +1,6 @@
+fastapi==0.143.0
+pydantic-settings==2.15.0
+httpx==0.28.1
+qdrant-client==1.19.1
+email-validator==2.3.0
+uvicorn==0.54.0

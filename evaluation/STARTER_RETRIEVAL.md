@@ -1,6 +1,6 @@
 # Retrieval evaluation dataset
 
-`search_evaluation.json` contains 48 English, manually authored cases for the current
+`datasets/search-starter-v1.json` contains 48 English, manually authored cases for the current
 100-product catalog. It is a starter benchmark, not observed customer traffic or
 human-reviewed ground truth. Review the labels before drawing product decisions.
 

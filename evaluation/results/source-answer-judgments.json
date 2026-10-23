@@ -1,0 +1,35 @@
+{
+  "judge_model": "gemma4:31b",
+  "expected_answers": 145,
+  "expected_judgments": 290,
+  "completed_judgments": 290,
+  "valid_judgments": 290,
+  "metrics": {
+    "correctness": {
+      "mean": 0.8879310344827587,
+      "scored_answers": 145,
+      "expected_answers": 145
+    },
+    "completeness": {
+      "mean": 0.9172413793103448,
+      "scored_answers": 145,
+      "expected_answers": 145
+    },
+    "relevance": {
+      "mean": 0.9517241379310345,
+      "scored_answers": 145,
+      "expected_answers": 145
+    },
+    "faithfulness": {
+      "mean": 0.9482758620689655,
+      "scored_answers": 145,
+      "expected_answers": 145
+    }
+  },
+  "limitations": [
+    "LLM-rubric scores require human calibration; no independent human adjudication.",
+    "Correctness receives frozen references; faithfulness receives only actual tool outputs.",
+    "Invalid/schema/transient requests retry at most3; valid low scores are never retried.",
+    "A missing answer is a failed workflow case, not a successful judge score; inspect coverage separately."
+  ]
+}

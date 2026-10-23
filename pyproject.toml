@@ -6,11 +6,11 @@ build-backend = "setuptools.build_meta"
 name = "market-deep-agent"
 version = "0.1.0"
 description = "Multi-agent grocery marketplace with hybrid retrieval and customer-scoped ordering"
-requires-python = ">=3.13,<3.14"
+requires-python = ">=3.12,<3.14"
 dynamic = ["dependencies"]
 
 [tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
+dependencies = {file = ["requirements/core.in"]}
 
 [tool.setuptools.packages.find]
 include = ["app*"]

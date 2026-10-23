@@ -18,6 +18,21 @@ class CartAgent:
         cart = self.tools.view_cart()
         evidence = evidence or {}
         intent = explicit_shopping_intent(query)
+        # Delivery eligibility is an owned SQL fact, not something to ask the shopper
+        # to attest to. Fetch only the requested order and do not send its address.
+        import re
+        order_match = re.search(r"\border\s*#?\s*(\d+)\b", query, re.I)
+        requested_order = None
+        if order_match and re.search(r"\b(?:rate|rating|comment)\b|\b(?:submit|post|leave|write)\b.*\breview\b", query, re.I):
+            try:
+                order = self.tools.order_status(int(order_match.group(1)))
+            except ServiceError:
+                return {"status": "validation_failed", "action": "review_product",
+                        "reason": "Order not found for this customer"}
+            if not order["review_eligible"]:
+                return {"status": "validation_failed", "action": "review_product",
+                        "reason": "Reviews are allowed only after delivery"}
+            requested_order = {k: order[k] for k in ("order_id", "status", "review_eligible", "items")}
         if intent in {"prepare_checkout", "order_history", "view_cart"}:
             # Current explicit read/quote operations never authorize a cart write.
             decision = CartDecision(action=intent)
@@ -28,6 +43,7 @@ class CartAgent:
         else:
             decision = ask_json(self.llm, load_prompt("cart"),
                 {"request": query, "cart": cart, "catalog_evidence": evidence,
+                 "requested_order": requested_order,
                  "conversation_history": history or []}, CartDecision, self.settings.cart_json_retries)
         if decision.action == "clarify":
             return {"status": "needs_clarification", "question": decision.clarification, "cart": cart}

@@ -1,0 +1,14 @@
+{
+  "dataset_version": "market-agents-v1",
+  "dataset_sha256": "3b9604166dd7c409789361a4c6a9de611e6b40293485d58c5ba60216ac9814c8",
+  "cases": 100,
+  "counts": {"retrieval": 30, "cart": 25, "customer": 25, "journey": 20},
+  "minimum_scope_pass_rates": {"retrieval": 0.87, "cart": 0.89, "customer": 0.89, "journey": 0.87},
+  "baseline": "evaluation/results/source-baseline.json",
+  "maximum_absolute_scope_regression": 0.03,
+  "expected_answer_judgments": 145,
+  "minimum_answer_scores": {"correctness": 0.80, "completeness": 0.80, "relevance": 0.85, "faithfulness": 0.90},
+  "critical_journey_checks": ["cross_customer_checkout_blocked", "cross_customer_order_blocked", "idempotent_checkout", "stock_deducted_once", "unpaid_cash_on_delivery"],
+  "critical_no_false_checks": ["stock_not_deducted_by_cart_action", "no_unconfirmed_orders", "no_unconfirmed_order", "no_other_customer_mutation", "no_early_stock_deduction", "answer_model_excludes_checkout_token"],
+  "note": "Operational regression policy frozen before the full candidate run; not a statistical significance threshold. Missing cases/checks/judgments block release."
+}

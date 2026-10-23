@@ -39,9 +39,18 @@ def ask_json(client, system_prompt, payload, schema, retries=1):
         except (ValidationError, AttributeError, TypeError) as error:
             issues = []
             if isinstance(error, ValidationError):
-                for issue in error.errors(include_input=False, include_context=False, include_url=False)[:5]:
+                for issue in error.errors(include_input=False, include_context=True, include_url=False)[:5]:
                     # Only known schema locations/types, never customer data or raw model output.
                     issues.append({"field": ".".join(str(part) if isinstance(part, int) or part in known_fields else "<unknown-field>" for part in issue['loc']), "type": issue['type']})
+                    # Cross-field validators have no useful field path. Explain only
+                    # allowlisted static rules; never echo arbitrary exception text.
+                    rules = {
+                        "Catalog selection requires source=sql or both": "For source=hybrid omit catalog or set it to null; catalog selections require source=sql or both.",
+                        "Completed retrieval cannot request more searches or claim missing information": "When retrieval_ok=true, followup_queries and missing_information must both be empty.",
+                    }
+                    message = str((issue.get('ctx') or {}).get('error', ''))
+                    if message in rules:
+                        issues[-1]['rule'] = rules[message]
             details = json.dumps(issues, separators=(",", ":"))
             if attempt == retries:
                 raise StructuredResponseError(f"{schema.__name__} response validation failed: {details}") from None

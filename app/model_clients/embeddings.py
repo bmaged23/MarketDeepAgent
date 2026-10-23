@@ -4,9 +4,10 @@ from threading import Lock
 class BGEEmbeddings:
     QUERY_INSTRUCTION = "Represent this sentence for searching relevant passages: "
 
-    def __init__(self, model_name, dimension=1024, device="cpu", batch_size=32, cache_dir=None):
+    def __init__(self, model_name, dimension=1024, device="cpu", batch_size=32, cache_dir=None, revision=None):
         self.model_name, self.dimension, self.device = model_name, dimension, device
         self.batch_size, self.cache_dir = batch_size, cache_dir
+        self.revision = revision
         self._model = None
         self._lock = Lock()
 
@@ -14,7 +15,8 @@ class BGEEmbeddings:
         with self._lock:
             if self._model is None:
                 from sentence_transformers import SentenceTransformer
-                model = SentenceTransformer(self.model_name, device=self.device, cache_folder=str(self.cache_dir) if self.cache_dir else None)
+                model = SentenceTransformer(self.model_name, device=self.device, revision=self.revision,
+                    cache_folder=str(self.cache_dir) if self.cache_dir else None)
                 if model.get_sentence_embedding_dimension() != self.dimension:
                     raise ValueError("Configured embedding dimension does not match model")
                 self._model = model

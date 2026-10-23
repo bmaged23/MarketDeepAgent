@@ -39,11 +39,11 @@ def traced_retrieval(settings, products, records, offline, search):
     runner.llm = RecordedClient(runner.llm, records, {"chat"}, "retrieval")
     runner.judge.llm = runner.llm
     runner.judge = RecordedClient(runner.judge, records, {"grade"}, "retrieval")
-    runner.tools = RecordedClient(runner.tools, records, {"categories", "search_products", "query_products", "product_details", "compare_products"}, "retrieval")
+    runner.tools = RecordedClient(runner.tools, records, {"categories", "resolve_named_products", "search_products", "query_products", "product_details", "compare_products"}, "retrieval")
     return runner
 
 
-def evaluate_cases(settings, selected, offline=False, embeddings=None, vectors=None):
+def evaluate_cases(settings, selected, offline=False, embeddings=None, vectors=None, query_override=None):
     reports = []
     for case_id in selected:
         records = []
@@ -58,6 +58,7 @@ def evaluate_cases(settings, selected, offline=False, embeddings=None, vectors=N
                     mapped = {"view_cart": "view_empty", "confirmed_checkout": "prepare_checkout"}.get(case_id, case_id)
                     query, decision, _, validate_cart = cart_scenario(isolated, products, mapped)
                     steps = ["retrieval", "cart"] if case_id == "add_products" else ["cart"]
+                query = query_override or query
                 search = None if offline else create_search_service(isolated, embeddings, vectors)
                 retrieval = traced_retrieval(isolated, products, records, offline, search)
                 cart_llm = ScriptedLLM([decision, decision]) if offline else OllamaClient(isolated)

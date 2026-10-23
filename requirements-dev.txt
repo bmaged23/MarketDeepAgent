@@ -1,5 +1,2 @@
-# Test tooling; runtime environment is pinned separately.
--r requirements.txt
-pytest==9.0.2
-iniconfig==2.1.0
-pluggy==1.6.0
+# Lightweight offline test environment; no CUDA download required.
+-r requirements/dev.txt

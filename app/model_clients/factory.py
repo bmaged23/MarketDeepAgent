@@ -4,7 +4,8 @@ from app.product_search.vector_index import QdrantProductIndex
 
 def embedding_client(settings):
     return BGEEmbeddings(settings.embedding_model, settings.embedding_dim,
-        settings.embedding_device, settings.embedding_batch_size, settings.embedding_cache_dir)
+        settings.embedding_device, settings.embedding_batch_size, settings.embedding_cache_dir,
+        revision=settings.embedding_revision)
 
 
 def vector_index(settings):

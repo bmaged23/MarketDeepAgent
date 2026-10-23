@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" viewBox="0 0 1000 440" role="img" aria-labelledby="title desc">
+<title id="title">Measured MarketDeepAgent BGE performance</title><desc id="desc">Warm embedding latency and peak process RAM on identical queries. Batch timing is amortized per query.</desc>
+<rect width="1000" height="440" rx="18" fill="#0f172a"/>
+<g font-family="Arial,sans-serif" fill="#f1f5f9"><text x="30" y="38" font-size="23">MarketDeepAgent · measured embedding performance</text>
+<text x="30" y="66" font-size="14" fill="#cbd5e1">BGE-large-en-v1.5 · 60 encodings/configuration · GTX 1660 Ti · FP32</text>
+<text x="30" y="112" font-size="19">Warm median / query</text>
+<text x="30" y="148" font-size="14">CPU · batch 1</text><rect x="30" y="158" width="311.67" height="22" rx="4" fill="#94a3b8"/><text x="349.67" y="175" font-size="13">231.53 ms</text>
+<text x="30" y="223" font-size="14">GPU · batch 1</text><rect x="30" y="233" width="32.13" height="22" rx="4" fill="#38bdf8"/><text x="70.13" y="250" font-size="13">23.87 ms</text>
+<text x="30" y="298" font-size="14">GPU · batch 8</text><rect x="30" y="308" width="8.73" height="22" rx="4" fill="#34d399"/><text x="46.73" y="325" font-size="13">6.48 ms</text>
+<text x="520" y="112" font-size="19">Peak process RAM</text>
+<text x="520" y="148" font-size="14">CPU · batch 1</text><rect x="520" y="158" width="252.43" height="22" rx="4" fill="#94a3b8"/><text x="780.43" y="175" font-size="13">1586.72 MiB</text>
+<text x="520" y="223" font-size="14">GPU · batch 1</text><rect x="520" y="233" width="312.54" height="22" rx="4" fill="#38bdf8"/><text x="840.54" y="250" font-size="13">1964.51 MiB</text>
+<text x="520" y="298" font-size="14">GPU · batch 8</text><rect x="520" y="308" width="308.05" height="22" rx="4" fill="#34d399"/><text x="836.05" y="325" font-size="13">1936.30 MiB</text>
+<text x="30" y="405" font-size="13" fill="#cbd5e1">Batch 8 = throughput measurement, not interactive response time. RAM = sampled process RSS.</text></g></svg>

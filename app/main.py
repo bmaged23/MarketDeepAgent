@@ -43,6 +43,27 @@ def create_app(settings=None, embeddings=None, vectors=None, memory_vectors=None
             memory_vectors.close()
 
     app = FastAPI(title="SmartCart API", lifespan=lifespan)
+    @app.get("/healthz", include_in_schema=False)
+    def health():
+        # Process liveness only; this does not certify cloud credentials or retrieval.
+        return {"status": "ok"}
+
+    @app.get("/readyz", include_in_schema=False)
+    def ready():
+        # Verify actual local inference/storage; cloud account access is tested separately.
+        try:
+            from app.database.connection import connection
+            with connection(settings.database_path) as conn:
+                count = conn.execute("SELECT COUNT(*) FROM product").fetchone()[0]
+            info = vectors.client.get_collection(settings.qdrant_collection)
+            vector = embeddings.encode_query("catalog readiness")
+            if count < 1 or (info.points_count or 0) < count or len(vector) != settings.embedding_dim:
+                raise ValueError("Catalog or vector index is incomplete")
+            return {"status": "ready", "products": count, "embedding_device": settings.embedding_device,
+                    "cloud_credentials_configured": bool(settings.ollama_api_key.get_secret_value())}
+        except Exception:
+            return JSONResponse(status_code=503, content={"status": "not_ready"})
+
     @app.exception_handler(ServiceError)
     async def service_error_handler(request, error):
         return JSONResponse(status_code=error.status_code, content={"detail": error.detail})

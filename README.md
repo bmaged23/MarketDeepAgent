@@ -12,254 +12,165 @@ MarketDeepAgent is a grocery marketplace with an AI shopping assistant. A custom
 
 ![System architecture](docs/assets/architecture.svg)
 
-## What works
+## What it does
 
-- 100 seeded products across six categories, with images and explicitly estimated calories.
-- Right-side assistant panel, safe Markdown replies, product cards, navigation and shared SQL cart updates. Enter sends; Shift+Enter adds a line.
-- Retrieval agent: rewrite/split → hybrid and/or structured SQL search → batch relevance approval → completeness check → follow-up searches or done.
-- Cart agent: customer-scoped cart validation, quotes, order history, shipping status and verified product reviews.
-- Customer coordinator: conversation, specialist delegation, page context, grounded replies and typed UI actions.
-- Cookie sessions, CSRF checks, per-customer conversations and optional long-term preference memory in a separate Qdrant collection.
-- Explicit checkout confirmation, cash on delivery, atomic stock deduction and duplicate-checkout protection.
+The customer coordinator delegates product research to the retrieval agent and shopping operations to the cart agent. Retrieval combines SQLite FTS5/BM25, BGE/Qdrant vectors and validated structured catalog queries. SQLite is authoritative for prices, stock, carts and orders. No model-authored raw SQL is executed.
 
-Payment gateway integration and automatic carrier tracking are not implemented. A pending order means it is waiting for fulfillment; unpaid cash-on-delivery does not block fulfillment. Calories are food-type estimates, not verified manufacturer labels.
+Customers can research products, compare prices and nutrition, navigate the store, adjust carts and request checkout. An authenticated confirmation form creates orders atomically and prevents duplicate stock deductions. Conversation history and explicit owner-filtered preference memory are separate. Payment gateways and automatic carrier tracking are not implemented; prices, calories and ratings in the seeded catalog are demonstration estimates.
 
-## Clone to launch
+## Models and hardware
 
-The pinned environment was captured from **CPython 3.13.16 on Linux x86_64**, including all installed transitive and CUDA libraries. Use Ubuntu/WSL with Python 3.13 and Docker with the Compose plugin. The exact snapshot is substantial: allow several GB for dependencies and about 1.3 GB for the embedding model, plus Docker storage. The default embedding device is CPU; the snapshot still includes the installed CUDA packages.
+| Component | Configuration |
+|---|---|
+| Agent LLM | `gpt-oss:120b` on Ollama Cloud |
+| Answer judge | `gemma4:31b` on Ollama Cloud; separate correctness and faithfulness calls |
+| Local embeddings | `BAAI/bge-large-en-v1.5`, normalized 1024 dimensions |
+| Model revision | `d4aa6901d3a41ba39fb536a557fa166f842b0e09` |
+| Native GPU runtime | PyTorch 2.6.0+cu124, sentence-transformers 5.1.2, Transformers 4.57.6 |
+| Portable image | Linux amd64, Python 3.12.15, CPU embeddings and bundled model/catalog |
 
-### 1. Clone and create the environment
+Native GPU inference was verified on a GTX 1660 Ti with 6 GB VRAM and driver 560.76. The portable image uses CPU; a GPU container is not certified. Cloud LLM weights do not consume local RAM/VRAM. Budget at least 8 GB available RAM and 8 GB free disk for CPU, with more space for CUDA libraries. Hardware and platform compatibility are limited to the routes actually verified.
+
+## Measured performance
+
+![CPU/GPU embedding measurements](docs/performance/embedding-comparison.svg)
+
+| BGE configuration | Warm median/query | Warm p95 | Queries/s | Peak process RAM | Peak CUDA allocation |
+|---|---:|---:|---:|---:|---:|
+| CPU, batch 1 | 231.53 ms | 290.12 ms | 4.27 | 1586.7 MiB | — |
+| GPU, batch 1 | 23.87 ms | 41.51 ms | 36.82 | 1964.5 MiB | 1288.9 MiB |
+| GPU, batch 8 | 6.48 ms | 8.25 ms | 147.17 | 1936.3 MiB | 1293.6 MiB |
+
+The same 20 queries were encoded three times per configuration. GPU single-query median was **9.70× faster**. Batch 8 is an amortized throughput benchmark, not interactive response latency or a claim that the UI batches eight shoppers. These worker measurements are separate from whole-agent performance. [CPU/RAM/VRAM, cloud bottleneck, token usage and reproduction](docs/PERFORMANCE.md).
+
+## Agent evaluation
+
+A frozen **100-scenario** regression dataset covers 30 retrieval cases, 25 cart cases, 25 coordinator cases and 20 six-turn shopping journeys. References precede model execution: stable product IDs, catalog facts, constraints, initial states, expected actions and expected cart/order effects. Intermediate decisions, tool inputs/outputs, filters, SQL evidence and database changes are checked alongside final answers.
+
+The original source/GPU baseline passed **91/100** workflows: retrieval 27/30, cart 23/25, coordinator 23/25, journeys 18/20. Direct hybrid retrieval on the 30 starter-labelled questions achieved recall/MRR/nDCG@5 of 1.0 and precision@5 of 0.2467. Sparse positive labels and known-catalog questions limit interpretation; this is not universal perfect search accuracy.
+
+Baseline judging covered **145 replies and 290 valid assessments**: correctness **88.79%**, completeness **91.72%**, relevance **95.17%**, faithfulness **94.83%**. These are normalized rubric means, not percentages of conversations passed. The set is synthetic and source-validated, not independently human-adjudicated traffic. Valid low scores are retained.
+
+Baseline failures informed fixes for retrieval planning, review context, checkout routing and original cart instructions during delegation. Final candidate results are recorded separately. **Release evaluation runs inside the built Docker image before publication**, using isolated SQL and Qdrant. [Methodology](docs/EVALUATION.md) · [Frozen references](evaluation/README.md) · [Release evidence](docs/RELEASE_VERIFICATION.md).
+
+## Docker: pull, configure and run
+
+Publication is verified only when recorded in the release evidence. The intended public image is `bmaged23/market-deep-agent:cpu`. No repository clone, compilation or Python installation is needed for this route.
+
+Download the two small configuration files:
+
+```bash
+mkdir market-deep-agent
+cd market-deep-agent
+curl -fL https://raw.githubusercontent.com/bmaged23/MarketDeepAgent/main/docker-compose.yml -o docker-compose.yml
+curl -fL https://raw.githubusercontent.com/bmaged23/MarketDeepAgent/main/.env.example -o .env
+```
+
+Edit `.env`: provide `OLLAMA_API_KEY` and an account-accessible `OLLAMA_MODEL`. Generate `ADMIN_API_KEY` if you need administration endpoints. Then:
+
+```bash
+docker compose pull
+docker compose up -d
+docker compose logs -f market
+```
+
+The image includes pinned BGE weights, product images and the 100-product seed. On first start it initializes an empty catalog and indexes it; existing nonempty catalogs are preserved. Open **http://localhost:8600**, register and sign in. API documentation is at **http://localhost:8600/docs**. `/healthz` checks liveness; `/readyz` checks local catalog/index/inference, not cloud account access.
+
+Try “Find apples and apple juice,” add an identified product, inspect your cart and request checkout. A chat reply alone cannot confirm an order.
+
+```bash
+# Stop while keeping persistent data:
+docker compose down
+# Update:
+docker compose pull
+docker compose up -d
+```
+
+Avoid `down -v` unless you intend to delete stored data. [Docker details and troubleshooting](docs/DOCKER.md).
+
+## Source installation, including GPU
+
+Use Ubuntu/WSL, Python 3.12 and Docker Compose. No frontend npm build is required.
 
 ```bash
 git clone https://github.com/bmaged23/MarketDeepAgent.git
 cd MarketDeepAgent
-python3.13 -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
+
+# CPU:
 python -m pip install -r requirements.txt
+# Or use this instead for a compatible CUDA 12.4 GPU:
+# python -m pip install --extra-index-url https://download.pytorch.org/whl/cu124 -r requirements/gpu.txt
 python -m pip check
-```
-
-If Python 3.13 is not installed, an existing [uv installation](https://docs.astral.sh/uv/getting-started/installation/) can create the tested interpreter/environment instead:
-
-```bash
-uv python install 3.13.16
-uv venv --python 3.13.16 --seed .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-```
-
-### 2. Configure the application
-
-```bash
 cp .env.example .env
-python -c 'import secrets; print(secrets.token_urlsafe(32))'
 ```
 
-Edit `.env`. Set your `OLLAMA_API_KEY` and use the generated value as `ADMIN_API_KEY`. Leave `OLLAMA_MODEL=gpt-oss:120b`, `OLLAMA_BASE_URL=https://ollama.com`, and the default BGE model/dimension unless you intend to reindex. No Venice/Jev account is needed.
-
-For the bundled Compose service, set:
-
-```dotenv
-QDRANT_URL=http://localhost:6335
-```
-
-### 3. Start Qdrant
+Set your cloud key in `.env`, set `QDRANT_URL=http://localhost:6335`, and choose `EMBEDDING_DEVICE=cuda` for GPU or `cpu` for CPU. Source inference downloads the pinned BGE model once; Docker already bundles it.
 
 ```bash
-docker compose up -d
-curl --fail http://localhost:6335/collections
-```
-
-Compose uses port **6335**, bound to loopback, and a named volume. If you already run Qdrant on **6333**, skip Compose and keep `QDRANT_URL=http://localhost:6333` instead. Do not change the URL after indexing unless the other instance has the same collection.
-
-### 4. Create and index the demo catalog
-
-```bash
+docker compose -f docker/compose.storage.yml up -d
 python data/seed_products.py
 python -m app.product_indexing.commands index-all
 python -m app.product_indexing.commands process --limit 100 --force
 python -m app.product_indexing.commands status
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8600
 ```
 
-The seed command applies all migrations, creates 100 products with stable seed IDs, links the supplied images, and fills demo nutrition. It does not create customer accounts or sample orders and does not duplicate existing product names. The runtime database is intentionally excluded from Git.
+A fresh seed/index should report 100 done and 0 failed. In a second activated terminal run `python -m app.product_indexing.commands watch` to synchronize catalog changes. Each process loads its own model only when needed.
 
-SQLite triggers maintain BM25 immediately and enqueue Qdrant work. The first vector indexing run downloads the BGE model; it can take time. Expect `done: 100, failed: 0, skipped: 0` on a fresh catalog and job counts showing 100 done. If jobs fail, resolve the reported dependency/service issue and rerun `process --force` before evaluating semantic search.
-
-### 5. Open the marketplace
+## Tests and CI/CD
 
 ```bash
-python -m uvicorn app.main:app --host 127.0.0.1 --port 8600 --reload
-```
-
-Open **http://127.0.0.1:8600**. Create a customer account, sign in, and click **AI assistant** on the right. API documentation is at **http://127.0.0.1:8600/docs**.
-
-Try: “Show me apples and apple juice,” “Add it to my cart,” “Show my cart,” and “I want to checkout my cart.” Checkout requires the displayed quote, delivery address and explicit confirmation; a chat reply alone cannot authorize payment/order completion.
-
-In a second terminal, keep product vectors synchronized after catalog or stock changes:
-
-```bash
-cd MarketDeepAgent
-source .venv/bin/activate
-python -m app.product_indexing.commands watch
-```
-
-The compatibility entry point `UI.backend.main:app` remains available; prefer `app.main:app`. Frontend files are served by FastAPI; no frontend build or npm installation is required.
-
-## Architecture and data
-
-| Component | Responsibility |
-| --- | --- |
-| Customer agent | Chat, page context, specialist routing, grounded answers and typed UI actions |
-| Retrieval agent | Rewrite/split, search, batched approval, coverage and follow-up subqueries |
-| Cart agent | Owned cart/order tools, validation and checkout preparation |
-| SQLite | Authoritative products, categories, stock, customers, carts, quotes, orders, reviews, sessions, conversations and memories |
-| SQLite FTS5 | Persistent BM25 documents synchronized by triggers |
-| Qdrant `market_products` | Derived product vectors; point ID equals SQL product_id and category_id is shared |
-| Qdrant `customer_memories` | Separate owner-filtered, versioned memory vectors; point ID equals SQL memory_id |
-| BGE | Local normalized 1024-dimensional document/query embeddings |
-| Ollama Cloud | Planning, rewriting, batched relevance approval, coverage checking and replies |
-
-Hybrid scores use min-max normalization per candidate list:
-
-```text
-score = 0.30 × normalized_BM25 + 0.70 × normalized_vector_similarity
-```
-
-The retrieval agent defaults to top-3 per hybrid query. SQL selection supports validated filters and field projections, with paginated coverage for whole-category questions. No model-authored SQL is executed. Search refreshes prices, stock and requested product facts from SQL; Qdrant payloads are derived data.
-
-Runtime retrieval evidence stays in memory/API responses. Evaluation reports may be saved. Conversation messages/summaries and explicit customer preference memory persist separately, under the customer's account. Memory recall checks vector owner/model/version filters and then SQL ownership/active/version again.
-
-See the [migration-generated ERD](docs/database.md), [full-size schema SVG](docs/assets/database-erd.svg) and [interactive docs](docs/README.md).
-
-## Configuration
-
-`.env.example` contains the public configuration template; `app/config.py` validates all settings. Never commit `.env`. Important defaults:
-
-| Setting | Default |
-| --- | --- |
-| `OLLAMA_MODEL` | `gpt-oss:120b` |
-| `EMBEDDING_MODEL` / `EMBEDDING_DIM` | `BAAI/bge-large-en-v1.5` / `1024` |
-| `DATABASE_PATH` | `data/products.db` |
-| `QDRANT_URL` | `http://localhost:6333` (use 6335 for bundled Compose) |
-| `BM25_WEIGHT` / `VECTOR_WEIGHT` | `0.3` / `0.7` |
-| `RETRIEVAL_RESULTS_PER_QUERY` | `3` |
-| `RETRIEVAL_MAX_ROUNDS` / `RETRIEVAL_MAX_SEARCHES` | `3` / `8` |
-| `RETRIEVAL_SQL_MAX_RESULTS` | `100` |
-| `CART_QUOTE_TTL_SECONDS` | `900` |
-| `MEMORY_COLLECTION` | `customer_memories` |
-| `CUSTOMER_RECEIPT_MAX_ITEMS` | `10` |
-
-Administration endpoints require `X-Admin-Key`. The default cookie configuration is for local HTTP development. Public deployment needs HTTPS and `SESSION_COOKIE_SECURE=true`.
-
-## Index operations
-
-```bash
-# Keyword-only rebuild (no embedding download required)
-python -m app.product_indexing.commands rebuild-bm25
-
-# Detect missing/stale vectors and remove orphan product points
-python -m app.product_indexing.commands reconcile
-python -m app.product_indexing.commands process --limit 100 --force
-
-# Retry queued customer-memory changes
-python -m app.customer_memory.commands --limit 100
-```
-
-Product writes commit to SQL and queue asynchronous vector work. Failed jobs retry with backoff. Changing embedding dimensions needs a new collection; changing the model/document format needs reindexing. Use product services and migrations rather than directly editing search tables or revisions.
-
-## Tests and evaluation
-
-```bash
+# Lightweight test environment; no model/CUDA download:
 python -m pip install -r requirements-dev.txt
 python -m pytest -q
-
-# Requires Node.js 24; no npm packages required
+# Node.js 24; no npm packages needed:
 node --test --test-isolation=none tests/frontend/*.test.cjs
-
-# Actual workflow with scripted decisions/local test vectors
-python -m app.agents.customer.journey_evaluation --offline --repetitions 3
-
-# Live Ollama + hybrid/SQL search; isolated synthetic customers/orders
-python -m app.agents.customer.journey_evaluation --repetitions 1
-
-# Per-agent tool input/output reports
-python -m app.agents.retrieval.evaluation --max-cases 3
-python -m app.agents.cart.evaluation
-python -m app.agents.customer.evaluation
 ```
 
-Evaluation JSON files are saved under **`data/evaluation_reports/`**, excluded from Git. Runtime customer retrieval output is not saved there. Live shopping journeys copy catalog data into temporary SQL and use synthetic customers; they do not create real customer orders or shared memory writes. Offline runs check workflow, not LLM or semantic search quality.
+CI checks Python 3.12/3.13, frontend behavior, generated diagrams, frozen references and publication boundaries. Trusted code pushes follow:
 
-For vanilla retrieval baselines and weighted combinations:
+**Tests → build candidate → 100 cases inside that image → separate answer judges → coverage/quality/safety gate → container/persistence checks → publish exact gated image → pull and test again.**
 
-```bash
-python -m app.product_search.evaluation --sweep --split tune --limit 5 \
-  --weights 0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1 \
-  --output data/evaluation_reports/retrieval_vanila.json
-```
+The seeded catalog and bundled model support GitHub-hosted CPU evaluation without access to a laptop database. Keys are encrypted GitHub secrets. Pull requests get offline tests without publishing credentials. Documentation-only pushes avoid another live release. Image delivery is separate from hosting a public website. [CI/CD and quality policy](docs/CI_CD.md).
 
-GitHub Actions checks source syntax, migration-derived diagram freshness, publication exclusions and the 21 frontend/platform/architecture/video checks. Run the full Python suite locally with the pinned test requirements; CI does not install the large CUDA snapshot.
+## Important settings
 
-The latest reviewed live journey passed **19/19 checks** and placed two synthetic orders, including stock/idempotence/ownership checks and complete snack calorie answers. This is a small test run, not a claim of comprehensive model quality or a visual browser audit.
+| Setting | Default / purpose |
+|---|---|
+| `OLLAMA_MODEL`, `OLLAMA_TIMEOUT_SECONDS` | `gpt-oss:120b`, 120 seconds per call |
+| `EMBEDDING_DEVICE`, `EMBEDDING_BATCH_SIZE` | `cpu`, 32; choose `cuda` for native GPU |
+| `BM25_WEIGHT`, `VECTOR_WEIGHT` | 0.30 / 0.70, per-list min-max normalization |
+| `RETRIEVAL_RESULTS_PER_QUERY` | 3 hybrid results per query |
+| `RETRIEVAL_MAX_ROUNDS`, `RETRIEVAL_MAX_SEARCHES` | 3 rounds, 8 searches |
+| `RETRIEVAL_SQL_MAX_RESULTS` | 100 rows per SQL page |
+| `RETRIEVAL_JSON_RETRIES` | 1 schema repair; no retry of a valid low-quality answer |
+| `CART_QUOTE_TTL_SECONDS` | 900; stale/changed quotes cannot confirm checkout |
+| `CUSTOMER_HISTORY_MESSAGES` | 20; explicit preference memory remains separately owner-filtered |
+| `SESSION_COOKIE_SECURE` | false for local HTTP; enable with HTTPS deployment |
 
-## Real storefront demo and animated diagrams
+See `app/config.py` and `.env.example`. Administration requires `X-Admin-Key`. Orders use cash on delivery and remain unpaid pending fulfillment.
 
-The generated presentation was removed. The replacement records the **actual marketplace browser UI and live multi-agent interactions**, using a temporary catalog-only database and a fictional customer.
-
-```bash
-source .venv/bin/activate
-npm --prefix docs install
-npm --prefix docs run install-browser
-python docs/record_storefront.py
-```
-
-The recorder shows signup and login at a readable pace, researches prices and nutrition, opens and buys five products (apples, tea, whole wheat bread, Greek yogurt and mixed nuts), changes quantities, confirms one synthetic order and visits order history/profile/settings. Output: **`docs/assets/storefront-tour.mp4`**. It needs working Ollama, BGE and Qdrant. Long waiting periods are trimmed; model replies and rendered screens are never substituted. A failed action aborts the recording rather than claiming success. No real customer/order/stock or shared memory changes occur. Node recording dependencies are separate from the Python environment.
-
-**The actual storefront recording is available:** the completed run produced a 1440×900 H.264 MP4, approximately 5 minutes 52 seconds, using the real UI and live agents with one synthetic order. See [recording details](docs/README.md), including browser dependencies and headed mode.
-
-To view the video and moving architecture/ERD diagrams:
-
-```bash
-python docs/generate.py
-python -m http.server 8700 --bind 127.0.0.1 --directory docs
-```
-
-Open **http://127.0.0.1:8700**. The demo page shows the real MP4 once it exists, with fullscreen and direct playback controls. The [manual recorder](docs/record.html) is also available. The static docs are suitable for GitHub Pages; the marketplace itself needs the Python backend and services.
-
-## Project layout
+## Project organization
 
 ```text
-app/
-  agents/{customer,retrieval,cart}/  # Each: agent.py, tools.py, prompts/
-  assistant/                       # Authenticated chat orchestration/API
-  application_guide/               # Page registry and app help
-  authentication/                  # Sessions, identity, CSRF
-  products/, cart/, orders/         # Marketplace business features
-  customers/, product_reviews/
-  product_search/                  # BM25, vector adapter, fusion, evaluation
-  product_indexing/                # Durable vector jobs and CLI
-  customer_memory/, conversations/
-  model_clients/                   # Ollama and BGE clients
-  database/migrations/             # Single source of schema truth
-  utils/                           # Shared helpers
-UI/frontend/                       # HTML, CSS and browser JavaScript
-UI/backend/                        # Compatibility entry point
-products/images/                   # Product image assets
-data/                              # Seed/catalog data and evaluation datasets
-                                   # Runtime database/cache/reports are ignored
-docs/                              # Diagrams, ERD, demo and recorder
-tests/                            # Feature tests and frontend DOM tests
+app/                         Feature services, API routes and agent roles
+  agents/{customer,retrieval,cart}/
+  model_clients/             Cloud LLM and local BGE adapters
+  product_search/            BM25, Qdrant and fusion
+  product_indexing/          Durable synchronization jobs
+  database/migrations/      Authoritative SQL schema
+UI/frontend/                 Storefront HTML/CSS/JavaScript
+UI/backend/                  Compatibility entry point
+products/images/             Seeded product assets
+data/                        Catalog seed/nutrition/pricing; runtime files ignored
+requirements/                CPU/GPU/dev/evaluation locks and maintainer inputs
+evaluation/{datasets,results}/
+scripts/{evaluation,performance,release,runtime}/
+docker/                      Dockerfile and storage-only Compose configuration
+docs/                        Guides, demo, animated architecture and measured charts
+tests/                       Python/frontend regressions
 ```
 
-Empty `__init__.py` files are intentional Python package markers. `description/` is private, Git-ignored context maintained for coding assistants. The seeded catalog and public docs contain no customer accounts, checkout tokens or private model credentials.
-
-## Publish the demo with GitHub Pages
-
-After pushing the repository, open **Settings → Pages → Build and deployment**:
-
-1. Choose **Deploy from a branch** under Source.
-2. Choose branch **main** and folder **/docs**.
-3. Click **Save**, then wait for the Pages deployment to finish under **Actions**.
-4. Open **https://bmaged23.github.io/MarketDeepAgent/demo.html**.
-
-The README video preview opens that hosted video page; the architecture is at the site root. `docs/.nojekyll` serves these static files directly. These links require the one-time Pages setting above.
+Private `description/`, databases, full traces and model caches remain ignored. [Documentation index](docs/README.md) · [Script guide](scripts/README.md) · [Dependency guide](requirements/README.md).

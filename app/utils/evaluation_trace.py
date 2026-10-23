@@ -3,6 +3,7 @@ import json
 import httpx
 from pydantic import BaseModel
 from time import perf_counter
+from datetime import datetime, timezone
 
 
 def _structured_argument(value):
@@ -29,12 +30,16 @@ class RecordedClient:
             # Freeze inputs before a JSON repair mutates its message list.
             row["input"] = json.loads(json.dumps(row["input"], default=_structured_argument))
             self.records.append(row)
+            row['started_at'] = datetime.now(timezone.utc).isoformat()
             started = perf_counter()
             try:
                 result = method(*args, **kwargs)
                 # Exclude model reasoning and transport metadata.
                 row["output"] = ({"content": result.get("message", {}).get("content")}
                                  if name == "chat" else result)
+                if name == "chat":
+                    row["usage"] = {"input_tokens": result.get("prompt_eval_count"),
+                                    "output_tokens": result.get("eval_count")}
                 row["status"] = "ok"
                 return result
             except Exception as exc:
@@ -55,5 +60,6 @@ class RecordedClient:
                 raise
             finally:
                 row["duration_seconds"] = round(perf_counter() - started, 4)
+                row['ended_at'] = datetime.now(timezone.utc).isoformat()
         return recorded
 

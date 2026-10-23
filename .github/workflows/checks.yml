@@ -1,40 +1,53 @@
-name: Source and documentation checks
+name: Application tests and publication hygiene
 on:
   push:
   pull_request:
   workflow_dispatch:
+  workflow_call:
 permissions:
   contents: read
 jobs:
-  source-and-docs:
+  application:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    strategy:
+      matrix:
+        python: ['3.12', '3.13']
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version: ${{ matrix.python }}
+          cache: pip
+          cache-dependency-path: requirements/dev.txt
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Check Python syntax and migration-derived diagrams
+      - name: Install pinned offline dependencies
         run: |
-          python -m compileall -q app data docs
+          python -m pip install -r requirements-dev.txt
+          python -m pip check
+      - name: Run actual Python tests
+        run: python -m pytest -q
+      - name: Validate source and generated diagrams
+        run: |
+          python -m compileall -q app data scripts docs
           python docs/generate.py
           git diff --exit-code -- docs/assets/architecture*.svg docs/assets/database-erd.svg docs/database.md
-      - name: Check JavaScript and frontend behavior
+      - name: Frontend behavior and syntax
         run: |
           for file in UI/frontend/js/*.js docs/*.js docs/*.mjs; do node --check "$file"; done
           node --test --test-isolation=none tests/frontend/*.test.cjs
-      - name: Check whitespace and publication files
+      - name: Verify publication boundaries and dependency pins
         run: |
           git diff --check
           python - <<'PY'
           import subprocess
           from pathlib import Path
-          tracked = subprocess.check_output(['git', 'ls-files'], text=True).splitlines()
-          forbidden = [p for p in tracked if p == '.env' or p.endswith(('.db', '.sqlite', '.sqlite3')) or p.startswith(('description/', 'data/evaluation_reports/', '.venv/'))]
-          assert not forbidden, f'Runtime/private files tracked: {forbidden}'
-          pins = [line for line in Path('requirements.txt').read_text().splitlines() if line and not line.startswith('#')]
-          assert all('==' in line and ' @ ' not in line for line in pins)
+          tracked=subprocess.check_output(['git','ls-files'],text=True).splitlines()
+          forbidden=[p for p in tracked if p=='.env' or p.endswith(('.db','.sqlite','.sqlite3')) or p.startswith(('description/','data/evaluation_reports/','.venv/','.release-local/','.evaluation-local/','.cache/','data/model_cache/'))]
+          assert not forbidden, forbidden
+          for filename in ['runtime.txt','gpu.txt','evaluation.txt']:
+              lines=Path('requirements',filename).read_text().splitlines()
+              assert all('==' in line for line in lines if line and line[0].isalnum())
           PY

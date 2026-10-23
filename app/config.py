@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     ollama_model: str = "gpt-oss:120b"
     ollama_base_url: str = "https://ollama.com"
     embedding_model: str = "BAAI/bge-large-en-v1.5"
+    embedding_revision: str = "d4aa6901d3a41ba39fb536a557fa166f842b0e09"
     embedding_dim: int = Field(default=1024, gt=0)
     embedding_device: str = "cpu"
     database_path: Path = PROJECT_ROOT / "data/products.db"

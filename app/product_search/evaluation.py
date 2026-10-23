@@ -85,7 +85,7 @@ def main():
     from app.model_clients.factory import embedding_client,vector_index
     from app.product_search.service import create_search_service
     parser = argparse.ArgumentParser(description="Compare retrieval against a small labeled catalog query set")
-    parser.add_argument("--cases", type=Path, default=PROJECT_ROOT/"data/search_evaluation.json")
+    parser.add_argument("--cases", type=Path, default=PROJECT_ROOT/"evaluation/datasets/search-starter-v1.json")
     parser.add_argument("--modes", nargs="+", choices=["bm25","vector","hybrid"], default=["bm25","vector","hybrid"])
     parser.add_argument("--limit", type=int, default=5)
     parser.add_argument("--sweep", action="store_true", help="Compare BM25/vector weights from 0/100 to 100/0")

@@ -89,11 +89,13 @@ class CustomerAgent:
                 evidence = self.tools.retrieve_products(specialist_query)
                 results[step] = evidence
             else:
-                results[step] = self.tools.manage_cart(specialist_query, evidence=evidence, history=history)
+                # A search rewrite can drop "add" or a quantity. The cart specialist
+                # receives the authoritative current request and resolved evidence.
+                results[step] = self.tools.manage_cart(query, evidence=evidence, history=history)
                 if results[step].get("status") == "needs_retrieval" and evidence is None:
                     evidence = self.tools.retrieve_products(specialist_query)
                     results["retrieval"] = evidence
-                    results[step] = self.tools.manage_cart(specialist_query, evidence=evidence, history=history)
+                    results[step] = self.tools.manage_cart(query, evidence=evidence, history=history)
         # Keep checkout authorization tokens outside customer-facing LLM context.
         payload = json.loads(json.dumps(results))
         if "retrieval" in payload:

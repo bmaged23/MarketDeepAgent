@@ -1,0 +1,756 @@
+{
+  "embedding_configurations": {
+    "cpu-batch1": {
+      "device": "cpu",
+      "batch_size": 1,
+      "encodings": 60,
+      "warm_batches": 60,
+      "cold_first_query_seconds": 9.882206256999893,
+      "warm_median_ms": 231.52994599996646,
+      "warm_p95_ms": 290.1192371000206,
+      "warm_std_ms": 43.23012523875478,
+      "throughput_queries_per_second": 4.269924204215347,
+      "warm_process_cpu_percent_one_core_100": 197.6205089033468,
+      "logical_cpu_count": 12,
+      "peak_process_rss_mib": 1586.72265625,
+      "cuda_peak_allocated_mib": null,
+      "cuda_peak_reserved_mib": null,
+      "whole_device_peak_vram_mib": 26.0,
+      "whole_device_peak_utilization_percent": 0.0,
+      "torch": "2.6.0+cpu",
+      "model": "BAAI/bge-large-en-v1.5",
+      "revision": "d4aa6901d3a41ba39fb536a557fa166f842b0e09",
+      "gpu": null,
+      "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+      "timings": [
+        {
+          "queries": 1,
+          "seconds": 0.2600015140000096,
+          "amortized_ms": 260.0015140000096
+        },
+        {
+          "queries": 1,
+          "seconds": 0.26640953799994804,
+          "amortized_ms": 266.40953799994804
+        },
+        {
+          "queries": 1,
+          "seconds": 0.22640206599999146,
+          "amortized_ms": 226.40206599999146
+        },
+        {
+          "queries": 1,
+          "seconds": 0.20811131300001762,
+          "amortized_ms": 208.11131300001762
+        },
+        {
+          "queries": 1,
+          "seconds": 0.16840394799999103,
+          "amortized_ms": 168.40394799999103
+        },
+        {
+          "queries": 1,
+          "seconds": 0.18103979099998924,
+          "amortized_ms": 181.03979099998924
+        },
+        {
+          "queries": 1,
+          "seconds": 0.17648410399999648,
+          "amortized_ms": 176.48410399999648
+        },
+        {
+          "queries": 1,
+          "seconds": 0.19595447899996543,
+          "amortized_ms": 195.95447899996543
+        },
+        {
+          "queries": 1,
+          "seconds": 0.20468036300007952,
+          "amortized_ms": 204.68036300007952
+        },
+        {
+          "queries": 1,
+          "seconds": 0.1981394110000565,
+          "amortized_ms": 198.1394110000565
+        },
+        {
+          "queries": 1,
+          "seconds": 0.23233304999996562,
+          "amortized_ms": 232.33304999996562
+        },
+        {
+          "queries": 1,
+          "seconds": 0.197042429000021,
+          "amortized_ms": 197.042429000021
+        },
+        {
+          "queries": 1,
+          "seconds": 0.2615335179999647,
+          "amortized_ms": 261.5335179999647
+        },
+        {
+          "queries": 1,
+          "seconds": 0.2118468280000343,
+          "amortized_ms": 211.8468280000343
+        },
+        {
+          "queries": 1,
+          "seconds": 0.23181461100000433,
+          "amortized_ms": 231.81461100000433
+        },
+        {
+          "queries": 1,
+          "seconds": 0.28356615299992427,
+          "amortized_ms": 283.56615299992427
+        },
+        {
+          "queries": 1,
+          "seconds": 0.2681186059999163,
+          "amortized_ms": 268.1186059999163
+        },
+        {
+          "queries": 1,
+          "seconds": 0.26096047499993347,
+          "amortized_ms": 260.96047499993347
+        },
+        {
+          "queries": 1,
+          "seconds": 0.2574380129999554,
+          "amortized_ms": 257.4380129999554
+        },
+        {
+          "queries": 1,
+          "seconds": 0.4476328340000464,
+          "amortized_ms": 447.6328340000464
+        },
+        {
+          "queries": 1,
+          "seconds": 0.2837188639999795,
+          "amortized_ms": 283.7188639999795
+        },
+        {
+          "queries": 1,
+          "seconds": 0.30958978500007106,
+          "amortized_ms": 309.58978500007106
+        },
+        {
+          "queries": 1,
+          "seconds": 0.289346882000018,
+          "amortized_ms": 289.346882000018
+        },
+        {
+          "queries": 1,
+          "seconds": 0.230906842999957,
+          "amortized_ms": 230.906842999957
+        },
+        {
+          "queries": 1,
+          "seconds": 0.2473562639999045,
+          "amortized_ms": 247.3562639999045
+        },
+        {
+          "queries": 1,
+          "seconds": 0.2583406799999466,
+          "amortized_ms": 258.3406799999466
+        },
+        {
+          "queries": 1,
+          "seconds": 0.2559186999999383,
+          "amortized_ms": 255.91869999993833
+        },
+        {
+          "queries": 1,
+          "seconds": 0.27823035599999457,
+          "amortized_ms": 278.2303559999946
+        },
+        {
+          "queries": 1,
+          "seconds": 0.22981186200001957,
+          "amortized_ms": 229.81186200001957
+        },
+        {
+          "queries": 1,
+          "seconds": 0.27756724400001076,
+          "amortized_ms": 277.56724400001076
+        },
+        {
+          "queries": 1,
+          "seconds": 0.21561594199999945,
+          "amortized_ms": 215.61594199999945
+        },
+        {
+          "queries": 1,
+          "seconds": 0.18132370099999662,
+          "amortized_ms": 181.32370099999662
+        },
+        {
+          "queries": 1,
+          "seconds": 0.20038178000004336,
+          "amortized_ms": 200.38178000004336
+        },
+        {
+          "queries": 1,
+          "seconds": 0.24331388300004164,
+          "amortized_ms": 243.31388300004164
+        },
+        {
+          "queries": 1,
+          "seconds": 0.20937505300003068,
+          "amortized_ms": 209.37505300003068
+        },
+        {
+          "queries": 1,
+          "seconds": 0.24064670200004912,
+          "amortized_ms": 240.64670200004912
+        },
+        {
+          "queries": 1,
+          "seconds": 0.19840381999995316,
+          "amortized_ms": 198.40381999995316
+        },
+        {
+          "queries": 1,
+          "seconds": 0.23180923400002484,
+          "amortized_ms": 231.80923400002484
+        },
+        {
+          "queries": 1,
+          "seconds": 0.21591245100000833,
+          "amortized_ms": 215.91245100000833
+        },
+        {
+          "queries": 1,
+          "seconds": 0.2308276039999555,
+          "amortized_ms": 230.8276039999555
+        },
+        {
+          "queries": 1,
+          "seconds": 0.2405879930000765,
+          "amortized_ms": 240.5879930000765
+        },
+        {
+          "queries": 1,
+          "seconds": 0.24720532800006367,
+          "amortized_ms": 247.20532800006367
+        },
+        {
+          "queries": 1,
+          "seconds": 0.21784457899991594,
+          "amortized_ms": 217.84457899991594
+        },
+        {
+          "queries": 1,
+          "seconds": 0.19917531300006885,
+          "amortized_ms": 199.17531300006885
+        },
+        {
+          "queries": 1,
+          "seconds": 0.19792096799994852,
+          "amortized_ms": 197.92096799994852
+        },
+        {
+          "queries": 1,
+          "seconds": 0.17108091000000059,
+          "amortized_ms": 171.08091000000059
+        },
+        {
+          "queries": 1,
+          "seconds": 0.20878825599993434,
+          "amortized_ms": 208.78825599993434
+        },
+        {
+          "queries": 1,
+          "seconds": 0.23493388999997933,
+          "amortized_ms": 234.93388999997933
+        },
+        {
+          "queries": 1,
+          "seconds": 0.23125065799990807,
+          "amortized_ms": 231.25065799990807
+        },
+        {
+          "queries": 1,
+          "seconds": 0.20204961499996443,
+          "amortized_ms": 202.04961499996443
+        },
+        {
+          "queries": 1,
+          "seconds": 0.26384332199995697,
+          "amortized_ms": 263.84332199995697
+        },
+        {
+          "queries": 1,
+          "seconds": 0.2364847449999843,
+          "amortized_ms": 236.4847449999843
+        },
+        {
+          "queries": 1,
+          "seconds": 0.23545950900006574,
+          "amortized_ms": 235.45950900006574
+        },
+        {
+          "queries": 1,
+          "seconds": 0.17550616699998045,
+          "amortized_ms": 175.50616699998045
+        },
+        {
+          "queries": 1,
+          "seconds": 0.23472338199997012,
+          "amortized_ms": 234.72338199997012
+        },
+        {
+          "queries": 1,
+          "seconds": 0.20652197499998692,
+          "amortized_ms": 206.52197499998692
+        },
+        {
+          "queries": 1,
+          "seconds": 0.30479398400007085,
+          "amortized_ms": 304.79398400007085
+        },
+        {
+          "queries": 1,
+          "seconds": 0.24507255199989686,
+          "amortized_ms": 245.07255199989686
+        },
+        {
+          "queries": 1,
+          "seconds": 0.22154931199997918,
+          "amortized_ms": 221.54931199997918
+        },
+        {
+          "queries": 1,
+          "seconds": 0.21038551300000563,
+          "amortized_ms": 210.38551300000563
+        }
+      ],
+      "notes": [
+        "Same20 queries repeated3times; one warmup excluded from latency statistics.",
+        "Batch timing is amortized per query, not interactive request latency.",
+        "RSS/whole-deviceGPU sampled50/250ms; peaks are observed, not continuous guarantees.",
+        "CPU100% means one occupied core; device GPU figures include other processes."
+      ]
+    },
+    "cuda-batch1": {
+      "device": "cuda",
+      "batch_size": 1,
+      "encodings": 60,
+      "warm_batches": 60,
+      "cold_first_query_seconds": 8.72221204199991,
+      "warm_median_ms": 23.870744500015917,
+      "warm_p95_ms": 41.510650799983715,
+      "warm_std_ms": 9.296388465601195,
+      "throughput_queries_per_second": 36.823593577525756,
+      "warm_process_cpu_percent_one_core_100": 100.71427141796225,
+      "logical_cpu_count": 12,
+      "peak_process_rss_mib": 1964.5078125,
+      "cuda_peak_allocated_mib": 1288.93505859375,
+      "cuda_peak_reserved_mib": 1312.0,
+      "whole_device_peak_vram_mib": 1427.0,
+      "whole_device_peak_utilization_percent": 38.0,
+      "torch": "2.6.0+cu124",
+      "model": "BAAI/bge-large-en-v1.5",
+      "revision": "d4aa6901d3a41ba39fb536a557fa166f842b0e09",
+      "gpu": "NVIDIA GeForce GTX 1660 Ti",
+      "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+      "timings": [
+        {
+          "queries": 1,
+          "seconds": 0.020691195000040352,
+          "amortized_ms": 20.691195000040352
+        },
+        {
+          "queries": 1,
+          "seconds": 0.020785494999927323,
+          "amortized_ms": 20.785494999927323
+        },
+        {
+          "queries": 1,
+          "seconds": 0.020089496000082363,
+          "amortized_ms": 20.089496000082363
+        },
+        {
+          "queries": 1,
+          "seconds": 0.02031359500006147,
+          "amortized_ms": 20.31359500006147
+        },
+        {
+          "queries": 1,
+          "seconds": 0.02998529400008465,
+          "amortized_ms": 29.98529400008465
+        },
+        {
+          "queries": 1,
+          "seconds": 0.020094294999921658,
+          "amortized_ms": 20.094294999921658
+        },
+        {
+          "queries": 1,
+          "seconds": 0.03326159200003076,
+          "amortized_ms": 33.26159200003076
+        },
+        {
+          "queries": 1,
+          "seconds": 0.040849590999982865,
+          "amortized_ms": 40.849590999982865
+        },
+        {
+          "queries": 1,
+          "seconds": 0.02900479400000222,
+          "amortized_ms": 29.00479400000222
+        },
+        {
+          "queries": 1,
+          "seconds": 0.03430719199991472,
+          "amortized_ms": 34.30719199991472
+        },
+        {
+          "queries": 1,
+          "seconds": 0.024385093999967467,
+          "amortized_ms": 24.385093999967467
+        },
+        {
+          "queries": 1,
+          "seconds": 0.02898179400006029,
+          "amortized_ms": 28.98179400006029
+        },
+        {
+          "queries": 1,
+          "seconds": 0.039707390999979,
+          "amortized_ms": 39.707390999979
+        },
+        {
+          "queries": 1,
+          "seconds": 0.031333893000009994,
+          "amortized_ms": 31.333893000009994
+        },
+        {
+          "queries": 1,
+          "seconds": 0.03763889100002871,
+          "amortized_ms": 37.63889100002871
+        },
+        {
+          "queries": 1,
+          "seconds": 0.060141487000009874,
+          "amortized_ms": 60.141487000009874
+        },
+        {
+          "queries": 1,
+          "seconds": 0.0636548859999948,
+          "amortized_ms": 63.654885999994804
+        },
+        {
+          "queries": 1,
+          "seconds": 0.054070787000000564,
+          "amortized_ms": 54.070787000000564
+        },
+        {
+          "queries": 1,
+          "seconds": 0.03290969300007873,
+          "amortized_ms": 32.90969300007873
+        },
+        {
+          "queries": 1,
+          "seconds": 0.025890593999974953,
+          "amortized_ms": 25.890593999974953
+        },
+        {
+          "queries": 1,
+          "seconds": 0.028237893999971675,
+          "amortized_ms": 28.237893999971675
+        },
+        {
+          "queries": 1,
+          "seconds": 0.02367269399996985,
+          "amortized_ms": 23.67269399996985
+        },
+        {
+          "queries": 1,
+          "seconds": 0.024716994999948838,
+          "amortized_ms": 24.716994999948838
+        },
+        {
+          "queries": 1,
+          "seconds": 0.020963595000011992,
+          "amortized_ms": 20.963595000011992
+        },
+        {
+          "queries": 1,
+          "seconds": 0.02531009400001949,
+          "amortized_ms": 25.31009400001949
+        },
+        {
+          "queries": 1,
+          "seconds": 0.02012899599992579,
+          "amortized_ms": 20.12899599992579
+        },
+        {
+          "queries": 1,
+          "seconds": 0.021563294999964455,
+          "amortized_ms": 21.563294999964455
+        },
+        {
+          "queries": 1,
+          "seconds": 0.025100694000002477,
+          "amortized_ms": 25.100694000002477
+        },
+        {
+          "queries": 1,
+          "seconds": 0.020428196000011667,
+          "amortized_ms": 20.428196000011667
+        },
+        {
+          "queries": 1,
+          "seconds": 0.020225395000011304,
+          "amortized_ms": 20.225395000011304
+        },
+        {
+          "queries": 1,
+          "seconds": 0.018948895999983506,
+          "amortized_ms": 18.948895999983506
+        },
+        {
+          "queries": 1,
+          "seconds": 0.020005294999918988,
+          "amortized_ms": 20.005294999918988
+        },
+        {
+          "queries": 1,
+          "seconds": 0.021341196000093987,
+          "amortized_ms": 21.341196000093987
+        },
+        {
+          "queries": 1,
+          "seconds": 0.01940039499993418,
+          "amortized_ms": 19.40039499993418
+        },
+        {
+          "queries": 1,
+          "seconds": 0.021313895000048433,
+          "amortized_ms": 21.313895000048433
+        },
+        {
+          "queries": 1,
+          "seconds": 0.02010779600004753,
+          "amortized_ms": 20.10779600004753
+        },
+        {
+          "queries": 1,
+          "seconds": 0.023292295000032937,
+          "amortized_ms": 23.292295000032937
+        },
+        {
+          "queries": 1,
+          "seconds": 0.021010495000041374,
+          "amortized_ms": 21.010495000041374
+        },
+        {
+          "queries": 1,
+          "seconds": 0.020111094999947454,
+          "amortized_ms": 20.111094999947454
+        },
+        {
+          "queries": 1,
+          "seconds": 0.02065889599998627,
+          "amortized_ms": 20.65889599998627
+        },
+        {
+          "queries": 1,
+          "seconds": 0.021883594999962952,
+          "amortized_ms": 21.883594999962952
+        },
+        {
+          "queries": 1,
+          "seconds": 0.03234259199996359,
+          "amortized_ms": 32.34259199996359
+        },
+        {
+          "queries": 1,
+          "seconds": 0.027455993999979,
+          "amortized_ms": 27.455993999979
+        },
+        {
+          "queries": 1,
+          "seconds": 0.02949399400006314,
+          "amortized_ms": 29.49399400006314
+        },
+        {
+          "queries": 1,
+          "seconds": 0.027907992999985254,
+          "amortized_ms": 27.907992999985254
+        },
+        {
+          "queries": 1,
+          "seconds": 0.026920493999909922,
+          "amortized_ms": 26.920493999909922
+        },
+        {
+          "queries": 1,
+          "seconds": 0.029855693000058636,
+          "amortized_ms": 29.855693000058636
+        },
+        {
+          "queries": 1,
+          "seconds": 0.035951791999991656,
+          "amortized_ms": 35.951791999991656
+        },
+        {
+          "queries": 1,
+          "seconds": 0.030213593999974364,
+          "amortized_ms": 30.213593999974364
+        },
+        {
+          "queries": 1,
+          "seconds": 0.0330101920000061,
+          "amortized_ms": 33.0101920000061
+        },
+        {
+          "queries": 1,
+          "seconds": 0.033585392999953,
+          "amortized_ms": 33.585392999953
+        },
+        {
+          "queries": 1,
+          "seconds": 0.023193493999997372,
+          "amortized_ms": 23.193493999997372
+        },
+        {
+          "queries": 1,
+          "seconds": 0.024068795000061982,
+          "amortized_ms": 24.068795000061982
+        },
+        {
+          "queries": 1,
+          "seconds": 0.021735895000006167,
+          "amortized_ms": 21.735895000006167
+        },
+        {
+          "queries": 1,
+          "seconds": 0.02072899500001313,
+          "amortized_ms": 20.72899500001313
+        },
+        {
+          "queries": 1,
+          "seconds": 0.021032396000009612,
+          "amortized_ms": 21.032396000009612
+        },
+        {
+          "queries": 1,
+          "seconds": 0.020984594999958972,
+          "amortized_ms": 20.984594999958972
+        },
+        {
+          "queries": 1,
+          "seconds": 0.021447695000006206,
+          "amortized_ms": 21.447695000006206
+        },
+        {
+          "queries": 1,
+          "seconds": 0.022297594999940884,
+          "amortized_ms": 22.297594999940884
+        },
+        {
+          "queries": 1,
+          "seconds": 0.019695795000075123,
+          "amortized_ms": 19.695795000075123
+        }
+      ],
+      "notes": [
+        "Same20 queries repeated3times; one warmup excluded from latency statistics.",
+        "Batch timing is amortized per query, not interactive request latency.",
+        "RSS/whole-deviceGPU sampled50/250ms; peaks are observed, not continuous guarantees.",
+        "CPU100% means one occupied core; device GPU figures include other processes."
+      ]
+    },
+    "cuda-batch8": {
+      "device": "cuda",
+      "batch_size": 8,
+      "encodings": 60,
+      "warm_batches": 8,
+      "cold_first_query_seconds": 7.712232836999988,
+      "warm_median_ms": 6.484093249987666,
+      "warm_p95_ms": 8.245630456255526,
+      "warm_std_ms": 0.9215189427629894,
+      "throughput_queries_per_second": 147.16941052013456,
+      "warm_process_cpu_percent_one_core_100": 106.21267866531784,
+      "logical_cpu_count": 12,
+      "peak_process_rss_mib": 1936.3046875,
+      "cuda_peak_allocated_mib": 1293.5732421875,
+      "cuda_peak_reserved_mib": 1316.0,
+      "whole_device_peak_vram_mib": 1431.0,
+      "whole_device_peak_utilization_percent": 27.0,
+      "torch": "2.6.0+cu124",
+      "model": "BAAI/bge-large-en-v1.5",
+      "revision": "d4aa6901d3a41ba39fb536a557fa166f842b0e09",
+      "gpu": "NVIDIA GeForce GTX 1660 Ti",
+      "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+      "timings": [
+        {
+          "queries": 8,
+          "seconds": 0.06768940300003123,
+          "amortized_ms": 8.461175375003904
+        },
+        {
+          "queries": 8,
+          "seconds": 0.0627626620000683,
+          "amortized_ms": 7.845332750008538
+        },
+        {
+          "queries": 8,
+          "seconds": 0.050460161000046355,
+          "amortized_ms": 6.307520125005794
+        },
+        {
+          "queries": 8,
+          "seconds": 0.05240951599989785,
+          "amortized_ms": 6.551189499987231
+        },
+        {
+          "queries": 8,
+          "seconds": 0.051335975999904804,
+          "amortized_ms": 6.4169969999881005
+        },
+        {
+          "queries": 8,
+          "seconds": 0.04276396099999147,
+          "amortized_ms": 5.3454951249989335
+        },
+        {
+          "queries": 8,
+          "seconds": 0.05111674700003732,
+          "amortized_ms": 6.389593375004665
+        },
+        {
+          "queries": 4,
+          "seconds": 0.029033275000074354,
+          "amortized_ms": 7.258318750018589
+        }
+      ],
+      "notes": [
+        "Same20 queries repeated3times; one warmup excluded from latency statistics.",
+        "Batch timing is amortized per query, not interactive request latency.",
+        "RSS/whole-deviceGPU sampled50/250ms; peaks are observed, not continuous guarantees.",
+        "CPU100% means one occupied core; device GPU figures include other processes."
+      ]
+    }
+  },
+  "minimum_cosine_vs_cpu": {
+    "cpu-batch1": 1.0,
+    "cuda-batch1": 1.0,
+    "cuda-batch8": 0.9999998807907104
+  },
+  "gpu_single_query_median_speedup": 9.69931817584542,
+  "source_baseline_call_analysis": {
+    "cases": 100,
+    "recorded_llm_calls": 607,
+    "calls_with_usage": 607,
+    "tokens": {
+      "input_tokens": 1523226,
+      "output_tokens": 182161
+    },
+    "sum_case_seconds": 1693.785090443,
+    "sum_recorded_llm_call_seconds": 1669.8886,
+    "llm_share_of_sum_case_time": 0.9858916632471065,
+    "scope": "Source GPU baseline; per-case durations overlap across workers and are not total experiment wall time. Cloud/network wait is included. Monetary cost not estimated without billing rates."
+  }
+}

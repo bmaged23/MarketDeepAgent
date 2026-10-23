@@ -1,3 +1,17 @@
+# Documentation guide
+
+- [Main README and installation](../README.md)
+- [Docker pull/run](DOCKER.md)
+- [Agent/SQL/answer evaluation](EVALUATION.md)
+- [Performance measurements](PERFORMANCE.md)
+- [CI/CD and release policy](CI_CD.md)
+- [Verified release status](RELEASE_VERIFICATION.md)
+- [Frozen datasets and aggregate results](../evaluation/README.md)
+
+The recording and animated architecture documentation below describes the existing storefront demonstration. New release verification is recorded separately.
+
+---
+
 # Project diagrams and actual storefront demo
 
 Serve the documentation from the repository root:

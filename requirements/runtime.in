@@ -1,0 +1,5 @@
+-r core.in
+torch==2.6.0+cpu
+sentence-transformers==5.1.2
+transformers==4.57.6
+huggingface-hub==0.36.2

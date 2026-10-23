@@ -2,6 +2,8 @@ from app.database.connection import connection
 from app.products.queries import get_product
 from app.products.catalog_query import CatalogQuery, query_catalog, project_product
 from app.product_search.schemas import SearchFilters
+from app.utils.text import normalize_text
+import re
 
 
 class RetrievalTools:
@@ -12,6 +14,27 @@ class RetrievalTools:
     def categories(self):
         with connection(self.database_path) as conn:
             return [dict(row) for row in conn.execute("SELECT category_id, name FROM category ORDER BY category_id")]
+
+    def resolve_named_products(self, query):
+        """Resolve full catalog names from request text, never guessed IDs or gold labels."""
+        text = normalize_text(query).casefold()
+        with connection(self.database_path) as conn:
+            products = [dict(row) for row in conn.execute("SELECT product_id,name FROM product")]
+        matches = []
+        for product in products:
+            name = normalize_text(product['name']).casefold()
+            for match in re.finditer(r'(?<!\w)' + re.escape(name) + r'(?!\w)', text):
+                matches.append((match.start(), match.end(), product))
+        # Prefer the longest literal name when one SKU name contains another.
+        chosen = []
+        for start, end, product in sorted(matches, key=lambda row: -(row[1]-row[0])):
+            if (not any(start < b and end > a for a,b,_ in chosen)
+                or any(start == a and end == b for a,b,_ in chosen)):
+                chosen.append((start,end,product))
+        result = {}
+        for _,_,product in sorted(chosen,key=lambda row:(row[0],row[1],row[2]['product_id'])):
+            result[product['product_id']] = product
+        return list(result.values())
 
     def search_products(self, query, category_id=None, min_price=None, max_price=None, in_stock=False, limit=None):
         filters = SearchFilters(category_id=category_id, min_price=min_price, max_price=max_price, in_stock=in_stock)

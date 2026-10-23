@@ -113,7 +113,7 @@ def evaluate_agent(runner_factory, cases, products):
 def main():
     root = Path(__file__).resolve().parents[3]
     parser = argparse.ArgumentParser(description="Test retrieval tools and agent; save inputs/outputs in a JSON report")
-    parser.add_argument("--dataset", type=Path, default=root / "data/search_evaluation.json")
+    parser.add_argument("--dataset", type=Path, default=root / "evaluation/datasets/search-starter-v1.json")
     parser.add_argument("--output", type=Path, default=root / "data/evaluation_reports/retrieval_agent.json")
     parser.add_argument("--split", choices=["all", "tune", "test"], default="all")
     parser.add_argument("--max-cases", type=int, default=3, help="Default 3; use 48 for the entire starter dataset")

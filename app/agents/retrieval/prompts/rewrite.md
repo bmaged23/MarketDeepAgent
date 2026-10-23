@@ -31,3 +31,14 @@ not just the most similar products. Do not invent an average tool: retrieve the 
 Example for snack calories (replace the ID with the supplied actual Snacks ID):
 {"rewritten_query":"snack calories","queries":[{"query":"snack calories","source":"both",
 "filters":{"category_id":4},"catalog":{"fields":["calories_per_100"],"all_matches":true,"limit":100}}]}
+
+For ordinary product discovery, prefer source="hybrid" and do not add a category
+constraint from a food-type guess. Use category filters only when explicitly requested
+or otherwise verified. Name synonyms are discovery queries, not literal SQL name filters.
+Use all_matches=true only for genuinely exhaustive/aggregate requests (all/every,
+category-wide comparisons, averages or extrema), never simply to find a named product.
+Unfiltered category SQL retrieves unrelated rows; it does not improve a focused lookup.
+
+For source="hybrid", omit catalog entirely or set catalog=null. Catalog selections
+are legal only with source="sql" or source="both". A simple hybrid lookup looks like:
+{"rewritten_query":"requested product","queries":[{"query":"requested product","source":"hybrid","filters":{}}]}
