@@ -8,7 +8,7 @@ MarketDeepAgent is a grocery marketplace with an AI shopping assistant. A custom
 
 **English · USD · Ollama Cloud · BGE embeddings · SQLite · Qdrant · BM25**
 
-[Animated architecture](https://bmaged23.github.io/MarketDeepAgent/) · [Database ERD](docs/database.md) · [Customer tour](https://bmaged23.github.io/MarketDeepAgent/demo.html) · [Recording guide](docs/record.html)
+[Evaluation results](#evaluation-results) · [Animated architecture](https://bmaged23.github.io/MarketDeepAgent/) · [Database ERD](docs/database.md) · [Customer tour](https://bmaged23.github.io/MarketDeepAgent/demo.html) · [Recording guide](docs/record.html)
 
 ![System architecture](docs/assets/architecture.svg)
 
@@ -43,15 +43,55 @@ Native GPU inference was verified on a GTX 1660 Ti with 6 GB VRAM and driver 560
 
 The same 20 queries were encoded three times per configuration. GPU single-query median was **9.70× faster**. Batch 8 is an amortized throughput benchmark, not interactive response latency or a claim that the UI batches eight shoppers. These worker measurements are separate from whole-agent performance. [CPU/RAM/VRAM, cloud bottleneck, token usage and reproduction](docs/PERFORMANCE.md).
 
-## Agent evaluation
+## Evaluation results
 
-A frozen **100-scenario** regression dataset covers 30 retrieval cases, 25 cart cases, 25 coordinator cases and 20 six-turn shopping journeys. References precede model execution: stable product IDs, catalog facts, constraints, initial states, expected actions and expected cart/order effects. Intermediate decisions, tool inputs/outputs, filters, SQL evidence and database changes are checked alongside final answers.
+**Verified release: 23 October 2026.** Evaluation covers intermediate agent decisions, tool inputs/outputs, SQL facts and cart/order changes, alongside final answers. The frozen dataset contains **100 scenarios**, including **20 six-turn journeys**.
 
-The original source/GPU baseline passed **91/100** workflows: retrieval 27/30, cart 23/25, coordinator 23/25, journeys 18/20. Direct hybrid retrieval on the 30 starter-labelled questions achieved recall/MRR/nDCG@5 of 1.0 and precision@5 of 0.2467. Sparse positive labels and known-catalog questions limit interpretation; this is not universal perfect search accuracy.
+### Agent and workflow pass rates
 
-Baseline judging covered **145 replies and 290 valid assessments**: correctness **88.79%**, completeness **91.72%**, relevance **95.17%**, faithfulness **94.83%**. These are normalized rubric means, not percentages of conversations passed. The set is synthetic and source-validated, not independently human-adjudicated traffic. Valid low scores are retained.
+| Component | Original baseline | Released Docker CPU | Native GPU |
+|---|---:|---:|---:|
+| Retrieval specialist | 27/30 | 30/30 | 30/30 |
+| Cart specialist | 23/25 | 25/25 | 25/25 |
+| Customer coordinator | 23/25 | 25/25 | 25/25 |
+| Six-turn shopping journeys | 18/20 | 20/20 | 20/20 |
+| **Overall** | **91/100 (91%)** | **100/100 (100%)** | **100/100 (100%)** |
 
-Baseline failures informed fixes for retrieval planning, review context, checkout routing and original cart instructions during delegation. **The released Docker CPU image and native GPU run each passed 100/100 workflows.** Released-image judging covered 145 replies / 290 valid assessments: correctness **90.34%**, completeness **93.10%**, relevance **95.00%**, faithfulness **95.69%**. These are regression results and normalized rubric means, not guaranteed real-world accuracy. Native peak worker RAM was **2029.2 MiB**, with observed whole-device peak VRAM **1463 MiB**. [Per-agent latency and resource results](docs/PERFORMANCE.md). **Release evaluation runs inside the built Docker image before publication**, using isolated SQL and Qdrant. [Methodology](docs/EVALUATION.md) · [Frozen references](evaluation/README.md) · [Release evidence](docs/RELEASE_VERIFICATION.md).
+All final journeys passed the required confirmation, ownership, idempotence and exact stock-deduction checks. A successful chat reply alone does not count as a correct database action.
+
+### Retrieval ranking metrics
+
+Measured on **30 frozen starter-labelled queries**, using direct hybrid search at **k = 5** in the released image. Agent-approved evidence and SQL constraints are checked separately in the workflow scores above.
+
+| Metric | Released Docker CPU |
+|---|---:|
+| Recall@5 | 1.0000 |
+| Precision@5 | 0.2467 |
+| MRR@5 | 1.0000 |
+| nDCG@5 | 1.0000 |
+
+The positive relevance labels are sparse and not exhaustive. These known-catalog regression results do not establish perfect search accuracy on unseen traffic.
+
+### Final-answer quality
+
+`gemma4:31b` independently judged **145 released-image replies with 290 valid assessments**. Correctness, completeness and relevance use frozen references; faithfulness uses actual tool evidence. Scores are integer 0–4 rubrics normalized to percentages, **not percentages of conversations passed**.
+
+| Metric | Original baseline | Released Docker CPU | Replies scored |
+|---|---:|---:|---:|
+| Correctness | 88.79% | **90.34%** | 145/145 |
+| Completeness | 91.72% | **93.10%** | 145/145 |
+| Relevance | 95.17% | **95.00%** | 145/145 |
+| Faithfulness | 94.83% | **95.69%** | 145/145 |
+
+The data is synthetic and source-validated, not independently human-adjudicated or held out. Valid low scores are retained; relevance did not improve. Native GPU workflow results were measured separately; the answer-quality table belongs to the released CPU image.
+
+[Evaluation methodology](docs/EVALUATION.md) · [Frozen references](evaluation/README.md) · [CPU workflow metrics](evaluation/results/docker-cpu-final.json) · [Answer metrics](evaluation/results/docker-answer-judgments.json) · [GPU workflow metrics](evaluation/results/native-gpu-final.json) · [Per-agent latency, RAM and VRAM](docs/PERFORMANCE.md)
+
+### Verified CI/CD
+
+The [successful release run](https://github.com/bmaged23/MarketDeepAgent/actions/runs/39986061885) completed **tests → candidate build → 100 cases inside the image → answer judging → quality gate → LangSmith export → API/model/persistence tests → Docker Hub publication → public pull and repeat tests**.
+
+Code, dependency, evaluation and container changes on `main` trigger this release pipeline. Documentation-only pushes run the regular checks without repeating paid evaluation or publishing an unchanged image. A failed required gate prevents publication. [Exact source commit and image digest](docs/RELEASE_VERIFICATION.md).
 
 ## Docker: pull, configure and run
 
