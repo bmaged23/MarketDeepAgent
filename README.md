@@ -41,7 +41,7 @@ Native GPU inference was verified on a GTX 1660 Ti with 6 GB VRAM and driver 560
 | GPU, batch 1 | 23.87 ms | 41.51 ms | 36.82 | 1964.5 MiB | 1288.9 MiB |
 | GPU, batch 8 | 6.48 ms | 8.25 ms | 147.17 | 1936.3 MiB | 1293.6 MiB |
 
-The same 20 queries were encoded three times per configuration. GPU single-query median was **9.70× faster**. Batch 8 is an amortized throughput benchmark, not interactive response latency or a claim that the UI batches eight shoppers. These worker measurements are separate from whole-agent performance. [CPU/RAM/VRAM, cloud bottleneck, token usage and reproduction](docs/PERFORMANCE.md).
+The same 20 queries were encoded three times per configuration. GPU single-query median was **9.70× faster**. Batch 8 is an amortized throughput benchmark, not interactive response latency or a claim that the UI batches eight shoppers. These worker measurements are separate from whole-agent performance. [CPU/RAM/VRAM, cloud bottleneck, token usage and reproduction](docs/guides/PERFORMANCE.md).
 
 ## Evaluation results
 
@@ -85,17 +85,17 @@ The positive relevance labels are sparse and not exhaustive. These known-catalog
 
 The data is synthetic and source-validated, not independently human-adjudicated or held out. Valid low scores are retained; relevance did not improve. Native GPU workflow results were measured separately; the answer-quality table belongs to the released CPU image.
 
-[Evaluation methodology](docs/EVALUATION.md) · [Frozen references](evaluation/README.md) · [CPU workflow metrics](evaluation/results/docker-cpu-final.json) · [Answer metrics](evaluation/results/docker-answer-judgments.json) · [GPU workflow metrics](evaluation/results/native-gpu-final.json) · [Per-agent latency, RAM and VRAM](docs/PERFORMANCE.md)
+[Evaluation methodology](docs/guides/EVALUATION.md) · [Frozen references](evaluation/README.md) · [CPU workflow metrics](evaluation/results/docker-cpu-final.json) · [Answer metrics](evaluation/results/docker-answer-judgments.json) · [GPU workflow metrics](evaluation/results/native-gpu-final.json) · [Per-agent latency, RAM and VRAM](docs/guides/PERFORMANCE.md)
 
 ### Verified CI/CD
 
 The [successful release run](https://github.com/bmaged23/MarketDeepAgent/actions/runs/39986061885) completed **tests → candidate build → 100 cases inside the image → answer judging → quality gate → LangSmith export → API/model/persistence tests → Docker Hub publication → public pull and repeat tests**.
 
-Code, dependency, evaluation and container changes on `main` trigger this release pipeline. Documentation-only pushes run the regular checks without repeating paid evaluation or publishing an unchanged image. A failed required gate prevents publication. [Exact source commit and image digest](docs/RELEASE_VERIFICATION.md).
+Code, dependency, evaluation and container changes on `main` trigger this release pipeline. Documentation-only pushes run the regular checks without repeating paid evaluation or publishing an unchanged image. A failed required gate prevents publication. [Exact source commit and image digest](docs/guides/RELEASE_VERIFICATION.md).
 
 ## Docker: pull, configure and run
 
-The verified public image is [`bmaged23/market-deep-agent:cpu`](https://hub.docker.com/r/bmaged23/market-deep-agent). CI published the gated image, pulled it publicly and repeated its smoke checks. [Exact release and digest](docs/RELEASE_VERIFICATION.md). No repository clone, compilation or Python installation is needed for this route.
+The verified public image is [`bmaged23/market-deep-agent:cpu`](https://hub.docker.com/r/bmaged23/market-deep-agent). CI published the gated image, pulled it publicly and repeated its smoke checks. [Exact release and digest](docs/guides/RELEASE_VERIFICATION.md). No repository clone, compilation or Python installation is needed for this route.
 
 Download the two small configuration files:
 
@@ -126,7 +126,7 @@ docker compose pull
 docker compose up -d
 ```
 
-Avoid `down -v` unless you intend to delete stored data. [Docker details and troubleshooting](docs/DOCKER.md).
+Avoid `down -v` unless you intend to delete stored data. [Docker details and troubleshooting](docs/guides/DOCKER.md).
 
 ## Source installation, including GPU
 
@@ -173,7 +173,7 @@ CI checks Python 3.12/3.13, frontend behavior, generated diagrams, frozen refere
 
 **Tests → build candidate → 100 cases inside that image → separate answer judges → coverage/quality/safety gate → container/persistence checks → publish exact gated image → pull and test again.**
 
-The seeded catalog and bundled model support GitHub-hosted CPU evaluation without access to a laptop database. Keys are encrypted GitHub secrets. Pull requests get offline tests without publishing credentials. Documentation-only pushes avoid another live release. Image delivery is separate from hosting a public website. [CI/CD and quality policy](docs/CI_CD.md).
+The seeded catalog and bundled model support GitHub-hosted CPU evaluation without access to a laptop database. Keys are encrypted GitHub secrets. Pull requests get offline tests without publishing credentials. Documentation-only pushes avoid another live release. Image delivery is separate from hosting a public website. [CI/CD and quality policy](docs/guides/CI_CD.md).
 
 ## Important settings
 
@@ -209,8 +209,12 @@ requirements/                CPU/GPU/dev/evaluation locks and maintainer inputs
 evaluation/{datasets,results}/
 scripts/{evaluation,performance,release,runtime}/
 docker/                      Dockerfile and storage-only Compose configuration
-docs/                        Guides, demo, animated architecture and measured charts
+docs/
+  guides/                    Setup, evaluation, performance and release guides
+  dockerhub/                 Docker Hub Overview and generator
+  performance/               Published benchmark JSON and charts
+  assets/                    Demo, previews and generated diagrams
 tests/                       Python/frontend regressions
 ```
 
-Private `description/`, databases, full traces and model caches remain ignored. [Documentation index](docs/README.md) · [Script guide](scripts/README.md) · [Dependency guide](requirements/README.md).
+Private `description/`, databases, full traces and model caches remain ignored. [Folder guide](docs/guides/PROJECT_STRUCTURE.md) · [Documentation index](docs/README.md) · [Script guide](scripts/README.md) · [Dependency guide](requirements/README.md).

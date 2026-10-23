@@ -1,11 +1,11 @@
 # Performance measurements
 
-![CPU/GPU embeddings](performance/embedding-comparison.svg)
+![CPU/GPU embeddings](../performance/embedding-comparison.svg)
 
 ## Same-query CPU/GPU comparison
 
 | Configuration | Warm median | Warm p95 | Queries/s | Peak RAM | Peak CUDA allocation | Mean CPU* |
-|---|---:|---:|---:|---:|---:|---:|---:|
+|---|---:|---:|---:|---:|---:|---:|
 | CPU · batch 1 | 231.53 ms | 290.12 ms | 4.27 | 1586.7 MiB | — | 197.6% |
 | GPU · batch 1 | 23.87 ms | 41.51 ms | 36.82 | 1964.5 MiB | 1288.9 MiB | 100.7% |
 | GPU · batch 8 | 6.48 ms | 8.25 ms | 147.17 | 1936.3 MiB | 1293.6 MiB | 106.2% |
@@ -16,7 +16,7 @@ GPU single-query warm median was **9.70× faster** in this benchmark. CPU/GPU co
 
 ## Agent/cloud bottleneck
 
-The 100-case source GPU baseline recorded **607 LLM calls**. Their summed durations accounted for **98.6%** of summed per-case elapsed time, including network/provider wait. Cases overlap across2 workers, so these sums are not experiment wall time. Recorded usage: **1,523,226 input tokens**, **182,161 output tokens**; usage is available on 607/607 calls. No invoice/currency cost is inferred.
+The 100-case source GPU baseline recorded **607 LLM calls**. Their summed durations accounted for **98.6%** of summed per-case elapsed time, including network/provider wait. Cases overlap across 2 workers, so these sums are not experiment wall time. Recorded usage: **1,523,226 input tokens**, **182,161 output tokens**; usage is available on 607/607 calls. No invoice/currency cost is inferred.
 
 The main gpt-oss:120b model is hosted on Ollama Cloud. Local GPU resources are used for BGE, not for a 120B local model. The public portable image uses CPU embeddings; the native CUDA setup is measured separately. GPU embedding speedup is not an equal whole-agent speedup.
 
@@ -37,7 +37,7 @@ python -m scripts.performance.benchmark_embeddings --device cuda --batch-size 8 
 python -m scripts.performance.build_report
 ```
 
-[Machine-readable measurements](performance/measurements.json). Raw vectors and full agent traces stay ignored.
+[Machine-readable measurements](../performance/measurements.json). Raw vectors and full agent traces stay ignored.
 
 ## Final release measurements — 23 October 2026
 
@@ -61,4 +61,4 @@ A journey includes six actual requests plus deterministic confirmation/ownership
 
 These averages include cloud/network waiting, which explains low mean CPU utilization; they are not peak compute demand. Worker RSS excludes Qdrant/browser/cloud services. GPU samples include other device users and are not per-agent allocation. Per-case shared-worker samples and intermediate traces remain in the private raw experiment. The interrupted Qdrant-down attempt was preserved and excluded from this healthy run.
 
-[Released CPU aggregate](../evaluation/results/docker-cpu-final.json) · [Native GPU aggregate](../evaluation/results/native-gpu-final.json) · [Release verification](RELEASE_VERIFICATION.md)
+[Released CPU aggregate](../../evaluation/results/docker-cpu-final.json) · [Native GPU aggregate](../../evaluation/results/native-gpu-final.json) · [Release verification](RELEASE_VERIFICATION.md)

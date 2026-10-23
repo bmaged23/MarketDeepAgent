@@ -14,7 +14,7 @@ Verified by the successful run: Python 3.12/3.13 offline tests, candidate build,
 
 Both final CPU and GPU workflows passed 100/100. CPU answer means: correctness 90.34%, completeness 93.10%, relevance 95.00%, faithfulness 95.69%. See [evaluation](EVALUATION.md) and [measured latency/resources](PERFORMANCE.md).
 
-The public tags were independently read anonymously from Docker Hub and all matched the digest above. LangSmith experiment `market-image-39986061885-1`, ID `cefb3eaf-5e41-43d9-8c21-bfba47f91ea3`, was independently verified to contain all 100 frozen root case IDs. Full model/tool traces remain private; aggregate evidence is [recorded here](../evaluation/results/release-verification.json).
+The public tags were independently read anonymously from Docker Hub and all matched the digest above. LangSmith experiment `market-image-39986061885-1`, ID `cefb3eaf-5e41-43d9-8c21-bfba47f91ea3`, was independently verified to contain all 100 frozen root case IDs. Full model/tool traces remain private; aggregate evidence is [recorded here](../../evaluation/results/release-verification.json).
 
 The public image is Linux amd64 CPU. Native CUDA inference and workflows were tested on GTX 1660 Ti 6 GB; no public GPU image or universal device compatibility is certified. Fresh CUDA wheel installation was interrupted by disk limits; matching installed CUDA libraries were reused locally. The frozen set is synthetic regression data, not human-adjudicated production traffic. Long-term preference memory is disabled in these live journeys and has separate unit tests. Earlier failed/interrupted attempts remain preserved.
 

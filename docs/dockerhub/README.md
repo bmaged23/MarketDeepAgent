@@ -6,7 +6,7 @@ An AI grocery marketplace with retrieval, cart and customer agents, hybrid produ
 
 ## Docker setup
 
-The tested public image is [bmaged23/market-deep-agent](https://hub.docker.com/r/bmaged23/market-deep-agent). The complete evaluation, publication and public pull/smoke checks passed on 23 October 2026; exact commit and digest are in [release evidence](https://github.com/bmaged23/MarketDeepAgent/blob/main/docs/RELEASE_VERIFICATION.md).
+The tested public image is [bmaged23/market-deep-agent](https://hub.docker.com/r/bmaged23/market-deep-agent). The complete evaluation, publication and public pull/smoke checks passed on 23 October 2026; exact commit and digest are in [release evidence](https://github.com/bmaged23/MarketDeepAgent/blob/main/docs/guides/RELEASE_VERIFICATION.md).
 
 The Linux amd64 CPU image contains the FastAPI application, storefront assets, seeded 100-product catalog, indexing tools, SQLite migrations and pinned BGE model weights. It contains no API keys, user database or private evaluation traces. A fresh model download and repository clone are not required. BGE's upstream model card declares MIT licensing and its README is included with the pinned weights.
 
@@ -159,7 +159,7 @@ Both the released Docker CPU image and native GPU workflow run passed **100/100*
 
 All **290/290** rubric judgments were valid. These are normalized judge means, not percentages of conversations passed. Baseline means were correctness 88.79%, completeness 91.72%, relevance 95.17% and faithfulness 94.83%; relevance did not improve. No statistical significance or held-out generalization is claimed. The earlier 97/100 CPU candidate and interrupted vector-service failure remain retained separately; neither substitutes for final release evidence.
 
-The released CPU experiment is `market-image-39986061885-1` in LangSmith; 100 root case IDs were independently checked against the frozen dataset after export. [Public release record](https://github.com/bmaged23/MarketDeepAgent/blob/main/docs/RELEASE_VERIFICATION.md), [CPU summary](https://github.com/bmaged23/MarketDeepAgent/blob/main/evaluation/results/docker-cpu-final.json), [answer scores](https://github.com/bmaged23/MarketDeepAgent/blob/main/evaluation/results/docker-answer-judgments.json), [GPU summary](https://github.com/bmaged23/MarketDeepAgent/blob/main/evaluation/results/native-gpu-final.json).
+The released CPU experiment is `market-image-39986061885-1` in LangSmith; 100 root case IDs were independently checked against the frozen dataset after export. [Public release record](https://github.com/bmaged23/MarketDeepAgent/blob/main/docs/guides/RELEASE_VERIFICATION.md), [CPU summary](https://github.com/bmaged23/MarketDeepAgent/blob/main/evaluation/results/docker-cpu-final.json), [answer scores](https://github.com/bmaged23/MarketDeepAgent/blob/main/evaluation/results/docker-answer-judgments.json), [GPU summary](https://github.com/bmaged23/MarketDeepAgent/blob/main/evaluation/results/native-gpu-final.json).
 
 ## Performance measurements
 
@@ -168,7 +168,7 @@ The released CPU experiment is `market-image-39986061885-1` in LangSmith; 100 ro
 ### Same-query CPU/GPU comparison
 
 | Configuration | Warm median | Warm p95 | Queries/s | Peak RAM | Peak CUDA allocation | Mean CPU* |
-|---|---:|---:|---:|---:|---:|---:|---:|
+|---|---:|---:|---:|---:|---:|---:|
 | CPU · batch 1 | 231.53 ms | 290.12 ms | 4.27 | 1586.7 MiB | — | 197.6% |
 | GPU · batch 1 | 23.87 ms | 41.51 ms | 36.82 | 1964.5 MiB | 1288.9 MiB | 100.7% |
 | GPU · batch 8 | 6.48 ms | 8.25 ms | 147.17 | 1936.3 MiB | 1293.6 MiB | 106.2% |
@@ -179,7 +179,7 @@ GPU single-query warm median was **9.70× faster** in this benchmark. CPU/GPU co
 
 ### Agent/cloud bottleneck
 
-The 100-case source GPU baseline recorded **607 LLM calls**. Their summed durations accounted for **98.6%** of summed per-case elapsed time, including network/provider wait. Cases overlap across2 workers, so these sums are not experiment wall time. Recorded usage: **1,523,226 input tokens**, **182,161 output tokens**; usage is available on 607/607 calls. No invoice/currency cost is inferred.
+The 100-case source GPU baseline recorded **607 LLM calls**. Their summed durations accounted for **98.6%** of summed per-case elapsed time, including network/provider wait. Cases overlap across 2 workers, so these sums are not experiment wall time. Recorded usage: **1,523,226 input tokens**, **182,161 output tokens**; usage is available on 607/607 calls. No invoice/currency cost is inferred.
 
 The main gpt-oss:120b model is hosted on Ollama Cloud. Local GPU resources are used for BGE, not for a 120B local model. The public portable image uses CPU embeddings; the native CUDA setup is measured separately. GPU embedding speedup is not an equal whole-agent speedup.
 
@@ -204,7 +204,7 @@ python -m scripts.performance.build_report
 
 ### Final release measurements — 23 October 2026
 
-The exact released CPU image and native CUDA application each passed all **100/100** workflows on the same frozen dataset and application fingerprint. GPU workflows were evaluated separately; the 145-answer rubric evaluation in [the evaluation report](https://github.com/bmaged23/MarketDeepAgent/blob/main/docs/EVALUATION.md) belongs to the released CPU image.
+The exact released CPU image and native CUDA application each passed all **100/100** workflows on the same frozen dataset and application fingerprint. GPU workflows were evaluated separately; the 145-answer rubric evaluation in [the evaluation report](https://github.com/bmaged23/MarketDeepAgent/blob/main/docs/guides/EVALUATION.md) belongs to the released CPU image.
 
 | Scope | Cases | Docker CPU median | Native GPU median | CPU passed | GPU passed |
 |---|---:|---:|---:|---:|---:|
@@ -224,4 +224,4 @@ A journey includes six actual requests plus deterministic confirmation/ownership
 
 These averages include cloud/network waiting, which explains low mean CPU utilization; they are not peak compute demand. Worker RSS excludes Qdrant/browser/cloud services. GPU samples include other device users and are not per-agent allocation. Per-case shared-worker samples and intermediate traces remain in the private raw experiment. The interrupted Qdrant-down attempt was preserved and excluded from this healthy run.
 
-[Released CPU aggregate](https://github.com/bmaged23/MarketDeepAgent/blob/main/evaluation/results/docker-cpu-final.json) · [Native GPU aggregate](https://github.com/bmaged23/MarketDeepAgent/blob/main/evaluation/results/native-gpu-final.json) · [Release verification](https://github.com/bmaged23/MarketDeepAgent/blob/main/docs/RELEASE_VERIFICATION.md)
+[Released CPU aggregate](https://github.com/bmaged23/MarketDeepAgent/blob/main/evaluation/results/docker-cpu-final.json) · [Native GPU aggregate](https://github.com/bmaged23/MarketDeepAgent/blob/main/evaluation/results/native-gpu-final.json) · [Release verification](https://github.com/bmaged23/MarketDeepAgent/blob/main/docs/guides/RELEASE_VERIFICATION.md)

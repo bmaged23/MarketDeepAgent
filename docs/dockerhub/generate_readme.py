@@ -3,7 +3,7 @@ from pathlib import Path
 import re
 from urllib.parse import quote
 
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 GITHUB='https://github.com/bmaged23/MarketDeepAgent/blob/main/'
 RAW='https://raw.githubusercontent.com/bmaged23/MarketDeepAgent/main/'
 
@@ -32,8 +32,8 @@ def main():
 
 An AI grocery marketplace with retrieval, cart and customer agents, hybrid product search, persistent conversations and explicitly confirmed orders. The portable CPU image includes the seeded catalog and pinned BGE embedding weights; the main LLM runs on your Ollama Cloud account.
 
-'''+ '\n\n'.join(section(Path(p)) for p in ['docs/DOCKER.md','docs/EVALUATION.md','docs/PERFORMANCE.md'])+'\n'
+'''+ '\n\n'.join(section(Path(p)) for p in ['docs/guides/DOCKER.md','docs/guides/EVALUATION.md','docs/guides/PERFORMANCE.md'])+'\n'
     assert len(body)<=25000,'Hub description exceeds limit; shorten the guides without truncating commands'
-    (ROOT/'docs/DOCKERHUB_README.md').write_text(body)
+    (ROOT/'docs/dockerhub/README.md').write_text(body)
     print('Generated canonical Docker Hub README:',len(body),'characters')
 if __name__=='__main__':main()

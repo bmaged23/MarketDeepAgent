@@ -1,11 +1,13 @@
 # Documentation guide
 
 - [Main README and installation](../README.md)
-- [Docker pull/run](DOCKER.md)
-- [Agent/SQL/answer evaluation](EVALUATION.md)
-- [Performance measurements](PERFORMANCE.md)
-- [CI/CD and release policy](CI_CD.md)
-- [Verified release status](RELEASE_VERIFICATION.md)
+- [Repository organization](guides/PROJECT_STRUCTURE.md)
+- [Docker Hub Overview](dockerhub/README.md)
+- [Docker pull/run](guides/DOCKER.md)
+- [Agent/SQL/answer evaluation](guides/EVALUATION.md)
+- [Performance measurements](guides/PERFORMANCE.md)
+- [CI/CD and release policy](guides/CI_CD.md)
+- [Verified release status](guides/RELEASE_VERIFICATION.md)
 - [Frozen datasets and aggregate results](../evaluation/README.md)
 
 The recording and animated architecture documentation below describes the existing storefront demonstration. New release verification is recorded separately.
@@ -25,7 +27,7 @@ Open http://127.0.0.1:8700 for the animated architecture, database ERD and demo 
 
 The architecture explorer has five selectable views: overview, retrieval loop, cart/checkout, private memory and product indexing. Colored arrowheads distinguish requests, responses, authoritative writes and embedding/synchronization. Each view includes a workflow explanation, keyboard-accessible tabs, component inspection, motion controls and a full-size SVG link. `system_diagrams.py` generates the five source-backed architecture assets; `generate.py` also derives the ERD from migrations.
 
-The generated presentation was rejected and removed from public docs. **The actual storefront recording is now available at `assets/storefront-tour.mp4`: 1440×900 H.264, about 5 minutes 52 seconds.** The demo page displays the actual video only after a successful recording creates it.
+**The actual storefront recording is available at `assets/storefront-tour.mp4`: 1440×900 H.264, about 5 minutes 52 seconds.** The demo page displays the actual video only after a successful recording creates it.
 
 ## Automatically record the actual marketplace
 
@@ -33,12 +35,12 @@ From the project root, with the Python environment installed:
 
 ```bash
 source .venv/bin/activate
-npm --prefix docs install
+npm --prefix docs ci
 npm --prefix docs run install-browser
 python docs/record_storefront.py
 ```
 
-Requires Node.js, FFmpeg/ffprobe, the configured Ollama key, working product Qdrant/BGE retrieval and Chromium. Recording dependencies are isolated in `docs/node_modules`, excluded from Git; Python requirements remain the exact runtime snapshot. If Chromium reports missing Linux libraries, install its dependencies with `npm --prefix docs run install-browser -- --with-deps`.
+Requires Node.js, FFmpeg/ffprobe, the configured Ollama key, working product Qdrant/BGE retrieval and Chromium. Recording dependencies are isolated in `docs/node_modules`, excluded from Git; Python dependencies use the maintained CPU/GPU runtime locks in `requirements/`. If Chromium reports missing Linux libraries, install its dependencies with `npm --prefix docs run install-browser -- --with-deps`.
 
 The recorder:
 
@@ -89,6 +91,6 @@ Push the updated `main` branch. On GitHub go to **Settings → Pages → Build a
 - Customer video: https://bmaged23.github.io/MarketDeepAgent/demo.html
 - Architecture explorer: https://bmaged23.github.io/MarketDeepAgent/
 
-The README introduces the project first, then shows a clickable video preview that opens the hosted demo. On the demo page, the left-side Play demo button starts the real MP4; native playback controls and fullscreen remain available. `docs/.nojekyll` makes this a static Pages site. Hosting is ready in the source tree; enable Pages in repository settings before expecting these URLs to work.
+The README introduces the project first, then shows a clickable video preview that opens the hosted demo. On the demo page, the left-side Play demo button starts the real MP4; native playback controls and fullscreen remain available. `docs/.nojekyll` makes this a static Pages site. These URLs are published through the repository’s GitHub Pages deployment.
 
 The README preview (`assets/demo-preview.svg`) embeds a real recording frame with a play control inside its lower-left corner. The whole preview links to the hosted demo. Regenerate it with `python docs/demo_thumbnail.py`; successful recordings refresh it automatically.

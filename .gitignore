@@ -65,3 +65,24 @@ notes.txt
 .release-local/
 /reports/
 /tmp/
+
+# Disposable local runtime and tool output (published results stay tracked)
+/storage/
+/artifacts/
+/outputs/
+/logs/
+.uv-cache/
+.tox/
+.nox/
+.hypothesis/
+*.prof
+*.lprof
+*.sqlite-journal
+*.sqlite3-journal
+docs/assets/*.converting.mp4
+
+# Editor recovery files
+*.swp
+*.swo
+*~
+Desktop.ini
